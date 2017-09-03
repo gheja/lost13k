@@ -1,13 +1,5 @@
 "use strict";
 
-
-let canvas = null;
-let ctx = null;
-let body = null;
-let gui = null;
-let _layers = [];
-let _frameNumber = 0;
-
 let settings = {
 };
 
@@ -42,31 +34,6 @@ function generateBody(parent, size, r, speed, type)
 	a.def[0] *= 1 + randPlusMinus(0.025);
 	
 	return a;
-}
-
-function regenerate()
-{
-	let i, j, a, b, c;
-	
-	system.bodies.length = 0;
-	
-	system.bodies.push(generateBody(null, 13, 0, 0, BODY_TYPE_STAR));
-	
-	b = 20;
-	
-	for (i=0; i<5; i++)
-	{
-		a = system.bodies.push(generateBody(system.bodies[0], 5, i * 30 + 50, 0.0001, BODY_TYPE_PLANET)) - 1;
-		
-		c = Math.floor(randFloat() * 3);
-		
-		for (j=0; j<c; j++)
-		{
-			system.bodies.push(generateBody(system.bodies[a], 2, j * 10 + 15, 0.0005, BODY_TYPE_MOON));
-		}
-	}
-	
-	describeBody(system.bodies[2]);
 }
 
 function updateBodies()
@@ -195,7 +162,7 @@ function drawBodies()
 	}
 }
 
-function bodySizeString(b)
+function describeBodySize(b)
 {
 	if (b.radiusScale < 0.15)
 	{
@@ -220,7 +187,7 @@ function bodySizeString(b)
 	return "huge";
 }
 
-function moonCountString(b)
+function describeMoons(b)
 {
 	if (b.childCount == 0)
 	{
@@ -244,18 +211,43 @@ function describeBody(b)
 	
 	if (b.type == BODY_TYPE_MOON)
 	{
-		s += "the [" + bodySizeString(b) + "] [" + b.def[3] + "] moon of ";
+		s += "the [" + describeBodySize(b) + "] [" + b.def[3] + "] moon of ";
 		
 		// hack but cheap
 		b = b.parent;
 	}
 	
 	star = b.parent;
-	s += "a [" + bodySizeString(b) + "] [" + b.def[3] + "] planet [with " + moonCountString(b) + "], ";
+	s += "a [" + describeBodySize(b) + "] [" + b.def[3] + "] planet [with " + describeMoons(b) + "], ";
 	
 	s += "orbiting a [" + star.def[3] + "] sun."
 	
 	console.log(s);
+}
+
+function regenerateBodies()
+{
+	let i, j, a, b, c;
+	
+	system.bodies.length = 0;
+	
+	system.bodies.push(generateBody(null, 13, 0, 0, BODY_TYPE_STAR));
+	
+	b = 20;
+	
+	for (i=0; i<5; i++)
+	{
+		a = system.bodies.push(generateBody(system.bodies[0], 5, i * 30 + 50, 0.0001, BODY_TYPE_PLANET)) - 1;
+		
+		c = Math.floor(randFloat() * 3);
+		
+		for (j=0; j<c; j++)
+		{
+			system.bodies.push(generateBody(system.bodies[a], 2, j * 10 + 15, 0.0005, BODY_TYPE_MOON));
+		}
+	}
+	
+	describeBody(system.bodies[2]);
 }
 
 function drawSolar()
@@ -266,30 +258,3 @@ function drawSolar()
 	updateBodies();
 	drawBodies();
 }
-
-
-
-//// main
-function init()
-{
-	let tmp;
-	
-	body = document.body;
-	
-	layerCreate("planets", drawSolar);
-	// layerActivate("planets");
-	// layerDisable("planets");
-	
-	draw();
-	
-	body.onclick = regenerate;
-	regenerate();
-	
-	// window.setInterval(updateFps, 1000);
-/*
-	// DEMO
-	window.setInterval(regenerate, 3000);
-*/
-}
-
-window.onload = init;

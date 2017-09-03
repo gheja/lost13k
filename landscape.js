@@ -2,13 +2,6 @@
 
 const PALETTE_LENGTH = 5000;
 
-let canvas = null;
-let ctx = null;
-let body = null;
-let gui = null;
-let _layers = [];
-let _frameNumber = 0;
-
 let landscapeSettings = {
 	h1: 0,
 	s1: 0.2,
@@ -38,14 +31,12 @@ let landscapeSettings = {
 
 let _p = 0;
 
-
-
 function landscapeLerp(a, b, x)
 {
 	return a + (b - a) * Math.pow(x, landscapeSettings.pow);
 }
 
-function buildPalette()
+function buildLandscapePalette()
 {
 	let i, a;
 	
@@ -71,7 +62,7 @@ function drawLandscape()
 		landscapeSettings.position += (1 - landscapeSettings.position) * 0.005 + 0.001;
 		if (landscapeSettings.position > 1.1)
 		{
-			regenerate();
+			regenerateLandscape();
 			landscapeSettings.position = 0;
 		}
 	}
@@ -82,7 +73,7 @@ function drawLandscape()
 	
 	if (landscapeSettings.autoUpdate)
 	{
-		buildPalette();
+		buildLandscapePalette();
 	}
 	
 	ctx.globalCompositeOperation = 'source-over';
@@ -154,7 +145,7 @@ function drawLandscape()
 	// ctx.fillRect(0, 0, WIDTH, HEIGHT);
 }
 
-function regenerate()
+function regenerateLandscape()
 {
 	let i, n, a;
 	
@@ -171,7 +162,6 @@ function regenerate()
 	landscapeSettings.s2 = 0.2 + randFloat() * 0.5;
 	landscapeSettings.pow = randFloat();
 	landscapeSettings.density = randFloat();
-	
 	
 	landscapeSettings.stars.length = 0;
 	for (i=0; i<500; i++)
@@ -211,49 +201,5 @@ function regenerate()
 		landscapeSettings.hill2.push(randFloat());
 	}
 	
-	buildPalette();
+	buildLandscapePalette();
 }
-
-function init()
-{
-	let tmp;
-	
-	body = document.body;
-	layerCreate("landscape", drawLandscape);
-	
-	gui = new dat.gui.GUI();
-	
-	tmp = gui.addFolder("Atmosphere");
-	
-	tmp.add(landscapeSettings, 'h1').min(0).max(1).step(0.01).listen();
-	tmp.add(landscapeSettings, 's1').min(0).max(1).step(0.01).listen();
-	tmp.add(landscapeSettings, 'l1').min(0).max(1).step(0.01).listen();
-	
-	tmp.add(landscapeSettings, 'h2').min(0).max(1).step(0.01).listen();
-	tmp.add(landscapeSettings, 's2').min(0).max(1).step(0.01).listen();
-	tmp.add(landscapeSettings, 'l2').min(0).max(1).step(0.01).listen();
-	
-	tmp.add(landscapeSettings, 'pow').min(0.1).max(10).listen();
-	
-	tmp.add(landscapeSettings, 'density').min(0).max(1).step(0.01).listen();
-	tmp.add(landscapeSettings, 'position').min(0).max(1).listen();
-	tmp.add(landscapeSettings, 'autoPosition');
-	tmp.add(landscapeSettings, 'autoUpdate');
-	tmp.add(window, 'regenerate');
-	
-	tmp.open();
-	
-	regenerate();
-	
-	draw();
-	
-/*
-	// DEMO
-	
-	landscapeSettings.position = 1;
-	landscapeSettings.autoPosition = false;
-	window.setInterval(regenerate, 1000);
-*/
-}
-
-window.onload = init;

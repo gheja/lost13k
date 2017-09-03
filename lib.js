@@ -195,7 +195,7 @@ function layerCreate(name, drawFunction)
 	a.canvas.height = HEIGHT;
 	a.ctx = a.canvas.getContext("2d");
 	
-	body.appendChild(a.canvas);
+	_body.appendChild(a.canvas);
 	
 	return _layers.push(a) - 1;
 }
@@ -208,8 +208,11 @@ function draw()
 	
 	_frameNumber++;
 	
+	drawMain();
+	
 	for (i=0; i<_layers.length; i++)
 	{
+		_layers[i].canvas.style.display = _layers[i].visible ? "block" : "none";
 		if (_layers[i].visible)
 		{
 			canvas = _layers[i].canvas;
