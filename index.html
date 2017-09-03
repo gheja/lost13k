@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<script type="text/javascript" src="config.js"></script>
+		<script type="text/javascript" src="lib.js"></script>
+		<script type="text/javascript" src="starmap.js"></script>
+		<script type="text/javascript" src="solar.js"></script>
+		<script type="text/javascript" src="landscape.js"></script>
+<!--		<script type="text/javascript" src="wormhole.js"></script> -->
+		<script type="text/javascript" src="main.js"></script>
+		<style type="text/css">
+			body,
+			html
+			{
+				padding: 0;
+				margin: 0;
+				background: #222;
+				overflow: hidden;
+			}
+			canvas
+			{
+				position: fixed;
+				top: 0;
+				left: 0;
+			}
+			#debug
+			{
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				background: rgba(0, 0, 0, 0.5);
+				color: #fff;
+				padding: 4px;
+				z-index: 1000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="debug">
+			<input type="checkbox" id="layer0">Planets</input>
+			<input type="checkbox" id="layer1">Star map</input>
+			<input type="checkbox" id="layer2">Landscape</input>
+		</div>
+	</body>
+</html>
