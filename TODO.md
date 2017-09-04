@@ -26,3 +26,7 @@
 
 - [ ] ? sound effects
 - [ ] ? some simple background music
+
+- [ ] check out commit 1ca0bdb6f48a7c263db18ef3ad48dab804ce671d for...
+  - solar: stripes
+  - solar: dual stars
