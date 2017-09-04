@@ -283,3 +283,37 @@ function drawCircularSelection(p, radius)
 	_arc(p.x, p.y, radius, c + 2/6, c + 3/6, 0, 1);
 	_arc(p.x, p.y, radius, c + 4/6, c + 5/6, 0, 1);
 }
+
+function drawGuiStripe(x, y, width, color, outline)
+{
+	ctx.beginPath();
+	ctx.moveTo(_x(x), _y(y));
+	ctx.lineTo(_x(x + width), _y(y));
+	ctx.lineTo(_x(x + width - 8), _y(y + 12));
+	ctx.lineTo(_x(x + - 8), _y(y + 12));
+	ctx.closePath();
+	
+	ctx.strokeStyle = color;
+	ctx.fillStyle = color;
+	
+	if (outline)
+	{
+		ctx.lineWidth = _scale(5);
+		ctx.stroke();
+		
+		ctx.strokeStyle = "#000";
+		ctx.lineWidth = _scale(2);
+		ctx.stroke();
+	}
+	
+	ctx.fill();
+}
+
+function drawGuiButton(title, x, size, enabled, callback)
+{
+	drawGuiStripe(x * 20, -196, size * 20 - 10, "#0ce", true);
+	ctx.fillStyle = "#000";
+	ctx.textAlign = "center";
+	ctx.font = _scale(10) + "px Arial";
+	ctx.fillText(title, _x(x * 20 + (size - 1) * 10 + 1), _y(-196 + 9.5));
+}
