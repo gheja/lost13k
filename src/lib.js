@@ -249,4 +249,7 @@ function draw()
 			_layers[i].draw.call();
 		}
 	}
+	
+	// reset clicking state
+	_cursor.clicked = false;
 }
