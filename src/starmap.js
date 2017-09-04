@@ -1,13 +1,5 @@
 "use strict";
 
-const PATH_STEPS = 10;
-const PATH_STEP_DISTANCE = 100;
-const PATH_ITERATIONS = 100;
-
-const STAR_COUNT = 40;
-const STAR_DISTANCE_TARGET = 30;
-const STAR_DISTANCE_ITERATIONS = 100;
-
 function drawStarMap()
 {
 	let i, a, n;
