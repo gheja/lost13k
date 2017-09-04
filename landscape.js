@@ -18,8 +18,6 @@ let landscapeSettings = {
 	position: 0,
 	palette: [],
 	
-	autoUpdate: false,
-	autoPosition: true,
 	hillColor: "",
 	
 	stars: [],
@@ -56,16 +54,6 @@ function buildLandscapePalette()
 function drawLandscape()
 {
 	let i, n, c1, c2, a, p1, p2;
-	
-	if (landscapeSettings.autoPosition)
-	{
-		landscapeSettings.position += (1 - landscapeSettings.position) * 0.005 + 0.001;
-		if (landscapeSettings.position > 1.1)
-		{
-			regenerateLandscape();
-			landscapeSettings.position = 0;
-		}
-	}
 	
 	_p = clamp(landscapeSettings.position, 0, 1);
 	
