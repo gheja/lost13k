@@ -21,6 +21,22 @@ function _y(y)
 	return HEIGHT / 2 + _scale(y);
 }
 
+function _rscale(x)
+{
+	return x / SCALE;
+}
+
+function _rx(x)
+{
+	return _rscale(x) - _rscale(WIDTH / 2);
+}
+
+function _ry(y)
+{
+	return _rscale(y) - _rscale(HEIGHT / 2);
+}
+
+
 function _parallax(x, distance, weight)
 {
 //	return x + 1000 * Math.pow(1, -distance) * (1-_p);
