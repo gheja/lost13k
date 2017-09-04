@@ -19,7 +19,7 @@ function drawStarMap()
 	ctx.fillStyle = "#fff";
 	for (i=0; i<_map.stars.length; i++)
 	{
-		_arc(_map.stars[i].x, _map.stars[i].y, 3, 0, 1, 1);
+		_arc(_map.stars[i].x, _map.stars[i].y, 1.5, 0, 1, 1);
 	}
 }
 
