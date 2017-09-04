@@ -45,9 +45,6 @@ function updateBodies()
 		b = system.bodies[i];
 		b.position += b.speed;
 		
-		// TODO: dual stars?
-		// if (b.parent == null)
-		
 		if (b.type == BODY_TYPE_STAR)
 		{
 			b.centerX = 0;
@@ -90,28 +87,16 @@ function drawBodies()
 		{
 			c = ((stripes - j) / stripes);
 			
-/*
-			if (Math.floor(frameNumber + b.orbitRadius) % 150 == j)
+			if (b.type == BODY_TYPE_PLANET)
 			{
-				ctx.strokeStyle = "#fff";
+				ctx.strokeStyle = hsla2rgba_(b.parent.def[0], b.parent.def[1], b.parent.def[2], c);
 			}
 			else
 			{
-*/
-				if (b.type == BODY_TYPE_PLANET)
-				{
-					// ctx.strokeStyle = "rgba(255,220,30," + c + ")";
-					ctx.strokeStyle = hsla2rgba_(b.parent.def[0], b.parent.def[1], b.parent.def[2], c);
-				}
-				else
-				{
-					ctx.strokeStyle = "rgba(0,200,255," + c + ")";
-				}
-/*
+				ctx.strokeStyle = "rgba(0,200,255," + c + ")";
 			}
-*/
+			
 			a = b.position - j * 2 * 1/(stripes * 2 * 1.1);
-			// a = j * 2 * 1/(stripes * 2 * 1.1);
 			
 			_arc(b.centerX, b.centerY, b.orbitRadius, a - 1 / (stripes * 5), a, 0, 1);
 		}
