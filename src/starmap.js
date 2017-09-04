@@ -35,6 +35,13 @@ function drawStarMap()
 			}
 		}
 	}
+	
+	// TODO: click handling on star selection precedes the button click
+	// so no click on button is possible when a star is selected
+	
+	drawGuiStripes();
+	drawGuiButton("JUMP", 5, 3, (starSelected != null), regenerateBodies);
+	drawGuiButton("LAND", 9, 3, false, regenerateBodies);
 }
 
 function regenerateStars()
