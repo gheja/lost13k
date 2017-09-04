@@ -309,6 +309,17 @@ function drawGuiStripe(x, y, width, color, outline)
 	ctx.fill();
 }
 
+function drawGuiStripes()
+{
+	let i;
+	
+	for (i = -400; i < 400; i += 20)
+	{
+		drawGuiStripe(i, -196, 10, "#222", false);
+		drawGuiStripe(i, 184, 10, "#222", false);
+	}
+}
+
 function drawGuiButton(title, x, size, enabled, callback)
 {
 	drawGuiStripe(x * 20, -196, size * 20 - 10, "#0ce", true);
