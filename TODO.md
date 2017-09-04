@@ -4,6 +4,8 @@
 - [ ] win/lose conditions
 - [ ] buttons
 - [ ] main menu
+- [ ] auto resize
+- [ ] mobile fix (devicepixelratio, etc.)
 - [ ] objectives/talk design
 - [ ] star map ship design
 - [ ] solar system ship design
