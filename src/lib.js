@@ -253,3 +253,33 @@ function draw()
 	// reset clicking state
 	_cursor.clicked = false;
 }
+
+
+
+///// common gui elements
+function drawCircularSelection(p, radius)
+{
+	let a, c;
+	
+	ctx.lineCap = "butt";
+	ctx.lineWidth = _scale(2);
+	
+/*
+	a = (_frameNumber % 30) / 30;
+	c = _frameNumber / 60;
+	
+	ctx.strokeStyle = "rgba(255,255,255," + Math.max(0, 1 - a * 2) + ")";
+	
+	_arc(b.positionX, b.positionY, b.radius + 2 + a * 5, c + 0/6, c + 1/6, 0, 1);
+	_arc(b.positionX, b.positionY, b.radius + 2 + a * 5, c + 2/6, c + 3/6, 0, 1);
+	_arc(b.positionX, b.positionY, b.radius + 2 + a * 5, c + 4/6, c + 5/6, 0, 1);
+*/
+	
+	c = _frameNumber / 60;
+	
+	ctx.strokeStyle = "#fff";
+	
+	_arc(p.x, p.y, radius, c + 0/6, c + 1/6, 0, 1);
+	_arc(p.x, p.y, radius, c + 2/6, c + 3/6, 0, 1);
+	_arc(p.x, p.y, radius, c + 4/6, c + 5/6, 0, 1);
+}

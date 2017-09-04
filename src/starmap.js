@@ -20,6 +20,11 @@ function drawStarMap()
 	for (i=0; i<_map.stars.length; i++)
 	{
 		_arc(_map.stars[i].x, _map.stars[i].y, 1.5, 0, 1, 1);
+		
+		if (getDistance(_map.stars[i], _cursor) < 10)
+		{
+			drawCircularSelection(_map.stars[i], 5);
+		}
 	}
 }
 

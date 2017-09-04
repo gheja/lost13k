@@ -161,16 +161,6 @@ function drawBodies()
 		_arc(b.positionX, b.positionY, b.radius, c - 0.5, c, 1);
 	}
 	
-	ctx.lineCap = "butt";
-	ctx.lineWidth = _scale(2);
-	
-	c = _frameNumber / 60;
-	a = (_frameNumber % 30) / 30;
-/*
-	ctx.strokeStyle = "rgba(255,255,255," + Math.max(0, 1 - a * 2) + ")";
-*/
-	ctx.strokeStyle = "#fff";
-	
 	for (i=0; i<system.bodies.length; i++)
 	{
 		b = system.bodies[i];
@@ -179,14 +169,7 @@ function drawBodies()
 		{
 			if (getDistance({ x: b.positionX, y: b.positionY }, _cursor) < b.radius + 4)
 			{
-/*
-				_arc(b.positionX, b.positionY, b.radius + 2 + a * 5, c + 0/6, c + 1/6, 0, 1);
-				_arc(b.positionX, b.positionY, b.radius + 2 + a * 5, c + 2/6, c + 3/6, 0, 1);
-				_arc(b.positionX, b.positionY, b.radius + 2 + a * 5, c + 4/6, c + 5/6, 0, 1);
-*/
-				_arc(b.positionX, b.positionY, b.radius + 3, c + 0/6, c + 1/6, 0, 1);
-				_arc(b.positionX, b.positionY, b.radius + 3, c + 2/6, c + 3/6, 0, 1);
-				_arc(b.positionX, b.positionY, b.radius + 3, c + 4/6, c + 5/6, 0, 1);
+				drawCircularSelection({ x: b.positionX, y: b.positionY }, b.radius + 2);
 				
 				break;
 			}
