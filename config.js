@@ -4,8 +4,8 @@
 // const HEIGHT = 1080;
 // const WIDTH = 480;
 // const HEIGHT = 270;
-const WIDTH = 1000;
-const HEIGHT = 562;
+const WIDTH = 960;
+const HEIGHT = 540;
 const SCALE = Math.min(HEIGHT, WIDTH) / 400;
 
 const BODY_TYPE_STAR = 0;
