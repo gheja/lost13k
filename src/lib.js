@@ -197,6 +197,21 @@ function getAngle(p1, p2)
 	return Math.atan2(p1.y - p2.y, p2.x - p1.x) / PI2;
 }
 
+//// event handling
+function eventMouseDown(e)
+{
+	eventMouseMove(e);
+	_cursor.clicked = true;
+	// console.log("click, " + e.clientX + ", " + e.clientY + ", " + _rx(e.clientX) + ", " + _ry(e.clientY));
+}
+
+function eventMouseMove(e)
+{
+	e.preventDefault();
+	_cursor.x = _rx(e.clientX);
+	_cursor.y = _ry(e.clientY);
+	// console.log("move, " + e.clientX + ", " + e.clientY + ", " + _rx(e.clientX) + ", " + _ry(e.clientY));
+}
 
 
 //// canvas layers

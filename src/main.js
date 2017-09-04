@@ -6,7 +6,7 @@ let _layers = [];
 let _frameNumber = 0;
 
 let _map = null;
-
+let _cursor = { x: 0, y: 0, clicked: false };
 
 
 function drawMain()
@@ -40,6 +40,8 @@ function init()
 	let tmp;
 	
 	_body = document.body;
+	_body.onmousedown = eventMouseDown;
+	_body.onmousemove = eventMouseMove;
 	
 	layerCreate("planets", drawSolar);
 	layerCreate("starmap", drawStarMap);
