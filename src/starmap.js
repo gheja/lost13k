@@ -1,5 +1,7 @@
 "use strict";
 
+let starSelected = null;
+
 function drawStarMap()
 {
 	let i, a, n;
@@ -7,15 +9,30 @@ function drawStarMap()
 	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
+	if (_cursor.clicked)
+	{
+		starSelected = null;
+	}
+	
 	// star
 	ctx.fillStyle = "#fff";
 	for (i=0; i<_map.stars.length; i++)
 	{
 		_arc(_map.stars[i].x, _map.stars[i].y, 1.5, 0, 1, 1);
 		
+		if (_map.stars[i] == starSelected)
+		{
+			drawCircularSelection(_map.stars[i], 5);
+		}
+		
 		if (getDistance(_map.stars[i], _cursor) < 10)
 		{
 			drawCircularSelection(_map.stars[i], 5);
+			
+			if (_cursor.clicked)
+			{
+				starSelected = _map.stars[i];
+			}
 		}
 	}
 }
