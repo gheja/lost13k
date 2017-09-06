@@ -2,6 +2,39 @@
 
 let starSelected = null;
 
+function starMapNext()
+{
+	let i;
+	
+	for (i=0; i<STAR_COUNT; i++)
+	{
+		if (starSelected == _map.stars[i])
+		{
+			starSelected = _map.stars[(i + 1) % STAR_COUNT];
+			break;
+		}
+	}
+}
+
+function starMapZoom()
+{
+}
+
+function starMapJump()
+{
+	let i;
+	
+	for (i=0; i<STAR_COUNT; i++)
+	{
+		_map.stars[i].current = false;
+		
+		if (starSelected == _map.stars[i])
+		{
+			_map.stars[i].current = true;
+		}
+	}
+}
+
 function drawStarMap()
 {
 	let i, a, n, clicked;
@@ -59,7 +92,8 @@ function regenerateStars()
 			a = {
 				x: randPlusMinus(180),
 				y: randPlusMinus(180),
-				visited: false
+				visited: false,
+				current: false
 			}
 			
 			// don't generate stars too close
