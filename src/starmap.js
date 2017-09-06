@@ -4,13 +4,16 @@ let starSelected = null;
 
 function drawStarMap()
 {
-	let i, a, n;
+	let i, a, n, clicked;
 	
 	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
-	if (_cursor.clicked)
+	clicked = false;
+	
+	if (_cursor.clicked && _cursor.y > -180 && _cursor.y < 180)
 	{
+		clicked = true;
 		starSelected = null;
 	}
 	
@@ -29,19 +32,17 @@ function drawStarMap()
 		{
 			drawCircularSelection(_map.stars[i], 5);
 			
-			if (_cursor.clicked)
+			if (clicked)
 			{
 				starSelected = _map.stars[i];
 			}
 		}
 	}
 	
-	// TODO: click handling on star selection precedes the button click
-	// so no click on button is possible when a star is selected
-	
 	drawGuiStripes();
-	drawGuiButton("JUMP", 5, 3, (starSelected != null), regenerateBodies);
-	drawGuiButton("LAND", 9, 3, false, regenerateBodies);
+	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
+	drawGuiButton("JUMP", 5, 3, (starSelected && !starSelected.current), starMapJump);
+	drawGuiButton("ZOOM", 8, 3, (starSelected && starSelected.current), regenerateBodies);
 }
 
 function regenerateStars()
