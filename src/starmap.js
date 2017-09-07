@@ -16,7 +16,6 @@ function starMapNext()
 
 function starMapZoom()
 {
-	
 	document.getElementById("layer1").checked = false;
 	document.getElementById("layer0").checked = true;
 }
