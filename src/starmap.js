@@ -41,6 +41,7 @@ function drawStarMap()
 {
 	let i, a, n, clicked;
 	
+	ctx.globalCompositeOperation = "source-over";
 	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
@@ -81,6 +82,21 @@ function drawStarMap()
 			}
 		}
 	}
+	
+	ctx.globalCompositeOperation = "screen";
+	ctx.lineCap = "round";
+	ctx.beginPath();
+	ctx.moveTo(_x(_map.path.steps[0].system.mapPosition.x), _y(_map.path.steps[0].system.mapPosition.y));
+	for (i=1; i<_map.path.steps.length; i++)
+	{
+		ctx.lineTo(_x(_map.path.steps[i].system.mapPosition.x), _y(_map.path.steps[i].system.mapPosition.y));
+	}
+	ctx.strokeStyle = "rgba(0, 190, 255, 0.2)";
+	ctx.lineWidth = _scale(3);
+	ctx.stroke();
+	
+	ctx.globalCompositeOperation = "source-over";
+	ctx.lineCap = "butt";
 	
 	drawGuiStripes();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
