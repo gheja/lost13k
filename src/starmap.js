@@ -16,6 +16,10 @@ function starMapNext()
 
 function starMapZoom()
 {
+	_currentSystem = _selectedSystem;
+	
+	document.getElementById("layer1").checked = false;
+	document.getElementById("layer0").checked = true;
 }
 
 function starMapJump()
