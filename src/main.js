@@ -14,9 +14,6 @@ let _cursor = { x: 0, y: 0, clicked: false };
 
 function drawMain()
 {
-	_layers[0].visible = document.getElementById("layer0").checked;
-	_layers[1].visible = document.getElementById("layer1").checked;
-	_layers[2].visible = document.getElementById("layer2").checked;
 }
 
 function reset()
@@ -55,6 +52,8 @@ function init()
 	layerCreate("planets", drawSolar);
 	layerCreate("starmap", drawStarMap);
 	layerCreate("landscape", drawLandscape);
+	
+	_layers[1].visible = true;
 	
 	reset();
 	

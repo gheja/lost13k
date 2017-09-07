@@ -276,8 +276,9 @@ function solarLand()
 
 function solarZoom()
 {
-	document.getElementById("layer0").checked = false;
-	document.getElementById("layer1").checked = true;
+	_cursor.clicked = false;
+	_layers[0].visible = false;
+	_layers[1].visible = true;
 }
 
 function drawSolar()

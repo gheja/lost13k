@@ -217,7 +217,7 @@ function layerCreate(name, drawFunction)
 {
 	let a;
 	
-	a = { name: name, visible: true, canvas: document.createElement("canvas"), draw: drawFunction };
+	a = { name: name, visible: false, canvas: document.createElement("canvas"), draw: drawFunction };
 	
 	// TODO: resize on resize
 	a.canvas.width = WIDTH;
