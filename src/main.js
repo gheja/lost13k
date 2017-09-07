@@ -5,7 +5,7 @@ let _body = null;
 let _layers = [];
 let _frameNumber = 0;
 
-let _currentSystem = { bodies: [] };
+let _currentSystem = null;;
 let _selectedSystem = null;
 let _selectedBody = null;
 let _map = null;
