@@ -75,7 +75,7 @@ function drawStarMap()
 	drawGuiStripes();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
 	drawGuiButton("JUMP", 5, 3, (systemSelected && !systemSelected.current), starMapJump);
-	drawGuiButton("ZOOM", 8, 3, (systemSelected && systemSelected.current), regenerateBodies);
+	drawGuiButton("ZOOM", 8, 3, (systemSelected && systemSelected.current), function() { });
 }
 
 function regenerateStars()
