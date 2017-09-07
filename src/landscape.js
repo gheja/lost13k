@@ -1,68 +1,40 @@
 "use strict";
 
 const PALETTE_LENGTH = 5000;
+let landscapeSettings = null;
 
-let landscapeSettings = {
-	h1: 0,
-	s1: 0.2,
-	l1: 0.3,
-	
-	h2: 0.16,
-	s2: 1.0,
-	l2: 0.59,
-	
-	pow: 3.42,
-	
-	density: 0.32,
-	
-	position: 0,
-	palette: [],
-	
-	hillColor: "",
-	
-	stars: [],
-	moons: [],
-	sun: null,
-	hill1: [],
-	hill2: []
-};
+let _p = 1;
+let _p2 = 1;
 
-let _p = 0;
-
-function landscapeLerp(a, b, x)
+function landscapeLerp(a, b, x, pow)
 {
-	return a + (b - a) * Math.pow(x, landscapeSettings.pow);
+	return a + (b - a) * Math.pow(x,pow);
 }
 
-function buildLandscapePalette()
+function buildLandscapePalette(settings)
 {
-	let i, a;
+	let i, a, result;
+	
+	settings.palette = [];
 	
 	for (i=0; i<PALETTE_LENGTH; i++)
 	{
 		a = i / PALETTE_LENGTH;
 		
-		landscapeSettings.palette[i] = hsla2rgba_(
-			landscapeLerp(landscapeSettings.h1, landscapeSettings.h2, a),
-			landscapeLerp(landscapeSettings.s1, landscapeSettings.s2, a),
-			landscapeLerp(landscapeSettings.l1, landscapeSettings.l2, a),
-			Math.pow(a, 1 - landscapeSettings.density * 0.88)
+		settings.palette[i] = hsla2rgba_(
+			landscapeLerp(settings.h1, settings.h2, a, settings.pow),
+			landscapeLerp(settings.s1, settings.s2, a, settings.pow),
+			landscapeLerp(settings.l1, settings.l2, a, settings.pow),
+			Math.pow(a, 1 - settings.density * 0.88)
 		);
 	}
 }
 
 function drawLandscape()
 {
-	let i, n, c1, c2, a, p1, p2;
+	let i, n, c1, c2, p1, p2;
 	
-	_p = clamp(landscapeSettings.position, 0, 1);
-	
-	a = 1;
-	
-	if (landscapeSettings.autoUpdate)
-	{
-		buildLandscapePalette();
-	}
+	_p = clamp(_p2, 0, 1);
 	
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
@@ -131,61 +103,77 @@ function drawLandscape()
 	// ctx.fillRect(0, 0, WIDTH, HEIGHT);
 }
 
-function regenerateLandscape()
+function generateOrLoadLandscape()
 {
-	let i, n, a;
+	let i, n, a, settings;
 	
-	landscapeSettings.h1 = Math.random();
-	if (randFloat() < 0.5)
+	if (_currentBody.landscapeSettings == null)
 	{
-		landscapeSettings.h2 = landscapeSettings.h1 - 0.1 - Math.random() * 0.5;
-	}
-	else
-	{
-		landscapeSettings.h2 = landscapeSettings.h1 + 0.1 + Math.random() * 0.5;
-		landscapeSettings.h2 = landscapeSettings.h1 + 0.1 + Math.random() * 0.5;
-	}
-	landscapeSettings.s2 = 0.2 + randFloat() * 0.5;
-	landscapeSettings.pow = randFloat();
-	landscapeSettings.density = randFloat();
-	
-	landscapeSettings.stars.length = 0;
-	for (i=0; i<500; i++)
-	{
-		landscapeSettings.stars.push({ x: randPlusMinus(1200), y: randPlusMinus(1200) });
-	}
-	
-	n = Math.floor(randFloat() * 3);
-	landscapeSettings.moons.length = 0;
-	for (i=0; i<n; i++)
-	{
-		a = arrayRandom(BODY_TYPE_DEFINITIONS[BODY_TYPE_MOON]);
-		landscapeSettings.moons.push({
-			x: randPlusMinus(180),
-			y: randPlusMinus(40) - 130,
+		settings = {};
+		
+		settings.h1 = Math.random();
+		settings.s1 = 0.2;
+		settings.l1 = 0.3;
+		
+		if (randFloat() < 0.5)
+		{
+			settings.h2 = settings.h1 - 0.1 - Math.random() * 0.5;
+		}
+		else
+		{
+			settings.h2 = settings.h1 + 0.1 + Math.random() * 0.5;
+			settings.h2 = settings.h1 + 0.1 + Math.random() * 0.5;
+		}
+		settings.s2 = 0.2 + randFloat() * 0.5;
+		settings.l2 = 0.6;
+		
+		settings.pow = randFloat();
+		settings.density = randFloat();
+		
+		settings.stars = [];
+		for (i=0; i<500; i++)
+		{
+			settings.stars.push({ x: randPlusMinus(1200), y: randPlusMinus(1200) });
+		}
+		
+		settings.moons = [];
+		for (i=0; i<_currentBody.childCount; i++)
+		{
+			a = _currentBody.def;
+			
+			settings.moons.push({
+				x: randPlusMinus(180),
+				y: randPlusMinus(40) - 130,
+				color: hsla2rgba_(a[0], a[1], a[2], 1),
+				radius: randFloat() * 25 + 5
+			});
+		}
+		
+		a = _currentSystem.bodies[0].def;
+		
+		settings.sun = {
+			x: randPlusMinus(60) - 120,
+			y: randPlusMinus(40) + 80,
 			color: hsla2rgba_(a[0], a[1], a[2], 1),
-			radius: randFloat() * 25 + 5
-		});
+			radius: randFloat() * 30 + 50
+		};
+		
+		a = _currentBody.def;
+		
+		settings.hillColor = hsla2rgba_(a[0], a[1], a[2], 1);
+		
+		settings.hill1 = [];
+		settings.hill2 = [];
+		for (i=0; i<=10; i++)
+		{
+			settings.hill1.push(randFloat());
+			settings.hill2.push(randFloat());
+		}
+		
+		buildLandscapePalette(settings);
+		
+		_currentBody.landscapeSettings = settings;
 	}
 	
-	a = arrayRandom(BODY_TYPE_DEFINITIONS[BODY_TYPE_STAR]);
-	landscapeSettings.sun = {
-		x: randPlusMinus(60) - 120,
-		y: randPlusMinus(40) + 80,
-		color: hsla2rgba_(a[0], a[1], a[2], 1),
-		radius: randFloat() * 30 + 50
-	};
-	
-	a = arrayRandom(BODY_TYPE_DEFINITIONS[BODY_TYPE_PLANET]);
-	landscapeSettings.hillColor = hsla2rgba_(a[0], a[1], a[2], 1);
-	
-	landscapeSettings.hill1.length = 0;
-	landscapeSettings.hill2.length = 0;
-	for (i=0; i<=10; i++)
-	{
-		landscapeSettings.hill1.push(randFloat());
-		landscapeSettings.hill2.push(randFloat());
-	}
-	
-	buildLandscapePalette();
+	landscapeSettings = _currentBody.landscapeSettings;
 }

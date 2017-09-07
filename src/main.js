@@ -39,7 +39,7 @@ function reset()
 	regenerateStars();
 	regeneratePath();
 	regenerateAllBodies();
-	regenerateLandscape();
+	// regenerateLandscape();
 }
 
 function init()

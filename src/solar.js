@@ -12,7 +12,8 @@ function generateBody(parent, size, r, speed, type)
 		position: randFloat(),
 		speed: speed * (randFloat() + 0.5) * 5,
 		type: type,
-		childCount: 0
+		childCount: 0,
+		landscapeSettings: null
 	};
 	
 	a.radius = a.radiusBase * (a.radiusScale + 0.8);
@@ -273,6 +274,7 @@ function solarNext()
 function solarLand()
 {
 	_currentBody = _selectedBody;
+	generateOrLoadLandscape();
 }
 
 function solarZoom()
