@@ -16,7 +16,6 @@ function starMapNext()
 
 function starMapZoom()
 {
-	_currentSystem = _selectedSystem;
 	
 	document.getElementById("layer1").checked = false;
 	document.getElementById("layer0").checked = true;
@@ -24,21 +23,7 @@ function starMapZoom()
 
 function starMapJump()
 {
-	let i;
-	
-	for (i=0; i<STAR_COUNT; i++)
-	{
-		_map.systems[i].current = false;
-		
-		if (_selectedSystem == _map.systems[i])
-		{
-			_map.systems[i].current = true;
-			if (!_map.systems[i].visited)
-			{
-				pathAddStep({ system: _map.systems[i] });
-			}
-		}
-	}
+	jumpToSystem(_selectedSystem);
 }
 
 function drawStarMap()
@@ -90,10 +75,10 @@ function drawStarMap()
 	ctx.globalCompositeOperation = "screen";
 	ctx.lineCap = "round";
 	ctx.beginPath();
-	ctx.moveTo(_x(_map.path.steps[0].system.mapPosition.x), _y(_map.path.steps[0].system.mapPosition.y));
+	ctx.moveTo(_x(_map.path.steps[0].mapPosition.x), _y(_map.path.steps[0].mapPosition.y));
 	for (i=1; i<_map.path.steps.length; i++)
 	{
-		ctx.lineTo(_x(_map.path.steps[i].system.mapPosition.x), _y(_map.path.steps[i].system.mapPosition.y));
+		ctx.lineTo(_x(_map.path.steps[i].mapPosition.x), _y(_map.path.steps[i].mapPosition.y));
 	}
 	ctx.strokeStyle = "rgba(0, 190, 255, 0.2)";
 	ctx.lineWidth = _scale(3);
@@ -104,8 +89,8 @@ function drawStarMap()
 	
 	drawGuiStripes();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
-	drawGuiButton("JUMP", 5, 3, (_selectedSystem && !_selectedSystem.current), starMapJump);
-	drawGuiButton("ZOOM", 8, 3, (_selectedSystem && _selectedSystem.current), starMapZoom);
+	drawGuiButton("JUMP", 5, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump);
+	drawGuiButton("ZOOM", 8, 3, (_currentSystem && _selectedSystem == _currentSystem), starMapZoom);
 }
 
 function regenerateStars()
@@ -147,13 +132,23 @@ function regenerateStars()
 
 function pathAddStep(a)
 {
-	a.system.visited = true;
-	_map.path.steps.push(a);
+}
+
+function jumpToSystem(a)
+{
+	_currentSystem = a;
+	_selectedSystem = a;
+	
+	if (!_currentSystem.visited)
+	{
+		_map.path.steps.push(a);
+		_currentSystem.visited = true;
+	}
 }
 
 function regeneratePath()
 {
-	let i, j, k, a, b, c, current, best, angle, dist, minDist;
+	let i, j, k, a, b, c, current, best, angle, dist, distanceMin, angleMin, angleMax;
 	
 	for (i=0; i<PATH_ITERATIONS; i++)
 	{
@@ -165,18 +160,16 @@ function regeneratePath()
 			_map.systems[k].visited = false;
 		}
 		
-		pathAddStep({
-			system: arrayRandom(_map.systems),
-			angleMin: -0.3,
-			angleMax: 0.3
-		});
+		angleMin = -0.3;
+		angleMax = 0.3;
+		
+		jumpToSystem(arrayRandom(_map.systems));
 		
 		for (j=0; j<PATH_STEPS; j++)
 		{
 			c = null;
-			current = _map.path.steps[_map.path.steps.length - 1];
+			distanceMin = 1000;
 			
-			minDist = 1000;
 			for (k=0; k<STAR_COUNT; k++)
 			{
 				if (_map.systems[k].visited)
@@ -184,15 +177,15 @@ function regeneratePath()
 					continue;
 				}
 				
-				dist = getDistance(current.system.mapPosition, _map.systems[k].mapPosition);
-				angle = -getAngle(current.system.mapPosition, _map.systems[k].mapPosition);
+				dist = getDistance(_currentSystem.mapPosition, _map.systems[k].mapPosition);
+				angle = -getAngle(_currentSystem.mapPosition, _map.systems[k].mapPosition);
 				
-				if (dist > PATH_STEP_DISTANCE || angle < current.angleMin || angle > current.angleMax)
+				if (dist > PATH_STEP_DISTANCE || angle < angleMin || angle > angleMax)
 				{
 					continue;
 				}
 				
-				if (dist < minDist)
+				if (dist < distanceMin)
 				{
 					c = {
 						system: _map.systems[k],
@@ -200,7 +193,7 @@ function regeneratePath()
 						angleMax: angle + 0.4
 					};
 					
-					minDist = dist;
+					distanceMin = dist;
 				}
 			}
 			
@@ -210,7 +203,9 @@ function regeneratePath()
 				break;
 			}
 			
-			pathAddStep(c);
+			jumpToSystem(c.system);
+			angleMin = c.angleMin;
+			angleMax = c.angleMax;
 		}
 		
 		if (_map.path.valid)
