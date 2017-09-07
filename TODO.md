@@ -1,8 +1,8 @@
 - [x] star map
-- [ ] planet/moon selection
-- [ ] star selection
+- [x] planet/moon selection
+- [x] star selection
 - [ ] win/lose conditions
-- [ ] buttons
+- [x] buttons
 - [ ] main menu
 - [ ] auto resize
 - [ ] mobile fix (devicepixelratio, etc.)
@@ -12,13 +12,14 @@
 - [ ] landing/landed ship design
 - [ ] cat design
 - [ ] planet/moon generation tuning
-- [ ] parallax scrolling
+- [x] parallax scrolling
 - [ ] transitions
 - [x] past path highlight on star map
 - [ ] past planet/moon highlight (after visit)
 - [ ] noise texture
   - nebulae: starting at 0 on edges, 1 on center?
 - [ ] nebulae composition
+- [ ] difficulty levels (star count, path length, etc.)
 - [ ] star/planet/moon name generation
 - [ ] spherical distortion
 - [ ] planet/moon spherical noise overlay
