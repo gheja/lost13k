@@ -270,7 +270,6 @@ function solarZoom()
 
 function drawSolar()
 {
-	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
 	updateBodies();

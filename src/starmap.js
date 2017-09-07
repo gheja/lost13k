@@ -23,14 +23,13 @@ function starMapZoom()
 function starMapJump()
 {
 	jumpToSystem(_selectedSystem);
+	starMapZoom();
 }
 
 function drawStarMap()
 {
 	let i, a, n, clicked;
 	
-	ctx.globalCompositeOperation = "source-over";
-	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
 	clicked = false;

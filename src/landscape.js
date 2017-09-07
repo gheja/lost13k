@@ -64,8 +64,6 @@ function drawLandscape()
 		buildLandscapePalette();
 	}
 	
-	ctx.globalCompositeOperation = 'source-over';
-	ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
 	ctx.fillStyle = "rgba(255,255,255,0.5)";
