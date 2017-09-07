@@ -21,6 +21,8 @@
 ## Nice to have
 - [ ] past planet/moon highlight (after visit)
 - [ ] difficulty levels (star count, path length, etc.)
+- [ ] landscape: moon color should match on sky
+- [ ] landscape: from a moon the planet should be visible
 - [ ] sound effects
 - [ ] some simple background music
 
