@@ -153,7 +153,8 @@ function drawBodies()
 		
 		if (b.type != BODY_TYPE_STAR)
 		{
-			if (getDistance({ x: b.positionX, y: b.positionY }, _cursor) < b.radius + 4)
+			
+			if (getDistance({ x: b.positionX, y: b.positionY }, _cursor) < b.radius + 4 || _selectedBody == b)
 			{
 				if (clicked)
 				{
