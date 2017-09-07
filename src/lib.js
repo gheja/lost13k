@@ -210,8 +210,8 @@ function eventMouseDown(e)
 function eventMouseMove(e)
 {
 	e.preventDefault();
-	_cursor.x = _rx(e.clientX);
-	_cursor.y = _ry(e.clientY);
+	_cursor.x = _rx(e.clientX * window.devicePixelRatio);
+	_cursor.y = _ry(e.clientY * window.devicePixelRatio);
 }
 
 function consumeResource()
@@ -230,6 +230,9 @@ function layerCreate(drawFunction)
 	// TODO: resize on resize
 	a.canvas.width = WIDTH;
 	a.canvas.height = HEIGHT;
+	a.canvas.style.width = (WIDTH / window.devicePixelRatio) + 'px';
+	a.canvas.style.height = (HEIGHT / window.devicePixelRatio) + 'px';
+	
 	a.ctx = a.canvas.getContext("2d");
 	
 	_body.appendChild(a.canvas);
