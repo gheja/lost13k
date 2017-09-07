@@ -30,6 +30,13 @@ function buildLandscapePalette(settings)
 	}
 }
 
+function landscapeLeave()
+{
+	_cursor.clicked = false;
+	_layers[0].visible = true;
+	_layers[2].visible = false;
+}
+
 function drawLandscape()
 {
 	let i, n, c1, c2, p1, p2;
@@ -101,6 +108,9 @@ function drawLandscape()
 	ctx.fillStyle = hsla2rgba_(0.0, 1, 0.5, 0.33);
 	puthill(landscapeSettings.hill1, 80, 2);
 	// ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	
+	// drawGuiStripes();
+	drawGuiButton("LEAVE", 5, 3, true, landscapeLeave);
 }
 
 function generateOrLoadLandscape()
