@@ -48,7 +48,7 @@ function drawLandscape()
 	ctx.fillStyle = "rgba(255,255,255,0.5)";
 	for (i=0; i<landscapeSettings.stars.length; i++)
 	{
-		_arc(_parallaxPosition(landscapeSettings.stars, 10), 2, 0, 1, 1);
+		_arc(_parallaxPosition(landscapeSettings.stars[i], 10), 2, 0, 1, 1);
 	}
 	
 	// sun mask - no stars between planet and sun please
