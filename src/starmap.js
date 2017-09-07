@@ -151,11 +151,9 @@ function regeneratePath()
 {
 	let i, j, k, a, b, c, current, best, angle, dist, minDist;
 	
-	_map.path.valid = false;
-	_map.path.steps.length = 0;
-	
 	for (i=0; i<PATH_ITERATIONS; i++)
 	{
+		_map.path.steps.length = 0;
 		_map.path.valid = true;
 		
 		for (k=0; k<STAR_COUNT; k++)
