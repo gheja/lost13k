@@ -336,7 +336,7 @@ function drawGuiButton(title, x, size, enabled, callback)
 	
 	if (enabled)
 	{
-		if (_cursor.x > x * 20 - 5 && _cursor.x < x * 20 + size * 20 - 10 + 5 && _cursor.y > -198 && _cursor.y < -186 + 14)
+		if (_cursor.x > x * 20 - 5 && _cursor.x < x * 20 + size * 20 - 10 + 5 && _cursor.y > 184 && _cursor.y < 196)
 		{
 			if (_cursor.clicked)
 			{
@@ -354,9 +354,9 @@ function drawGuiButton(title, x, size, enabled, callback)
 		c = "#222";
 	}
 	
-	drawGuiStripe(x * 20, -196, size * 20 - 10, c, true);
+	drawGuiStripe(x * 20, 184, size * 20 - 10, c, true);
 	ctx.fillStyle = "#000";
 	ctx.textAlign = "center";
 	ctx.font = _scale(10) + "px Arial";
-	ctx.fillText(title, _x(x * 20 + (size - 1) * 10 + 1), _y(-196 + 9.5));
+	ctx.fillText(title, _x(x * 20 + (size - 1) * 10 + 1), _y(184 + 9.5));
 }
