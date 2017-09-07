@@ -3,6 +3,8 @@
 - [x] star selection
 - [ ] win/lose conditions
 - [x] buttons
+- [ ] resources (long jump, short jump, leave rockets)
+- [ ] resource display
 - [ ] main menu
 - [ ] auto resize
 - [ ] mobile fix (devicepixelratio, etc.)
