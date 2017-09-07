@@ -12,7 +12,7 @@
 - [ ] objectives/talk design
 - [ ] star map ship design
 - [x] parallax scrolling
-- [ ] transitions
+- [/] transitions
 - [x] past path highlight on star map
 - [ ] noise texture
   - nebulae: starting at 0 on edges, 1 on center?
