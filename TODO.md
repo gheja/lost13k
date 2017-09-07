@@ -7,8 +7,8 @@
 - [x] resources (long jump, short jump, leave rockets)
 - [x] resource display
 - [ ] main menu
-- [ ] auto resize
-- [ ] mobile fix (devicepixelratio, etc.)
+- [x] auto resize
+- [x] mobile fix (devicepixelratio, etc.)
 - [ ] objectives/talk design
 - [ ] star map ship design
 - [x] parallax scrolling
