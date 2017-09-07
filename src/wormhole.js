@@ -132,7 +132,7 @@ function draw()
 	
 	if (frameNumber < 100)
 	{
-		ctx.clearRect(0, 0, WIDTH, HEIGHT);
+		ctx.clearRect(0, 0, _windowWidth, _windowHeight);
 		z = 0;
 	}
 	else if (frameNumber < 100)
@@ -140,14 +140,14 @@ function draw()
 	}
 	else
 	{
-		ctx.fillRect(0, 0, WIDTH, HEIGHT);
+		ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 		ctx.globalCompositeOperation = "destination-out";
 		ctx.fillStyle = "#000";
 		z = 100;
 	}
 	
-	a = WIDTH / 2;
-	b = HEIGHT / 2;
+	a = _windowWidth / 2;
+	b = _windowHeight / 2;
 	ctx.beginPath();
 	ctx.moveTo(a, b)
 	for (i=0; i<(frameNumber - z) * 3; i++)
@@ -241,15 +241,15 @@ function init()
 	let tmp;
 	
 	canvas1 = document.createElement("canvas");
-	canvas1.width = WIDTH;
-	canvas1.height = HEIGHT;
+	canvas1.width = _windowWidth;
+	canvas1.height = _windowHeight;
 	ctx1 = canvas1.getContext("2d");
 	ctx1.fillStyle = "#600";
-	ctx1.fillRect(0, 0, WIDTH, HEIGHT);
+	ctx1.fillRect(0, 0, _windowWidth, _windowHeight);
 	
 	canvas = document.createElement("canvas");
-	canvas.width = WIDTH;
-	canvas.height = HEIGHT;
+	canvas.width = _windowWidth;
+	canvas.height = _windowHeight;
 	ctx = canvas.getContext("2d");
 	
 	body = document.body;

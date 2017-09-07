@@ -1,13 +1,5 @@
 "use strict";
 
-// const WIDTH = 1920;
-// const HEIGHT = 1080;
-// const WIDTH = 480;
-// const HEIGHT = 270;
-const WIDTH = 960;
-const HEIGHT = 540;
-const SCALE = Math.min(HEIGHT, WIDTH) / 400;
-
 const PATH_STEPS = 10;
 const PATH_STEP_DISTANCE = 100;
 const PATH_ITERATIONS = 100;

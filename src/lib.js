@@ -8,32 +8,32 @@ var _raf = window.requestAnimationFrame;
 
 function _scale(x)
 {
-	return x * SCALE;
+	return x * _windowScale;
 }
 
 function _x(x)
 {
-	return WIDTH / 2 + _scale(x);
+	return _windowWidth / 2 + _scale(x);
 }
 
 function _y(y)
 {
-	return HEIGHT / 2 + _scale(y);
+	return _windowHeight / 2 + _scale(y);
 }
 
 function _rscale(x)
 {
-	return x / SCALE;
+	return x / _windowScale;
 }
 
 function _rx(x)
 {
-	return _rscale(x) - _rscale(WIDTH / 2);
+	return _rscale(x) - _rscale(_windowWidth / 2);
 }
 
 function _ry(y)
 {
-	return _rscale(y) - _rscale(HEIGHT / 2);
+	return _rscale(y) - _rscale(_windowHeight / 2);
 }
 
 
@@ -214,6 +214,23 @@ function eventMouseMove(e)
 	_cursor.y = _ry(e.clientY * window.devicePixelRatio);
 }
 
+function eventResize()
+{
+	let i;
+	
+	_windowWidth = window.innerWidth * window.devicePixelRatio;
+	_windowHeight = window.innerHeight * window.devicePixelRatio;
+	_windowScale = Math.min(_windowWidth, _windowHeight) / 400;
+	
+	for (i=0; i<_layers.length; i++)
+	{
+		_layers[i].canvas.width = _windowWidth;
+		_layers[i].canvas.height = _windowHeight;
+		_layers[i].canvas.style.width = (_windowWidth / window.devicePixelRatio) + 'px';
+		_layers[i].canvas.style.height = (_windowHeight / window.devicePixelRatio) + 'px';
+	}
+}
+
 function consumeResource()
 {
 	_resources[_highlightedResourceCode]--;
@@ -226,12 +243,6 @@ function layerCreate(drawFunction)
 	let a;
 	
 	a = { visible: false, canvas: document.createElement("canvas"), draw: drawFunction };
-	
-	// TODO: resize on resize
-	a.canvas.width = WIDTH;
-	a.canvas.height = HEIGHT;
-	a.canvas.style.width = (WIDTH / window.devicePixelRatio) + 'px';
-	a.canvas.style.height = (HEIGHT / window.devicePixelRatio) + 'px';
 	
 	a.ctx = a.canvas.getContext("2d");
 	

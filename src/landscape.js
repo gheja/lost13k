@@ -47,7 +47,7 @@ function drawLandscape()
 	
 	_p = clamp(_p2, 0, 1);
 	
-	ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
 	ctx.fillStyle = "rgba(255,255,255,0.5)";
 	for (i=0; i<landscapeSettings.stars.length; i++)
@@ -67,12 +67,12 @@ function drawLandscape()
 	}
 	
 	// atmosphere
-	for (i=0; i<HEIGHT; i++)
+	for (i=0; i<_windowHeight; i++)
 	{
-		n = clamp(Math.floor((i / HEIGHT * PALETTE_LENGTH) * (Math.pow((_p + 0.2), 0.9))), 0, PALETTE_LENGTH - 1);
+		n = clamp(Math.floor((i / _windowHeight * PALETTE_LENGTH) * (Math.pow((_p + 0.2), 0.9))), 0, PALETTE_LENGTH - 1);
 		
 		ctx.fillStyle = landscapeSettings.palette[n];
-		ctx.fillRect(0, i, WIDTH, 1);
+		ctx.fillRect(0, i, _windowWidth, 1);
 	}
 	
 	// sun
@@ -85,13 +85,13 @@ function drawLandscape()
 		let i;
 		
 		ctx.beginPath();
-		ctx.moveTo(0, _scale(_parallax(top, p)) + HEIGHT / 2);
+		ctx.moveTo(0, _scale(_parallax(top, p)) + _windowHeight / 2);
 		for (i=0; i<hill.length; i++)
 		{
-			ctx.lineTo((i + 1) * WIDTH / hill.length, _scale(_parallax(hill[i] * 30 + top, p)) + HEIGHT / 2);
+			ctx.lineTo((i + 1) * _windowWidth / hill.length, _scale(_parallax(hill[i] * 30 + top, p)) + _windowHeight / 2);
 		}
-		ctx.lineTo(WIDTH, HEIGHT);
-		ctx.lineTo(0, HEIGHT);
+		ctx.lineTo(_windowWidth, _windowHeight);
+		ctx.lineTo(0, _windowHeight);
 		ctx.fill();
 	}
 	
@@ -111,9 +111,9 @@ function drawLandscape()
 	// sun color:
 	ctx.fillStyle = hsla2rgba_(0.0, 1, 0.5, 0.33);
 	puthill(landscapeSettings.hill1, 80, 2);
-	// ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	// ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
-	i = HEIGHT * (1 - _p3);
+	i = _windowHeight * (1 - _p3);
 	
 	if (_p3 < 1)
 	{
@@ -121,13 +121,13 @@ function drawLandscape()
 		
 		if (!_p3Reversed)
 		{
-			ctx.clearRect(0, 0, WIDTH, i - _scale(5));
-			ctx.fillRect(0, i - _scale(5), WIDTH, _scale(5));
+			ctx.clearRect(0, 0, _windowWidth, i - _scale(5));
+			ctx.fillRect(0, i - _scale(5), _windowWidth, _scale(5));
 		}
 		else
 		{
-			ctx.clearRect(0, i + _scale(5), WIDTH, HEIGHT - i + _scale(5));
-			ctx.fillRect(0, i, WIDTH, _scale(5));
+			ctx.clearRect(0, i + _scale(5), _windowWidth, _windowHeight - i + _scale(5));
+			ctx.fillRect(0, i, _windowWidth, _scale(5));
 		}
 	}
 	

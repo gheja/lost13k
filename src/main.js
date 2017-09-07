@@ -1,3 +1,7 @@
+let _windowWidth;
+let _windowHeight;
+let _windowScale;
+
 let canvas = null;
 let ctx = null;
 
@@ -48,10 +52,13 @@ function init()
 	_body = document.body;
 	_body.onmousedown = eventMouseDown;
 	_body.onmousemove = eventMouseMove;
+	_body.onresize = eventResize;
 	
 	layerCreate(drawSolar); // planets
 	layerCreate(drawStarMap); // star map
 	layerCreate(drawLandscape); // landscape
+	
+	eventResize();
 	
 	_layers[1].visible = true;
 	

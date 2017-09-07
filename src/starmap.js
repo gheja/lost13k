@@ -38,7 +38,7 @@ function drawStarMap()
 	let i, a, n, clicked;
 	
 	ctx.fillStyle = "#112";
-	ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
 	clicked = false;
 	
@@ -102,13 +102,13 @@ function drawStarMap()
 	
 	if (_p4 > 0)
 	{
-		a = HEIGHT * _p4;
-		i = HEIGHT / 2 - a / 2;
+		a = _windowHeight * _p4;
+		i = _windowHeight / 2 - a / 2;
 		
 		ctx.fillStyle = "#000";
 		
-		ctx.fillRect(0, i - _scale(5), WIDTH, a + _scale(5) * 2);
-		ctx.clearRect(0, i, WIDTH, a);
+		ctx.fillRect(0, i - _scale(5), _windowWidth, a + _scale(5) * 2);
+		ctx.clearRect(0, i, _windowWidth, a);
 	}
 	
 	drawGuiBase();

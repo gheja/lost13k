@@ -62,7 +62,7 @@ function drawBodies()
 	let i, j, a, b, c, stripes, clicked;
 	
 	ctx.fillStyle = "#211";
-	ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	ctx.lineCap = "round";
 	
 	for (i=0; i<_currentSystem.bodies.length; i++)
@@ -307,7 +307,7 @@ function solarZoom()
 
 function drawSolar()
 {
-	ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
 	updateBodies();
 	drawBodies();
