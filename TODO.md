@@ -4,8 +4,8 @@
 - [x] star selection
 - [ ] win/lose conditions
 - [x] buttons
-- [ ] resources (long jump, short jump, leave rockets)
-- [ ] resource display
+- [x] resources (long jump, short jump, leave rockets)
+- [x] resource display
 - [ ] main menu
 - [ ] auto resize
 - [ ] mobile fix (devicepixelratio, etc.)
@@ -19,6 +19,8 @@
 - [ ] nebulae composition
 
 ## Nice to have
+- [ ] add some low fps mode
+- [ ] make all/actions/animations etc. time based not frame based (dropped frames should be less noticable)
 - [ ] past planet/moon highlight (after visit)
 - [ ] difficulty levels (star count, path length, etc.)
 - [ ] landscape: moon color should match on sky
