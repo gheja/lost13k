@@ -61,6 +61,8 @@ function drawBodies()
 {
 	let i, j, a, b, c, stripes, clicked;
 	
+	ctx.fillStyle = "#211";
+	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	ctx.lineCap = "round";
 	
 	for (i=0; i<_currentSystem.bodies.length; i++)
@@ -287,16 +289,19 @@ function solarLand()
 {
 	_currentBody = _selectedBody;
 	generateOrLoadLandscape();
+	animationStart(animationPlanetLanding, 0.003);
 	
 	_cursor.clicked = false;
-	_layers[0].visible = false;
+	// _layers[0].visible = false;
 	_layers[2].visible = true;
 }
 
 function solarZoom()
 {
+	animationStart(animationSystemZoomOut, 0.03);
+	
 	_cursor.clicked = false;
-	_layers[0].visible = false;
+	// _layers[0].visible = false;
 	_layers[1].visible = true;
 }
 

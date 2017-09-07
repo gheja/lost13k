@@ -249,6 +249,8 @@ function draw()
 	_frameNumber++;
 	_highlightedResourceCode = -1;
 	
+	drawMain();
+	
 	for (i=0; i<_layers.length; i++)
 	{
 		_layers[i].canvas.style.display = _layers[i].visible ? "block" : "none";
@@ -344,6 +346,11 @@ function drawGuiBase(skipStripes)
 function drawGuiButton(title, x, size, enabled, callback, resourceCodeToHighlight)
 {
 	let c;
+	
+	if (_animation.position < 1)
+	{
+		return;
+	}
 	
 	c = "#0ac";
 	

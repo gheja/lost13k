@@ -5,6 +5,8 @@ let landscapeSettings = null;
 
 let _p = 1;
 let _p2 = 1;
+let _p3 = 1;
+let _p3Reversed = false;
 
 function landscapeLerp(a, b, x, pow)
 {
@@ -32,10 +34,11 @@ function buildLandscapePalette(settings)
 
 function landscapeLeave()
 {
+	animationStart(animationPlanetLeaving, 0.02);
 	consumeResource();
 	_cursor.clicked = false;
 	_layers[0].visible = true;
-	_layers[2].visible = false;
+	// _layers[2].visible = false;
 }
 
 function drawLandscape()
@@ -109,6 +112,24 @@ function drawLandscape()
 	ctx.fillStyle = hsla2rgba_(0.0, 1, 0.5, 0.33);
 	puthill(landscapeSettings.hill1, 80, 2);
 	// ctx.fillRect(0, 0, WIDTH, HEIGHT);
+	
+	i = HEIGHT * (1 - _p3);
+	
+	if (_p3 < 1)
+	{
+		ctx.fillStyle = "#000";
+		
+		if (!_p3Reversed)
+		{
+			ctx.clearRect(0, 0, WIDTH, i - _scale(5));
+			ctx.fillRect(0, i - _scale(5), WIDTH, _scale(5));
+		}
+		else
+		{
+			ctx.clearRect(0, i + _scale(5), WIDTH, HEIGHT - i + _scale(5));
+			ctx.fillRect(0, i, WIDTH, _scale(5));
+		}
+	}
 	
 	drawGuiBase(true);
 	drawGuiButton("LEAVE", 5, 3, true, landscapeLeave, RESOURCE_ROCKET);

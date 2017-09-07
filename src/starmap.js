@@ -1,5 +1,8 @@
 "use strict";
 
+let _p4 = 0;
+let _p4Reversed = false;
+
 function starMapNext()
 {
 	let i;
@@ -16,9 +19,11 @@ function starMapNext()
 
 function starMapZoom()
 {
+	animationStart(animationSystemZoomIn, 0.03);
+	
 	_cursor.clicked = false;
 	_layers[0].visible = true;
-	_layers[1].visible = false;
+	// _layers[1].visible = false;
 }
 
 function starMapJump()
@@ -32,6 +37,7 @@ function drawStarMap()
 {
 	let i, a, n, clicked;
 	
+	ctx.fillStyle = "#112";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
 	clicked = false;
@@ -92,6 +98,18 @@ function drawStarMap()
 	
 	ctx.globalCompositeOperation = "source-over";
 	ctx.lineCap = "butt";
+	
+	
+	if (_p4 > 0)
+	{
+		a = HEIGHT * _p4;
+		i = HEIGHT / 2 - a / 2;
+		
+		ctx.fillStyle = "#000";
+		
+		ctx.fillRect(0, i - _scale(5), WIDTH, a + _scale(5) * 2);
+		ctx.clearRect(0, i, WIDTH, a);
+	}
 	
 	drawGuiBase();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
