@@ -24,14 +24,12 @@ function reset()
 	// pos: { x: float, y: float }
 	// body: ...
 	// system: { mapPosition: pos, bodies: [ body, body, ... ], visited: boolean, current: boolean }
-	// systems: [ system, path: { steps: [ system, system, ... ] } ]
+	// systems: [ system, system, system ],
+	// path: [ system, system, ... ]
 	
 	_map = {
-		systems: [
-		],
-		path: {
-			steps: []
-		}
+		systems: [ ],
+		path: [ ]
 	};
 	
 	regenerateStars();

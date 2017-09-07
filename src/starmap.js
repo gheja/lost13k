@@ -80,10 +80,10 @@ function drawStarMap()
 	ctx.globalCompositeOperation = "screen";
 	ctx.lineCap = "round";
 	ctx.beginPath();
-	ctx.moveTo(_x(_map.path.steps[0].mapPosition.x), _y(_map.path.steps[0].mapPosition.y));
-	for (i=1; i<_map.path.steps.length; i++)
+	ctx.moveTo(_x(_map.path[0].mapPosition.x), _y(_map.path[0].mapPosition.y));
+	for (i=1; i<_map.path.length; i++)
 	{
-		ctx.lineTo(_x(_map.path.steps[i].mapPosition.x), _y(_map.path.steps[i].mapPosition.y));
+		ctx.lineTo(_x(_map.path[i].mapPosition.x), _y(_map.path[i].mapPosition.y));
 	}
 	ctx.strokeStyle = "rgba(0, 190, 255, 0.2)";
 	ctx.lineWidth = _scale(3);
@@ -103,7 +103,7 @@ function regenerateStars()
 	let i, j, k, a, b, min;
 	
 	_map.systems.length = 0;
-	_map.path.steps.length = 0;
+	_map.path.length = 0;
 	
 	for (i=0; i<STAR_COUNT; i++)
 	{
@@ -143,7 +143,7 @@ function jumpToSystem(a)
 	
 	if (!_currentSystem.visited)
 	{
-		_map.path.steps.push(a);
+		_map.path.push(a);
 		_currentSystem.visited = true;
 	}
 }
@@ -155,7 +155,7 @@ function regeneratePath()
 	for (i=0; i<PATH_ITERATIONS; i++)
 	{
 		valid = true;
-		_map.path.steps.length = 0;
+		_map.path.length = 0;
 		
 		for (k=0; k<STAR_COUNT; k++)
 		{
