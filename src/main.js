@@ -20,8 +20,10 @@ function reset()
 {
 	lastFrameTime = (new Date()).getTime();
 	
-	// systems: [ system ]
-	// system: { star: pointerToStar, bodies: [ body, body, ... ] }
+	// pos: { x: float, y: float }
+	// body: ...
+	// system: { mapPosition: pos, bodies: [ body, body, ... ], visited: boolean, current: boolean }
+	// systems: [ system, path: { valid: boolean, steps: [ pathstep, pathstep, ... ], stepsShown: integer } ]
 	
 	_map = {
 		systems: [

@@ -54,16 +54,16 @@ function drawStarMap()
 	ctx.fillStyle = "#fff";
 	for (i=0; i<_map.systems.length; i++)
 	{
-		_arc(_map.systems[i].star.mapPosition.x, _map.systems[i].star.mapPosition.y, 1.5, 0, 1, 1);
+		_arc(_map.systems[i].mapPosition.x, _map.systems[i].mapPosition.y, 1.5, 0, 1, 1);
 		
 		if (_map.systems[i] == systemSelected)
 		{
-			drawCircularSelection(_map.systems[i].star.mapPosition, 5);
+			drawCircularSelection(_map.systems[i].mapPosition, 5);
 		}
 		
-		if (getDistance(_map.systems[i].star.mapPosition, _cursor) < 10)
+		if (getDistance(_map.systems[i].mapPosition, _cursor) < 10)
 		{
-			drawCircularSelection(_map.systems[i].star.mapPosition, 5);
+			drawCircularSelection(_map.systems[i].mapPosition, 5);
 			
 			if (clicked)
 			{
@@ -98,7 +98,7 @@ function regenerateStars()
 			min = 1000;
 			for (k=0; k<i; k++)
 			{
-				min = Math.min(min, getDistance(a, _map.systems[k].star.mapPosition));
+				min = Math.min(min, getDistance(a, _map.systems[k].mapPosition));
 			}
 			
 			if (min > STAR_DISTANCE_TARGET)
@@ -108,9 +108,7 @@ function regenerateStars()
 		}
 		
 		_map.systems.push({
-			star: {
-				mapPosition: a
-			},
+			mapPosition: a,
 			visited: false,
 			current: false
 		});
@@ -136,7 +134,7 @@ function regeneratePath()
 		
 		for (k=0; k<STAR_COUNT; k++)
 		{
-			_map.systems[k].star.visited = false;
+			_map.systems[k].visited = false;
 		}
 		
 		pathAddStep({
@@ -158,8 +156,8 @@ function regeneratePath()
 					continue;
 				}
 				
-				dist = getDistance(current.system.star.mapPosition, _map.systems[k].star.mapPosition);
-				angle = -getAngle(current.system.star.mapPosition, _map.systems[k].star.mapPosition);
+				dist = getDistance(current.system.mapPosition, _map.systems[k].mapPosition);
+				angle = -getAngle(current.system.mapPosition, _map.systems[k].mapPosition);
 				
 				if (dist > PATH_STEP_DISTANCE || angle < current.angleMin || angle > current.angleMax)
 				{
