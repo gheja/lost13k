@@ -56,7 +56,7 @@ function updateBodies()
 
 function drawBodies()
 {
-	let i, j, a, b, c, stripes;
+	let i, j, a, b, c, stripes, clicked;
 	
 	ctx.lineCap = "round";
 	
@@ -138,6 +138,14 @@ function drawBodies()
 		_arc(b.positionX, b.positionY, b.radius, c - 0.5, c, 1);
 	}
 	
+	clicked = false;
+	
+	if (_cursor.clicked && _cursor.y > -180 && _cursor.y < 180)
+	{
+		clicked = true;
+		_selectedBody = null;
+	}
+	
 	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
 		b = _currentSystem.bodies[i];
@@ -146,6 +154,10 @@ function drawBodies()
 		{
 			if (getDistance({ x: b.positionX, y: b.positionY }, _cursor) < b.radius + 4)
 			{
+				if (clicked)
+				{
+					_selectedBody = b;
+				}
 				drawCircularSelection({ x: b.positionX, y: b.positionY }, b.radius + 2);
 				
 				break;
