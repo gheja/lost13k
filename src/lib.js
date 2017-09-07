@@ -91,11 +91,6 @@ function randPlusMinus(x)
 	return (randFloat() - 0.5) * x * 2;
 }
 
-function _hackClone(x)
-{
-	return JSON.parse(JSON.stringify(x));
-}
-
 function goFullScreen()
 {
 	// based on https://developers.google.com/web/fundamentals/native-hardware/fullscreen/
@@ -244,8 +239,6 @@ function draw()
 	_raf(draw);
 	
 	_frameNumber++;
-	
-	drawMain();
 	
 	for (i=0; i<_layers.length; i++)
 	{

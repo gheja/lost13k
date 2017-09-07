@@ -13,10 +13,6 @@ let _map = null;
 let _cursor = { x: 0, y: 0, clicked: false };
 
 
-function drawMain()
-{
-}
-
 function reset()
 {
 	lastFrameTime = (new Date()).getTime();
