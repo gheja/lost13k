@@ -33,6 +33,10 @@ function starMapJump()
 		if (_selectedSystem == _map.systems[i])
 		{
 			_map.systems[i].current = true;
+			if (!_map.systems[i].visited)
+			{
+				pathAddStep({ system: _map.systems[i] });
+			}
 		}
 	}
 }
