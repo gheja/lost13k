@@ -1,16 +1,14 @@
 "use strict";
 
-let systemSelected = null;
-
 function starMapNext()
 {
 	let i;
 	
 	for (i=0; i<STAR_COUNT; i++)
 	{
-		if (systemSelected == _map.systems[i])
+		if (_selectedSystem == _map.systems[i])
 		{
-			systemSelected = _map.systems[(i + 1) % STAR_COUNT];
+			_selectedSystem = _map.systems[(i + 1) % STAR_COUNT];
 			break;
 		}
 	}
@@ -28,7 +26,7 @@ function starMapJump()
 	{
 		_map.systems[i].current = false;
 		
-		if (systemSelected == _map.systems[i])
+		if (_selectedSystem == _map.systems[i])
 		{
 			_map.systems[i].current = true;
 		}
@@ -47,7 +45,7 @@ function drawStarMap()
 	if (_cursor.clicked && _cursor.y > -180 && _cursor.y < 180)
 	{
 		clicked = true;
-		systemSelected = null;
+		_selectedSystem = null;
 	}
 	
 	// star
@@ -56,7 +54,7 @@ function drawStarMap()
 	{
 		_arc(_map.systems[i].mapPosition.x, _map.systems[i].mapPosition.y, 1.5, 0, 1, 1);
 		
-		if (_map.systems[i] == systemSelected)
+		if (_map.systems[i] == _selectedSystem)
 		{
 			drawCircularSelection(_map.systems[i].mapPosition, 5);
 		}
@@ -67,15 +65,15 @@ function drawStarMap()
 			
 			if (clicked)
 			{
-				systemSelected = _map.systems[i];
+				_selectedSystem = _map.systems[i];
 			}
 		}
 	}
 	
 	drawGuiStripes();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
-	drawGuiButton("JUMP", 5, 3, (systemSelected && !systemSelected.current), starMapJump);
-	drawGuiButton("ZOOM", 8, 3, (systemSelected && systemSelected.current), function() { });
+	drawGuiButton("JUMP", 5, 3, (_selectedSystem && !_selectedSystem.current), starMapJump);
+	drawGuiButton("ZOOM", 8, 3, (_selectedSystem && _selectedSystem.current), starMapZoom);
 }
 
 function regenerateStars()
