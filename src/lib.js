@@ -216,11 +216,11 @@ function eventMouseMove(e)
 
 
 //// canvas layers
-function layerCreate(name, drawFunction)
+function layerCreate(drawFunction)
 {
 	let a;
 	
-	a = { name: name, visible: false, canvas: document.createElement("canvas"), draw: drawFunction };
+	a = { visible: false, canvas: document.createElement("canvas"), draw: drawFunction };
 	
 	// TODO: resize on resize
 	a.canvas.width = WIDTH;
@@ -229,7 +229,10 @@ function layerCreate(name, drawFunction)
 	
 	_body.appendChild(a.canvas);
 	
-	return _layers.push(a) - 1;
+	_layers.push(a);
+	
+	// OR, to return index:
+	// return _layers.push(a) - 1;
 }
 
 function draw()

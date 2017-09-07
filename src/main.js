@@ -42,9 +42,9 @@ function init()
 	_body.onmousedown = eventMouseDown;
 	_body.onmousemove = eventMouseMove;
 	
-	layerCreate("planets", drawSolar);
-	layerCreate("starmap", drawStarMap);
-	layerCreate("landscape", drawLandscape);
+	layerCreate(drawSolar); // planets
+	layerCreate(drawStarMap); // star map
+	layerCreate(drawLandscape); // landscape
 	
 	_layers[1].visible = true;
 	
