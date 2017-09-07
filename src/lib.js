@@ -246,6 +246,14 @@ function draw()
 		{
 			canvas = _layers[i].canvas;
 			ctx = _layers[i].ctx;
+			
+			// reset to some default values
+			ctx.globalCompositeOperation = "source-over";
+			ctx.lineCap = "butt";
+			ctx.miterLimit = 1;
+			ctx.lineJoin = "round";
+			ctx.fillStyle = "#000";
+			
 			_layers[i].draw.call();
 		}
 	}
