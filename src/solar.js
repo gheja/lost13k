@@ -275,6 +275,10 @@ function solarLand()
 {
 	_currentBody = _selectedBody;
 	generateOrLoadLandscape();
+	
+	_cursor.clicked = false;
+	_layers[0].visible = false;
+	_layers[2].visible = true;
 }
 
 function solarZoom()
