@@ -24,15 +24,13 @@ function reset()
 	// pos: { x: float, y: float }
 	// body: ...
 	// system: { mapPosition: pos, bodies: [ body, body, ... ], visited: boolean, current: boolean }
-	// systems: [ system, path: { valid: boolean, steps: [ pathstep, pathstep, ... ], stepsShown: integer } ]
+	// systems: [ system, path: { steps: [ system, system, ... ] } ]
 	
 	_map = {
 		systems: [
 		],
 		path: {
-			valid: false,
-			steps: [],
-			stepsShown: PATH_STEPS + 1
+			steps: []
 		}
 	};
 	

@@ -129,14 +129,9 @@ function regenerateStars()
 		
 		_map.systems.push({
 			mapPosition: a,
-			visited: false,
-			current: false
+			visited: false
 		});
 	}
-}
-
-function pathAddStep(a)
-{
 }
 
 function jumpToSystem(a)
@@ -155,12 +150,12 @@ function jumpToSystem(a)
 
 function regeneratePath()
 {
-	let i, j, k, a, b, c, current, best, angle, dist, distanceMin, angleHeading;
+	let i, j, k, a, b, c, angle, distance, distanceMin, angleHeading, valid;
 	
 	for (i=0; i<PATH_ITERATIONS; i++)
 	{
+		valid = true;
 		_map.path.steps.length = 0;
-		_map.path.valid = true;
 		
 		for (k=0; k<STAR_COUNT; k++)
 		{
@@ -183,28 +178,28 @@ function regeneratePath()
 					continue;
 				}
 				
-				dist = getDistance(_currentSystem.mapPosition, _map.systems[k].mapPosition);
+				distance = getDistance(_currentSystem.mapPosition, _map.systems[k].mapPosition);
 				angle = -getAngle(_currentSystem.mapPosition, _map.systems[k].mapPosition);
 				
-				if (dist > PATH_STEP_DISTANCE || angle < angleHeading - PATH_ANGLE_DIFF_MAX || angle > angleHeading + PATH_ANGLE_DIFF_MAX)
+				if (distance > PATH_STEP_DISTANCE || angle < angleHeading - PATH_ANGLE_DIFF_MAX || angle > angleHeading + PATH_ANGLE_DIFF_MAX)
 				{
 					continue;
 				}
 				
-				if (dist < distanceMin)
+				if (distance < distanceMin)
 				{
 					c = {
 						system: _map.systems[k],
 						angleHeading: angle
 					};
 					
-					distanceMin = dist;
+					distanceMin = distance;
 				}
 			}
 			
 			if (!c)
 			{
-				_map.path.valid = false;
+				valid = false;
 				break;
 			}
 			
@@ -212,7 +207,7 @@ function regeneratePath()
 			angleHeading = c.angleHeading;
 		}
 		
-		if (_map.path.valid)
+		if (valid)
 		{
 			return true;
 		}
