@@ -143,6 +143,8 @@ function jumpToSystem(a)
 {
 	_currentSystem = a;
 	_selectedSystem = a;
+	_currentBody = null;
+	_selectedBody = null;
 	
 	if (!_currentSystem.visited)
 	{
