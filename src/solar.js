@@ -9,7 +9,9 @@ function generateBody(parent, size, r, speed, type)
 		radiusScale: randFloat(),
 		radius: 0,
 		orbitRadius: r,
-		position: randFloat(),
+		orbitPosition: randFloat(),
+		center: { x: 0, y: 0 },
+		position: { x: 0, y: 0 },
 		speed: speed * (randFloat() + 0.5) * 5,
 		type: type,
 		childCount: 0,
@@ -36,21 +38,21 @@ function updateBodies()
 	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
 		b = _currentSystem.bodies[i];
-		b.position += b.speed;
+		b.orbitPosition += b.speed;
 		
 		if (b.type == BODY_TYPE_STAR)
 		{
-			b.centerX = 0;
-			b.centerY = 0;
-			b.positionX = 0;
-			b.positionY = 0;
+			b.center.x = 0;
+			b.center.y = 0;
+			b.position.x = 0;
+			b.position.y = 0;
 		}
 		else
 		{
-			b.centerX = b.parent.positionX;
-			b.centerY = b.parent.positionY;
-			b.positionX = b.centerX + cos(b.position) * b.orbitRadius;
-			b.positionY = b.centerY + sin(b.position) * b.orbitRadius;
+			b.center.x = b.parent.position.x;
+			b.center.y = b.parent.position.y;
+			b.position.x = b.center.x + cos(b.orbitPosition) * b.orbitRadius;
+			b.position.y = b.center.y + sin(b.orbitPosition) * b.orbitRadius;
 		}
 	}
 }
@@ -89,9 +91,9 @@ function drawBodies()
 				ctx.strokeStyle = "rgba(0,200,255," + c + ")";
 			}
 			
-			a = b.position - j * 2 * 1/(stripes * 2 * 1.1);
+			a = b.orbitPosition - j * 2 * 1/(stripes * 2 * 1.1);
 			
-			_arc(b.centerX, b.centerY, b.orbitRadius, a - 1 / (stripes * 5), a, 0, 1);
+			_arc(b.center.x, b.center.y, b.orbitRadius, a - 1 / (stripes * 5), a, 0, 1);
 		}
 	}
 	
@@ -107,11 +109,11 @@ function drawBodies()
 			// atmosphere
 			ctx.lineWidth = _scale(1);
 			ctx.strokeStyle = hsla2rgba_(0.4, 0.2, 0.8, 0.7);
-			_arc(b.positionX, b.positionY, b.radius + 1.5, 0, 1, 0, 1);
+			_arc(b.position.x, b.position.y, b.radius + 1.5, 0, 1, 0, 1);
 		}
 		
 		ctx.fillStyle = hsla2rgba_(b.def[0], b.def[1], b.def[2], 1);
-		_arc(b.positionX, b.positionY, b.radius, 0, 1, 1);
+		_arc(b.position.x, b.position.y, b.radius, 0, 1, 1);
 		
 		// no shadow on the star
 		if (b.type == BODY_TYPE_STAR)
@@ -122,21 +124,21 @@ function drawBodies()
 		// planet
 		if (b.type == BODY_TYPE_PLANET)
 		{
-			c = b.position + 0.25;
+			c = b.orbitPosition + 0.25;
 		}
 		// moon
 		else
 		{
-			c = b.parent.position + 0.25;
+			c = b.parent.orbitPosition + 0.25;
 		}
 		
 		// sunny side
 		ctx.fillStyle = hsla2rgba_(_currentSystem.bodies[0].def[0], _currentSystem.bodies[0].def[1], _currentSystem.bodies[0].def[2], 0.2);
-		_arc(b.positionX, b.positionY, b.radius, 0, 1, 1);
+		_arc(b.position.x, b.position.y, b.radius, 0, 1, 1);
 		
 		// shadow
 		ctx.fillStyle = "rgba(0,0,0,0.4)";
-		_arc(b.positionX, b.positionY, b.radius, c - 0.5, c, 1);
+		_arc(b.position.x, b.position.y, b.radius, c - 0.5, c, 1);
 	}
 	
 	clicked = false;
@@ -151,16 +153,25 @@ function drawBodies()
 	{
 		b = _currentSystem.bodies[i];
 		
+/*
+		if (b == _currentBody)
+		{
+			ctx.fillStyle = "#040";
+			ctx.lineWidth = _scale(2);
+			_arc(b.position.x, b.position.y, b.radius + 4, 0, 1, 0, 1);
+		}
+*/
+		
 		if (b.type != BODY_TYPE_STAR)
 		{
 			
-			if (getDistance({ x: b.positionX, y: b.positionY }, _cursor) < b.radius + 4 || _selectedBody == b)
+			if (getDistance({ x: b.position.x, y: b.position.y }, _cursor) < b.radius + 4 || _selectedBody == b)
 			{
 				if (clicked)
 				{
 					_selectedBody = b;
 				}
-				drawCircularSelection({ x: b.positionX, y: b.positionY }, b.radius + 2);
+				drawCircularSelection({ x: b.position.x, y: b.position.y }, b.radius + 2);
 				
 				break;
 			}
