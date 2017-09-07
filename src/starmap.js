@@ -92,7 +92,7 @@ function drawStarMap()
 	ctx.globalCompositeOperation = "source-over";
 	ctx.lineCap = "butt";
 	
-	drawGuiStripes();
+	drawGuiBase();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
 	drawGuiButton("JUMP", 5, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump);
 	drawGuiButton("ZOOM", 8, 3, (_currentSystem && _selectedSystem == _currentSystem), starMapZoom);

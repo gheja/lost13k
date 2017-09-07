@@ -109,7 +109,7 @@ function drawLandscape()
 	puthill(landscapeSettings.hill1, 80, 2);
 	// ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
-	// drawGuiStripes();
+	drawGuiBase(true);
 	drawGuiButton("LEAVE", 5, 3, true, landscapeLeave);
 }
 

@@ -321,15 +321,22 @@ function drawGuiStripe(x, y, width, color, outline)
 	ctx.fill();
 }
 
-function drawGuiStripes()
+function drawGuiBase(skipStripes)
 {
 	let i;
 	
-	for (i = -400; i < 400; i += 20)
+	if (!skipStripes)
 	{
-		drawGuiStripe(i, -196, 10, "#222", false);
-		drawGuiStripe(i, 184, 10, "#222", false);
+		for (i = -400; i < 400; i += 20)
+		{
+			drawGuiStripe(i, -196, 10, "#222", false);
+			drawGuiStripe(i, 184, 10, "#222", false);
+		}
 	}
+	
+	drawGuiStatus("Long jump fuel: 2", -10, 5, true);
+	drawGuiStatus("Short jump fuel: 3", -5, 5, true);
+	drawGuiStatus("Rocket fuel: 6", 0, 5, true);
 }
 
 function drawGuiButton(title, x, size, enabled, callback)
