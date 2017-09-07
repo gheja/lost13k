@@ -147,7 +147,7 @@ function jumpToSystem(a)
 
 function regeneratePath()
 {
-	let i, j, k, a, b, c, current, best, angle, dist, distanceMin, angleMin, angleMax;
+	let i, j, k, a, b, c, current, best, angle, dist, distanceMin, angleHeading;
 	
 	for (i=0; i<PATH_ITERATIONS; i++)
 	{
@@ -159,8 +159,7 @@ function regeneratePath()
 			_map.systems[k].visited = false;
 		}
 		
-		angleMin = -0.3;
-		angleMax = 0.3;
+		angleHeading = 0;
 		
 		jumpToSystem(arrayRandom(_map.systems));
 		
@@ -179,7 +178,7 @@ function regeneratePath()
 				dist = getDistance(_currentSystem.mapPosition, _map.systems[k].mapPosition);
 				angle = -getAngle(_currentSystem.mapPosition, _map.systems[k].mapPosition);
 				
-				if (dist > PATH_STEP_DISTANCE || angle < angleMin || angle > angleMax)
+				if (dist > PATH_STEP_DISTANCE || angle < angleHeading - PATH_ANGLE_DIFF_MAX || angle > angleHeading + PATH_ANGLE_DIFF_MAX)
 				{
 					continue;
 				}
@@ -188,8 +187,7 @@ function regeneratePath()
 				{
 					c = {
 						system: _map.systems[k],
-						angleMin: angle - 0.4,
-						angleMax: angle + 0.4
+						angleHeading: angle
 					};
 					
 					distanceMin = dist;
@@ -203,8 +201,7 @@ function regeneratePath()
 			}
 			
 			jumpToSystem(c.system);
-			angleMin = c.angleMin;
-			angleMax = c.angleMax;
+			angleHeading = c.angleHeading;
 		}
 		
 		if (_map.path.valid)

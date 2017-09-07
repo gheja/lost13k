@@ -11,6 +11,7 @@ const SCALE = Math.min(HEIGHT, WIDTH) / 400;
 const PATH_STEPS = 10;
 const PATH_STEP_DISTANCE = 100;
 const PATH_ITERATIONS = 100;
+const PATH_ANGLE_DIFF_MAX = 0.3;
 
 const STAR_COUNT = 40;
 const STAR_DISTANCE_TARGET = 30;
