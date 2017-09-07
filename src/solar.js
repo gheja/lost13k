@@ -4,7 +4,7 @@ function generateBody(parent, size, r, speed, type)
 {
 	let a = {
 		parent: parent,
-		def: arrayRandom(BODY_TYPE_DEFINITIONS[type]),
+		def: arrayPick(BODY_TYPE_DEFINITIONS[type]),
 		radiusBase: size,
 		radiusScale: randFloat(),
 		radius: 0,

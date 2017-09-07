@@ -103,7 +103,7 @@ function goFullScreen()
 	(d.requestFullscreen || d.mozRequestFullScreen || d.webkitRequestFullScreen || d.msRequestFullscreen).call(d);
 }
 
-function arrayRandom(a)
+function arrayPick(a)
 {
 	return a[Math.floor(randFloat() * a.length)];
 }

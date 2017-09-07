@@ -164,7 +164,7 @@ function regeneratePath()
 		
 		angleHeading = 0;
 		
-		jumpToSystem(arrayRandom(_map.systems));
+		jumpToSystem(arrayPick(_map.systems));
 		
 		for (j=0; j<PATH_STEPS; j++)
 		{
