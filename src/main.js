@@ -20,8 +20,12 @@ function reset()
 {
 	lastFrameTime = (new Date()).getTime();
 	
+	// systems: [ system ]
+	// system: { star: pointerToStar, bodies: [ body, body, ... ] }
+	
 	_map = {
-		stars: [],
+		systems: [
+		],
 		path: {
 			valid: false,
 			steps: [],

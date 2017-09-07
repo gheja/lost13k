@@ -1,6 +1,6 @@
 "use strict";
 
-let starSelected = null;
+let systemSelected = null;
 
 function starMapNext()
 {
@@ -8,9 +8,9 @@ function starMapNext()
 	
 	for (i=0; i<STAR_COUNT; i++)
 	{
-		if (starSelected == _map.stars[i])
+		if (systemSelected == _map.systems[i])
 		{
-			starSelected = _map.stars[(i + 1) % STAR_COUNT];
+			systemSelected = _map.systems[(i + 1) % STAR_COUNT];
 			break;
 		}
 	}
@@ -26,11 +26,11 @@ function starMapJump()
 	
 	for (i=0; i<STAR_COUNT; i++)
 	{
-		_map.stars[i].current = false;
+		_map.systems[i].current = false;
 		
-		if (starSelected == _map.stars[i])
+		if (systemSelected == _map.systems[i])
 		{
-			_map.stars[i].current = true;
+			_map.systems[i].current = true;
 		}
 	}
 }
@@ -47,42 +47,42 @@ function drawStarMap()
 	if (_cursor.clicked && _cursor.y > -180 && _cursor.y < 180)
 	{
 		clicked = true;
-		starSelected = null;
+		systemSelected = null;
 	}
 	
 	// star
 	ctx.fillStyle = "#fff";
-	for (i=0; i<_map.stars.length; i++)
+	for (i=0; i<_map.systems.length; i++)
 	{
-		_arc(_map.stars[i].x, _map.stars[i].y, 1.5, 0, 1, 1);
+		_arc(_map.systems[i].star.mapPosition.x, _map.systems[i].star.mapPosition.y, 1.5, 0, 1, 1);
 		
-		if (_map.stars[i] == starSelected)
+		if (_map.systems[i] == systemSelected)
 		{
-			drawCircularSelection(_map.stars[i], 5);
+			drawCircularSelection(_map.systems[i].star.mapPosition, 5);
 		}
 		
-		if (getDistance(_map.stars[i], _cursor) < 10)
+		if (getDistance(_map.systems[i].star.mapPosition, _cursor) < 10)
 		{
-			drawCircularSelection(_map.stars[i], 5);
+			drawCircularSelection(_map.systems[i].star.mapPosition, 5);
 			
 			if (clicked)
 			{
-				starSelected = _map.stars[i];
+				systemSelected = _map.systems[i];
 			}
 		}
 	}
 	
 	drawGuiStripes();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
-	drawGuiButton("JUMP", 5, 3, (starSelected && !starSelected.current), starMapJump);
-	drawGuiButton("ZOOM", 8, 3, (starSelected && starSelected.current), regenerateBodies);
+	drawGuiButton("JUMP", 5, 3, (systemSelected && !systemSelected.current), starMapJump);
+	drawGuiButton("ZOOM", 8, 3, (systemSelected && systemSelected.current), regenerateBodies);
 }
 
 function regenerateStars()
 {
 	let i, j, k, a, b, min;
 	
-	_map.stars.length = 0;
+	_map.systems.length = 0;
 	_map.path.steps.length = 0;
 	
 	for (i=0; i<STAR_COUNT; i++)
@@ -92,15 +92,13 @@ function regenerateStars()
 			a = {
 				x: randPlusMinus(180),
 				y: randPlusMinus(180),
-				visited: false,
-				current: false
 			}
 			
 			// don't generate stars too close
 			min = 1000;
 			for (k=0; k<i; k++)
 			{
-				min = Math.min(min, getDistance(a, _map.stars[k]));
+				min = Math.min(min, getDistance(a, _map.systems[k].star.mapPosition));
 			}
 			
 			if (min > STAR_DISTANCE_TARGET)
@@ -109,13 +107,19 @@ function regenerateStars()
 			}
 		}
 		
-		_map.stars.push(a);
+		_map.systems.push({
+			star: {
+				mapPosition: a
+			},
+			visited: false,
+			current: false
+		});
 	}
 }
 
 function pathAddStep(a)
 {
-	a.star.visited = true;
+	a.system.visited = true;
 	_map.path.steps.push(a);
 }
 
@@ -132,11 +136,11 @@ function regeneratePath()
 		
 		for (k=0; k<STAR_COUNT; k++)
 		{
-			_map.stars[k].visited = false;
+			_map.systems[k].star.visited = false;
 		}
 		
 		pathAddStep({
-			star: arrayRandom(_map.stars),
+			system: arrayRandom(_map.systems),
 			angleMin: -0.3,
 			angleMax: 0.3
 		});
@@ -149,13 +153,13 @@ function regeneratePath()
 			minDist = 1000;
 			for (k=0; k<STAR_COUNT; k++)
 			{
-				if (_map.stars[k].visited)
+				if (_map.systems[k].visited)
 				{
 					continue;
 				}
 				
-				dist = getDistance(current.star, _map.stars[k]);
-				angle = -getAngle(current.star, _map.stars[k]);
+				dist = getDistance(current.system.star.mapPosition, _map.systems[k].star.mapPosition);
+				angle = -getAngle(current.system.star.mapPosition, _map.systems[k].star.mapPosition);
 				
 				if (dist > PATH_STEP_DISTANCE || angle < current.angleMin || angle > current.angleMax)
 				{
@@ -165,7 +169,7 @@ function regeneratePath()
 				if (dist < minDist)
 				{
 					c = {
-						star: _map.stars[k],
+						system: _map.systems[k],
 						angleMin: angle - 0.4,
 						angleMax: angle + 0.4
 					};
