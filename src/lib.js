@@ -364,3 +364,12 @@ function drawGuiButton(title, x, size, enabled, callback)
 	ctx.font = _scale(10) + "px Arial";
 	ctx.fillText(title, _x(x * 20 + (size - 1) * 10 + 1), _y(184 + 9.5));
 }
+
+function drawGuiStatus(title, x, size, enabled)
+{
+	drawGuiStripe(x * 20, -196, size * 20 - 10, enabled ? "#08a" : "#222", false);
+	ctx.fillStyle = "#023";
+	ctx.textAlign = "center";
+	ctx.font = _scale(9) + "px Arial";
+	ctx.fillText(title, _x(x * 20 + (size - 1) * 10 + 1), _y(-196 + 9.5));
+}
