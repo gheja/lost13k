@@ -225,29 +225,41 @@ function describeBody(b)
 	console.log(s);
 }
 
-function regenerateBodies()
+function generateBodies()
 {
-	let i, j, a, b, c;
+	let i, j, a, b, c, result;
 	
-	system.bodies.length = 0;
+	result = [];
 	
-	system.bodies.push(generateBody(null, 13, 0, 0, BODY_TYPE_STAR));
+	result.push(generateBody(null, 13, 0, 0, BODY_TYPE_STAR));
 	
 	b = 20;
 	
 	for (i=0; i<5; i++)
 	{
-		a = system.bodies.push(generateBody(system.bodies[0], 5, i * 30 + 50, 0.0001, BODY_TYPE_PLANET)) - 1;
+		a = result.push(generateBody(result[0], 5, i * 30 + 50, 0.0001, BODY_TYPE_PLANET)) - 1;
 		
 		c = Math.floor(randFloat() * 3);
 		
 		for (j=0; j<c; j++)
 		{
-			system.bodies.push(generateBody(system.bodies[a], 2, j * 10 + 15, 0.0005, BODY_TYPE_MOON));
+			result.push(generateBody(result[a], 2, j * 10 + 15, 0.0005, BODY_TYPE_MOON));
 		}
 	}
 	
-	describeBody(system.bodies[2]);
+	describeBody(result[2]);
+	
+	return result;
+}
+
+function regenerateAllBodies()
+{
+	let i;
+	
+	for (i=0; i<_map.systems.length; i++)
+	{
+		_map.systems[i].bodies = generateBodies();
+	}
 }
 
 function drawSolar()

@@ -37,7 +37,7 @@ function reset()
 	
 	regenerateStars();
 	regeneratePath();
-	regenerateBodies();
+	regenerateAllBodies();
 	regenerateLandscape();
 }
 
