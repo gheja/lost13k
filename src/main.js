@@ -5,6 +5,7 @@ let _body = null;
 let _layers = [];
 let _frameNumber = 0;
 
+let _currentSystem = { bodies: [] };
 let _map = null;
 let _cursor = { x: 0, y: 0, clicked: false };
 

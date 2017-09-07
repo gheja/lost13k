@@ -3,11 +3,6 @@
 let settings = {
 };
 
-let system = {
-	name: "e",
-	bodies: []
-};
-
 function generateBody(parent, size, r, speed, type)
 {
 	let a = {
@@ -40,9 +35,9 @@ function updateBodies()
 {
 	let i, b;
 	
-	for (i=0; i<system.bodies.length; i++)
+	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
-		b = system.bodies[i];
+		b = _currentSystem.bodies[i];
 		b.position += b.speed;
 		
 		if (b.type == BODY_TYPE_STAR)
@@ -68,9 +63,9 @@ function drawBodies()
 	
 	ctx.lineCap = "round";
 	
-	for (i=0; i<system.bodies.length; i++)
+	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
-		b = system.bodies[i];
+		b = _currentSystem.bodies[i];
 		
 		if (b.type == BODY_TYPE_PLANET)
 		{
@@ -104,9 +99,9 @@ function drawBodies()
 	
 	ctx.globalCompositeOperation = "source-over";
 	
-	for (i=0; i<system.bodies.length; i++)
+	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
-		b = system.bodies[i];
+		b = _currentSystem.bodies[i];
 		
 		// planet
 		if (b.type == BODY_TYPE_PLANET)
@@ -138,7 +133,7 @@ function drawBodies()
 		}
 		
 		// sunny side
-		ctx.fillStyle = hsla2rgba_(system.bodies[0].def[0], system.bodies[0].def[1], system.bodies[0].def[2], 0.2);
+		ctx.fillStyle = hsla2rgba_(_currentSystem.bodies[0].def[0], _currentSystem.bodies[0].def[1], _currentSystem.bodies[0].def[2], 0.2);
 		_arc(b.positionX, b.positionY, b.radius, 0, 1, 1);
 		
 		// shadow
@@ -146,9 +141,9 @@ function drawBodies()
 		_arc(b.positionX, b.positionY, b.radius, c - 0.5, c, 1);
 	}
 	
-	for (i=0; i<system.bodies.length; i++)
+	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
-		b = system.bodies[i];
+		b = _currentSystem.bodies[i];
 		
 		if (b.type != BODY_TYPE_STAR)
 		{
