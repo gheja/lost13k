@@ -257,6 +257,20 @@ function regenerateAllBodies()
 	}
 }
 
+function solarNext()
+{
+}
+
+function solarLand()
+{
+}
+
+function solarZoom()
+{
+	document.getElementById("layer0").checked = false;
+	document.getElementById("layer1").checked = true;
+}
+
 function drawSolar()
 {
 	ctx.fillStyle = "#000";
@@ -264,4 +278,9 @@ function drawSolar()
 	
 	updateBodies();
 	drawBodies();
+	
+	drawGuiStripes();
+	drawGuiButton("\u00BB", 4, 1, true, solarNext);
+	drawGuiButton("LAND", 5, 3, (_selectedBody != null), solarLand);
+	drawGuiButton("ZOOM", 8, 3, true, solarZoom);
 }
