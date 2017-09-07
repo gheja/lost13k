@@ -1,8 +1,5 @@
 "use strict";
 
-let settings = {
-};
-
 function generateBody(parent, size, r, speed, type)
 {
 	let a = {
