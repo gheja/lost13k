@@ -214,6 +214,11 @@ function eventMouseMove(e)
 	_cursor.y = _ry(e.clientY);
 }
 
+function consumeResource()
+{
+	_resources[_highlightedResourceCode]--;
+}
+
 
 //// canvas layers
 function layerCreate(drawFunction)
@@ -242,6 +247,7 @@ function draw()
 	_raf(draw);
 	
 	_frameNumber++;
+	_highlightedResourceCode = -1;
 	
 	for (i=0; i<_layers.length; i++)
 	{
@@ -333,13 +339,9 @@ function drawGuiBase(skipStripes)
 			drawGuiStripe(i, 184, 10, "#222", false);
 		}
 	}
-	
-	drawGuiStatus("Long jump fuel: 2", -10, 5, true);
-	drawGuiStatus("Short jump fuel: 3", -5, 5, true);
-	drawGuiStatus("Rocket fuel: 6", 0, 5, true);
 }
 
-function drawGuiButton(title, x, size, enabled, callback)
+function drawGuiButton(title, x, size, enabled, callback, resourceCodeToHighlight)
 {
 	let c;
 	
@@ -349,6 +351,11 @@ function drawGuiButton(title, x, size, enabled, callback)
 	{
 		if (_cursor.x > x * 20 - 5 && _cursor.x < x * 20 + size * 20 - 10 + 5 && _cursor.y > 184 && _cursor.y < 196)
 		{
+			if (resourceCodeToHighlight !== undefined)
+			{
+				_highlightedResourceCode = resourceCodeToHighlight;
+			}
+			
 			if (_cursor.clicked)
 			{
 				c = "#0ac";
@@ -372,11 +379,44 @@ function drawGuiButton(title, x, size, enabled, callback)
 	ctx.fillText(title, _x(x * 20 + (size - 1) * 10 + 1), _y(184 + 9.5));
 }
 
-function drawGuiStatus(title, x, size, enabled)
+function drawGuiResource(title, resourceCode, x, size)
 {
-	drawGuiStripe(x * 20, -196, size * 20 - 10, enabled ? "#08a" : "#222", false);
-	ctx.fillStyle = "#023";
+	let background, foreground;
+	
+	// empty
+	if (_resources[resourceCode] == 0)
+	{
+		background = "#222";
+		foreground = "#555";
+		
+		if (_highlightedResourceCode == resourceCode)
+		{
+			background = "#800";
+			foreground = "#e00";
+		}
+	}
+	else // available
+	{
+		background = "#030";
+		foreground = "#080";
+		
+		if (_highlightedResourceCode == resourceCode)
+		{
+			background = "#fff";
+			foreground = "#000";
+		}
+	}
+	
+	drawGuiStripe(x * 20, -196, size * 20 - 10, background, false);
+	ctx.fillStyle = foreground;
 	ctx.textAlign = "center";
 	ctx.font = _scale(9) + "px Arial";
-	ctx.fillText(title, _x(x * 20 + (size - 1) * 10 + 1), _y(-196 + 9.5));
+	ctx.fillText(title + ": " + _resources[resourceCode], _x(x * 20 + (size - 1) * 10 + 1), _y(-196 + 9.5));
+}
+
+function drawGuiResources()
+{
+	drawGuiResource("Long jump fuel", RESOURCE_LONG_JUMP, -10, 5);
+	drawGuiResource("Short jump fuel", RESOURCE_SHORT_JUMP, -5, 5);
+	drawGuiResource("Rocket jump fuel", RESOURCE_ROCKET, 0, 5);
 }

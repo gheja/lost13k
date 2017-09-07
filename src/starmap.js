@@ -23,6 +23,7 @@ function starMapZoom()
 
 function starMapJump()
 {
+	consumeResource();
 	jumpToSystem(_selectedSystem);
 	starMapZoom();
 }
@@ -94,8 +95,9 @@ function drawStarMap()
 	
 	drawGuiBase();
 	drawGuiButton("\u00BB", 4, 1, true, starMapNext);
-	drawGuiButton("JUMP", 5, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump);
+	drawGuiButton("JUMP", 5, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump, RESOURCE_SHORT_JUMP);
 	drawGuiButton("ZOOM", 8, 3, (_currentSystem && _selectedSystem == _currentSystem), starMapZoom);
+	drawGuiResources();
 }
 
 function regenerateStars()

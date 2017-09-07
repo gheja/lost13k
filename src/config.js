@@ -21,6 +21,10 @@ const BODY_TYPE_STAR = 0;
 const BODY_TYPE_PLANET = 1;
 const BODY_TYPE_MOON = 2;
 
+const RESOURCE_LONG_JUMP = 0;
+const RESOURCE_SHORT_JUMP = 1;
+const RESOURCE_ROCKET = 2;
+
 // [ [ h, s, l, type ], [ ... ], ... ]
 let BODY_TYPE_DEFINITIONS =
 [

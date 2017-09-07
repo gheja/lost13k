@@ -12,6 +12,8 @@ let _selectedBody = null;
 let _map = null;
 let _cursor = { x: 0, y: 0, clicked: false };
 
+let _resources = [ 3, 3, 3 ];
+let _highlightedResourceCode = -1;
 
 function reset()
 {

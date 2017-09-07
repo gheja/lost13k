@@ -32,6 +32,7 @@ function buildLandscapePalette(settings)
 
 function landscapeLeave()
 {
+	consumeResource();
 	_cursor.clicked = false;
 	_layers[0].visible = true;
 	_layers[2].visible = false;
@@ -110,7 +111,8 @@ function drawLandscape()
 	// ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	
 	drawGuiBase(true);
-	drawGuiButton("LEAVE", 5, 3, true, landscapeLeave);
+	drawGuiButton("LEAVE", 5, 3, true, landscapeLeave, RESOURCE_ROCKET);
+	drawGuiResources();
 }
 
 function generateOrLoadLandscape()
