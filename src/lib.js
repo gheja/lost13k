@@ -428,5 +428,5 @@ function drawGuiResources()
 {
 	drawGuiResource("Long jump fuel", RESOURCE_LONG_JUMP, -10, 5);
 	drawGuiResource("Short jump fuel", RESOURCE_SHORT_JUMP, -5, 5);
-	drawGuiResource("Rocket jump fuel", RESOURCE_ROCKET, 0, 5);
+	drawGuiResource("Rocket fuel", RESOURCE_ROCKET, 0, 5);
 }
