@@ -53,10 +53,18 @@ function drawStarMap()
 	}
 	
 	// star
-	ctx.fillStyle = "#fff";
 	for (i=0; i<_map.systems.length; i++)
 	{
+		a = _map.systems[i].bodies[0].def;
+		
+		ctx.fillStyle = hsla2rgba_(a[0], a[1], a[2], 0.2);
+		_arc(_map.systems[i].mapPosition.x, _map.systems[i].mapPosition.y, 2.5, 0, 1, 1);
+		
+		ctx.fillStyle = hsla2rgba_(a[0], a[1], a[2], 1);
 		_arc(_map.systems[i].mapPosition.x, _map.systems[i].mapPosition.y, 1.5, 0, 1, 1);
+		
+		ctx.fillStyle = "#fff";
+		_arc(_map.systems[i].mapPosition.x, _map.systems[i].mapPosition.y, 0.75, 0, 1, 1);
 		
 		if (_map.systems[i] == _selectedSystem)
 		{
