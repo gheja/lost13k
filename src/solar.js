@@ -93,7 +93,7 @@ function drawBodies()
 			
 			a = b.orbitPosition - j * 2 * 1/(stripes * 2 * 1.1);
 			
-			_arc(b.center.x, b.center.y, b.orbitRadius, a - 1 / (stripes * 5), a, 0, 1);
+			_arc(b.center, b.orbitRadius, a - 1 / (stripes * 5), a, 0, 1);
 		}
 	}
 	
@@ -109,11 +109,11 @@ function drawBodies()
 			// atmosphere
 			ctx.lineWidth = _scale(1);
 			ctx.strokeStyle = hsla2rgba_(0.4, 0.2, 0.8, 0.7);
-			_arc(b.position.x, b.position.y, b.radius + 1.5, 0, 1, 0, 1);
+			_arc(b.position, b.radius + 1.5, 0, 1, 0, 1);
 		}
 		
 		ctx.fillStyle = hsla2rgba_(b.def[0], b.def[1], b.def[2], 1);
-		_arc(b.position.x, b.position.y, b.radius, 0, 1, 1);
+		_arc(b.position, b.radius, 0, 1, 1);
 		
 		// no shadow on the star
 		if (b.type == BODY_TYPE_STAR)
@@ -134,11 +134,11 @@ function drawBodies()
 		
 		// sunny side
 		ctx.fillStyle = hsla2rgba_(_currentSystem.bodies[0].def[0], _currentSystem.bodies[0].def[1], _currentSystem.bodies[0].def[2], 0.2);
-		_arc(b.position.x, b.position.y, b.radius, 0, 1, 1);
+		_arc(b.position, b.radius, 0, 1, 1);
 		
 		// shadow
 		ctx.fillStyle = "rgba(0,0,0,0.4)";
-		_arc(b.position.x, b.position.y, b.radius, c - 0.5, c, 1);
+		_arc(b.position, b.radius, c - 0.5, c, 1);
 	}
 	
 	clicked = false;
@@ -158,7 +158,7 @@ function drawBodies()
 		{
 			ctx.fillStyle = "#040";
 			ctx.lineWidth = _scale(2);
-			_arc(b.position.x, b.position.y, b.radius + 4, 0, 1, 0, 1);
+			_arc(b.position, b.radius + 4, 0, 1, 0, 1);
 		}
 */
 		

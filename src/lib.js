@@ -43,6 +43,14 @@ function _parallax(x, distance, weight)
 	return x + (weight ? weight : 400) * (1 / (distance)) * (1 - _p);
 }
 
+function _parallaxPosition(p, distance, weight)
+{
+	return {
+		x: p.x,
+		y: _parallax(p.y, distance, weight)
+	};
+}
+
 function screenCoordinates(p)
 {
 	return [ _x(p[0]), _y(p[1]) ];
@@ -105,10 +113,10 @@ function arrayRandom(a)
 	return a[Math.floor(randFloat() * a.length)];
 }
 
-function _arc(x, y, r, a, b, fill, stroke)
+function _arc(p, r, a, b, fill, stroke)
 {
 	ctx.beginPath();
-	ctx.arc(_x(x), _y(y), _scale(r), a * PI2, b * PI2);
+	ctx.arc(_x(p.x), _y(p.y), _scale(r), a * PI2, b * PI2);
 	if (fill)
 	{
 		ctx.fill();
@@ -278,18 +286,18 @@ function drawCircularSelection(p, radius)
 	
 	ctx.strokeStyle = "rgba(255,255,255," + Math.max(0, 1 - a * 2) + ")";
 	
-	_arc(b.position.x, b.position.y, b.radius + 2 + a * 5, c + 0/6, c + 1/6, 0, 1);
-	_arc(b.position.x, b.position.y, b.radius + 2 + a * 5, c + 2/6, c + 3/6, 0, 1);
-	_arc(b.position.x, b.position.y, b.radius + 2 + a * 5, c + 4/6, c + 5/6, 0, 1);
+	_arc(b.position, b.radius + 2 + a * 5, c + 0/6, c + 1/6, 0, 1);
+	_arc(b.position, b.radius + 2 + a * 5, c + 2/6, c + 3/6, 0, 1);
+	_arc(b.position, b.radius + 2 + a * 5, c + 4/6, c + 5/6, 0, 1);
 */
 	
 	c = _frameNumber / 60;
 	
 	ctx.strokeStyle = "#fff";
 	
-	_arc(p.x, p.y, radius, c + 0/6, c + 1/6, 0, 1);
-	_arc(p.x, p.y, radius, c + 2/6, c + 3/6, 0, 1);
-	_arc(p.x, p.y, radius, c + 4/6, c + 5/6, 0, 1);
+	_arc(p, radius, c + 0/6, c + 1/6, 0, 1);
+	_arc(p, radius, c + 2/6, c + 3/6, 0, 1);
+	_arc(p, radius, c + 4/6, c + 5/6, 0, 1);
 }
 
 function drawGuiStripe(x, y, width, color, outline)
