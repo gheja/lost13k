@@ -272,6 +272,7 @@ function solarNext()
 
 function solarLand()
 {
+	_currentBody = _selectedBody;
 }
 
 function solarZoom()
