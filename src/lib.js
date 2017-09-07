@@ -322,7 +322,31 @@ function drawGuiStripes()
 
 function drawGuiButton(title, x, size, enabled, callback)
 {
-	drawGuiStripe(x * 20, -196, size * 20 - 10, enabled ? "#0ac" : "#222", true);
+	let c;
+	
+	c = "#0ac";
+	
+	if (enabled)
+	{
+		if (_cursor.x > x * 20 - 5 && _cursor.x < x * 20 + size * 20 - 10 + 5 && _cursor.y > -198 && _cursor.y < -186 + 14)
+		{
+			if (_cursor.clicked)
+			{
+				c = "#0ac";
+				callback.call();
+			}
+			else
+			{
+				c = "#fff";
+			}
+		}
+	}
+	else
+	{
+		c = "#222";
+	}
+	
+	drawGuiStripe(x * 20, -196, size * 20 - 10, c, true);
 	ctx.fillStyle = "#000";
 	ctx.textAlign = "center";
 	ctx.font = _scale(10) + "px Arial";
