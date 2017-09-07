@@ -54,14 +54,20 @@ function drawStarMap()
 		ctx.fillStyle = "#fff";
 		_arc(_map.systems[i].mapPosition.x, _map.systems[i].mapPosition.y, 0.75, 0, 1, 1);
 		
+		if (_map.systems[i] == _currentSystem)
+		{
+			ctx.strokeStyle = "#050";
+			_arc(_map.systems[i].mapPosition.x, _map.systems[i].mapPosition.y, 5, 0, 1, 0, 1);
+		}
+		
 		if (_map.systems[i] == _selectedSystem)
 		{
-			drawCircularSelection(_map.systems[i].mapPosition, 5);
+			drawCircularSelection(_map.systems[i].mapPosition, 7);
 		}
 		
 		if (getDistance(_map.systems[i].mapPosition, _cursor) < 10)
 		{
-			drawCircularSelection(_map.systems[i].mapPosition, 5);
+			drawCircularSelection(_map.systems[i].mapPosition, 7);
 			
 			if (clicked)
 			{
