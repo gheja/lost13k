@@ -178,13 +178,13 @@ function drawBodies()
 		if (b.type != BODY_TYPE_STAR)
 		{
 			
-			if (getDistance({ x: b.position.x, y: b.position.y }, _cursor) < b.radius + 4 || _selectedBody == b)
+			if (getDistance(b.position, _cursor) < b.radius + 4 || _selectedBody == b)
 			{
 				if (clicked)
 				{
 					_selectedBody = b;
 				}
-				drawCircularSelection({ x: b.position.x, y: b.position.y }, b.radius + 2);
+				drawCircularSelection(b.position, b.radius + 2);
 				
 				break;
 			}
