@@ -78,24 +78,32 @@ function drawBodies()
 			ctx.lineWidth = _scale(1);
 		}
 		
-		stripes = b.orbitRadius * 0.8;
-		
-		for (j=0; j<stripes; j++)
+		if (!_lowFps)
 		{
-			c = ((stripes - j) / stripes);
+			stripes = b.orbitRadius * 0.8;
 			
-			if (b.type == BODY_TYPE_PLANET)
+			for (j=0; j<stripes; j++)
 			{
-				ctx.strokeStyle = hsla2rgba_(b.parent.def[0], b.parent.def[1], b.parent.def[2], c);
+				c = ((stripes - j) / stripes);
+				
+				if (b.type == BODY_TYPE_PLANET)
+				{
+					ctx.strokeStyle = hsla2rgba_(b.parent.def[0], b.parent.def[1], b.parent.def[2], c);
+				}
+				else
+				{
+					ctx.strokeStyle = "rgba(0,200,255," + c + ")";
+				}
+				
+				a = b.orbitPosition - j * 2 * 1/(stripes * 2 * 1.1);
+				
+				_arc(b.center, b.orbitRadius, a - 1 / (stripes * 5), a, 0, 1);
 			}
-			else
-			{
-				ctx.strokeStyle = "rgba(0,200,255," + c + ")";
-			}
-			
-			a = b.orbitPosition - j * 2 * 1/(stripes * 2 * 1.1);
-			
-			_arc(b.center, b.orbitRadius, a - 1 / (stripes * 5), a, 0, 1);
+		}
+		else
+		{
+			ctx.strokeStyle = "#444";
+			_arc(b.center, b.orbitRadius, 0, 1, 0, 1);
 		}
 	}
 	
@@ -134,9 +142,12 @@ function drawBodies()
 			c = b.parent.orbitPosition + 0.25;
 		}
 		
-		// sunny side
-		ctx.fillStyle = hsla2rgba_(_currentSystem.bodies[0].def[0], _currentSystem.bodies[0].def[1], _currentSystem.bodies[0].def[2], 0.2);
-		_arc(b.position, b.radius, 0, 1, 1);
+		if (!_lowFps)
+		{
+			// sunny side
+			ctx.fillStyle = hsla2rgba_(_currentSystem.bodies[0].def[0], _currentSystem.bodies[0].def[1], _currentSystem.bodies[0].def[2], 0.2);
+			_arc(b.position, b.radius, 0, 1, 1);
+		}
 		
 		// shadow
 		ctx.fillStyle = "rgba(0,0,0,0.4)";

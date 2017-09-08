@@ -1,6 +1,7 @@
 let _windowWidth;
 let _windowHeight;
 let _windowScale;
+let _lowFps = 0;
 
 let canvas = null;
 let ctx = null;
