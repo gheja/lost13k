@@ -15,7 +15,8 @@ function generateBody(parent, size, r, speed, type)
 		speed: speed * (randFloat() + 0.5) * 5,
 		type: type,
 		childCount: 0,
-		landscapeSettings: null
+		landscapeSettings: null,
+		visited: false
 	};
 	
 	a.radius = a.radiusBase * (a.radiusScale + 0.8);
@@ -112,6 +113,14 @@ function drawBodies()
 	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
 		b = _currentSystem.bodies[i];
+		
+		if (b.visited)
+		{
+			ctx.lineWidth = _scale(2);
+			ctx.strokeStyle = "#0a0";
+			_arc(b.position, b.radius + 1.5, 0, 1, 0, 1);
+			// drawCircularSelection(b.position, b.radius + 2, 10, 600, "#0a0");
+		}
 		
 		// planet
 		if (b.type == BODY_TYPE_PLANET)
@@ -299,6 +308,8 @@ function solarNext()
 function solarLand()
 {
 	_currentBody = _selectedBody;
+	_currentBody.visited = true;
+	
 	generateOrLoadLandscape();
 	animationStart(animationPlanetLanding, 0.003);
 	
