@@ -17,7 +17,7 @@
 - [ ] noise texture
   - nebulae: starting at 0 on edges, 1 on center?
 - [ ] nebulae composition
-- [ ] use the wormhole animation
+- [x] use the wormhole animation
 
 ## Nice to have
 - [ ] add some low fps mode
