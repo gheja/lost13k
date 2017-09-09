@@ -335,8 +335,8 @@ function drawSolar()
 	drawBodies();
 	
 	drawGuiBase();
-	drawGuiButton("\u00BB", 4, 1, true, solarNext);
-	drawGuiButton("LAND", 5, 3, (_selectedBody != null), solarLand);
-	drawGuiButton("ZOOM", 8, 3, true, solarZoom);
+	drawGuiButton("\u00BB", 2, 1, true, solarNext);
+	drawGuiButton("LAND", 3, 3, (_selectedBody != null), solarLand);
+	drawGuiButton("ZOOM", 6, 3, true, solarZoom);
 	drawGuiResources();
 }
