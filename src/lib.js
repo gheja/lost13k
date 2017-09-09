@@ -177,6 +177,7 @@ function pos2(x, y, z, a, b)
 	let c = cos(b);
 	let s2 = sin(a);
 	let c2 = cos(a);
+	let distortion = 0.0025;
 	let p, x2, y2, w;
 	
 	w = Math.pow(10, z / 10);
@@ -186,7 +187,7 @@ function pos2(x, y, z, a, b)
 	
 	return [
 		(x2 * c) * w,
-		(y2 + s * x2 * y2 * settings.distortion) * w
+		(y2 + s * x2 * y2 * distortion) * w
 	];
 }
 
