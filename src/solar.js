@@ -266,13 +266,11 @@ function describeBody(b)
 
 function generateBodies()
 {
-	let i, j, a, b, c, result;
+	let i, j, a, c, result;
 	
 	result = [];
 	
 	result.push(generateBody(null, 13, 0, 0, BODY_TYPE_STAR));
-	
-	b = 20;
 	
 	for (i=0; i<5; i++)
 	{

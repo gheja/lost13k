@@ -99,7 +99,6 @@ function drawStarMap()
 	ctx.globalCompositeOperation = "source-over";
 	ctx.lineCap = "butt";
 	
-	
 	if (_p4 > 0)
 	{
 		a = _windowHeight * _p4;
