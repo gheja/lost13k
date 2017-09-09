@@ -284,8 +284,10 @@ function draw()
 			
 //			if (DEBUG_BORDER)
 			{
-				ctx.strokeStyle = "#f00";
 				ctx.lineWidth = 1;
+				ctx.strokeStyle = "#f00";
+				ctx.rect(_x(-200), _y(-180), _scale(400), _scale(355));
+				ctx.strokeStyle = "#f00";
 				ctx.rect(_x(-200), _y(-200), _scale(400), _scale(400));
 				ctx.stroke();
 			}
