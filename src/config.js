@@ -1,5 +1,7 @@
 "use strict";
 
+const DEBUG_BORDER = 1;
+
 const PATH_STEPS = 10;
 const PATH_STEP_DISTANCE = 100;
 const PATH_ITERATIONS = 100;
