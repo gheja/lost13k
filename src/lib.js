@@ -375,7 +375,7 @@ function drawGuiButton(title, x, size, enabled, callback, resourceCodeToHighligh
 	
 	if (_animation.position < 1)
 	{
-		return;
+		enabled = false;
 	}
 	
 	c = "#0ac";
