@@ -58,6 +58,9 @@ function init()
 	layerCreate(drawSolar); // planets
 	layerCreate(drawStarMap); // star map
 	layerCreate(drawLandscape); // landscape
+	layerCreate(drawWormhole); // wormhole
+	
+	restartWormhole();
 	
 	eventResize();
 	

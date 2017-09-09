@@ -71,3 +71,24 @@ function animationSystemZoomOut()
 		_layers[0].visible = false;
 	}
 }
+
+function animationWormhole()
+{
+	if (_animation.position == 0)
+	{
+		_layers[3].visible = true;
+		restartWormhole();
+	}
+	else if (_animation.position < 0.25)
+	{
+	}
+	else if (_animation.position < 1)
+	{
+		_layers[0].visible = true;
+		_layers[1].visible = false;
+	}
+	else if (_animation.position == 1)
+	{
+		_layers[3].visible = false;
+	}
+}
