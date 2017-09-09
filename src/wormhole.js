@@ -1,44 +1,11 @@
 "use strict";
 
-let hasBeginning = true;
-let hasEnd = true;
-let starsTotal = 300;
-
-let starsToRestart = 0;
-let finished = false;
-
-let canvas1 = null;
-let ctx1 = null;
-
-let canvas = null;
-let ctx = null;
-let body = null;
-let gui = null;
+const WORMHOLE_STEPS = 40;
+const WORMHOLE_STARS = 250;
+const WORMHOLE_VIEW_Z_STEP = 0.5;
 
 let viewZ = 0;
-let viewZStep = 0.5;
 let lastFrameTime = 0;
-
-let palette = [];
-
-let settings = {
-	a: 0,
-	b: 0,
-	distortion: 0.0025,
-	n: 30,
-	z: 1,
-	
-	autoB: false,
-	autoUpdate: true
-};
-
-let settings2 = {
-	steps: 40,
-	stars: 250,
-	diffA: 0.001,
-	diffB: 0.001
-};
-
 
 let csteps = [];
 let cstars = [];
@@ -49,11 +16,6 @@ let vy = -5;
 
 function getStarColor()
 {
-	// let x = [ "acf", "cde", "eef", "ffd", "ffa", "fe6", "fa3" ];
-	// return "#" + x[Math.floor(randFloat() * x.length) ];
-	
-	// return hsla2rgba_(0.55 + randPlusMinus(0.075), 1, 0.75 + randPlusMinus(0.125), 0.5 + randPlusMinus(0.25));
-	
 	return hsla2rgba_(0.53 + randPlusMinus(0.06), 1, 0.6 + randPlusMinus(0.25), 1);
 }
 
@@ -63,7 +25,7 @@ function generateStars()
 	
 	cstars = [];
 	
-	for (i=0; i<settings2.stars; i++)
+	for (i=0; i<WORMHOLE_STARS; i++)
 	{
 		x = 0;
 		y = 0;
@@ -82,7 +44,7 @@ function pushStep(shift)
 {
 	if (shift)
 	{
-		viewZ += viewZStep;
+		viewZ += WORMHOLE_VIEW_Z_STEP;
 		csteps.shift();
 	}
 	
@@ -100,7 +62,7 @@ function generateSteps()
 	
 	csteps = [];
 	
-	for (i=0; i<settings2.steps; i++)
+	for (i=0; i<WORMHOLE_STEPS; i++)
 	{
 		pushStep(false);
 	}
@@ -108,37 +70,39 @@ function generateSteps()
 
 //// main
 
-let frameNumber = 0;
+let wormholeFrameNumber = 0;
 
-function draw()
+function drawWormhole()
 {
-	let i, j, k, p, lastP, star, a, b, x, y, z, c, now, dt, lineStarted;
+	let i, j, k, p, lastP, star, a, b, x, y, z, c, now, dt, lineStarted, state;
 	
-	_raf(draw);
+	// 0: fade in
+	// 1: running
+	// 2: fade out
 	
-	now = (new Date()).getTime();
-	dt = now - lastFrameTime;
-	frameNumber++;
+	state = 0;
 	
-	lastFrameTime = now;
-	
-	if (finished)
-	{
-		return;
-	}
+	wormholeFrameNumber++;
 	
 	ctx.globalCompositeOperation = "source-over";
 	ctx.fillStyle = "#000";
 	
-	if (frameNumber < 100)
+	if (wormholeFrameNumber < 60)
 	{
 		ctx.clearRect(0, 0, _windowWidth, _windowHeight);
+		// state = 0;
 		z = 0;
 	}
-	else if (frameNumber < 100)
+	else if (wormholeFrameNumber < 100)
 	{
+		state = 1;
 	}
 	else
+	{
+		state = 2;
+	}
+	
+	if (state > 0)
 	{
 		ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 		ctx.globalCompositeOperation = "destination-out";
@@ -150,7 +114,7 @@ function draw()
 	b = _windowHeight / 2;
 	ctx.beginPath();
 	ctx.moveTo(a, b)
-	for (i=0; i<(frameNumber - z) * 3; i++)
+	for (i=0; i<(wormholeFrameNumber - z) * 3; i++)
 	{
 		c = _scale(i * i * i / 1500);
 		ctx.lineTo(a + cos(-i/30) * c, b + sin(-i/30) * c);
@@ -172,13 +136,13 @@ function draw()
 		z = 0;
 		lastP = null;
 		
-		for (j=0; j<settings2.steps; j++)
+		for (j=0; j<WORMHOLE_STEPS; j++)
 		{
 			a += csteps[j].a;
 			b += csteps[j].b;
 			x += csteps[j].x;
 			y += csteps[j].y;
-			z -= viewZStep;
+			z -= WORMHOLE_VIEW_Z_STEP;
 			
 			ctx.strokeStyle = star.color;
 			
@@ -204,13 +168,9 @@ function draw()
 			}
 		}
 		
-		if (star.z + viewZ > 1)
+		if (star.z + viewZ > 1 && state != 2)
 		{
-			if (starsToRestart > 0 || !hasEnd)
-			{
-				star.z -= 20;
-				starsToRestart--;
-			}
+			star.z -= 20;
 		}
 	}
 	
@@ -219,56 +179,20 @@ function draw()
 
 function restartWormhole()
 {
+	csteps = [];
+	cstars = [];
+	wormholeFrameNumber = 0;
+	
 	generateStars();
+	generateSteps();
 	
-	if (hasBeginning)
-	{
-		viewZ = -20;
-	}
-	else
-	{
-		viewZ = 0;
-	}
-	
-	if (hasEnd)
-	{
-		starsToRestart = starsTotal;
-	}
+	viewZ = -20;
 }
 
 function init()
 {
 	let tmp;
 	
-	canvas1 = document.createElement("canvas");
-	canvas1.width = _windowWidth;
-	canvas1.height = _windowHeight;
-	ctx1 = canvas1.getContext("2d");
-	ctx1.fillStyle = "#600";
-	ctx1.fillRect(0, 0, _windowWidth, _windowHeight);
-	
-	canvas = document.createElement("canvas");
-	canvas.width = _windowWidth;
-	canvas.height = _windowHeight;
-	ctx = canvas.getContext("2d");
-	
-	body = document.body;
-	body.appendChild(canvas1);
-	body.appendChild(canvas);
-	
 	generateSteps();
 	restartWormhole();
-	
-	lastFrameTime = (new Date()).getTime();
-	
-	draw();
-	
-	if (hasBeginning)
-	{
-		body.onclick = restartWormhole;
-	}
 }
-
-var _raf = window.requestAnimationFrame;
-
-window.onload = init;
