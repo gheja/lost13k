@@ -21,7 +21,7 @@
 ## Nice to have
 - [ ] add some low fps mode
 - [ ] make all/actions/animations etc. time based not frame based (dropped frames should be less noticable)
-- [ ] past planet/moon highlight (after visit)
+- [x] past planet/moon highlight (after visit)
 - [ ] difficulty levels (star count, path length, etc.)
 - [ ] landscape: moon color should match on sky
 - [ ] landscape: from a moon the planet should be visible
@@ -29,7 +29,7 @@
 - [ ] some simple background music
 
 ## Fine-tuning
-- [ ] planet/moon generation tuning
+- [x] planet/moon generation tuning
 
 ## Extra
 - [ ] solar system ship design
