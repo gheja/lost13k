@@ -284,8 +284,6 @@ function generateBodies()
 		}
 	}
 	
-	describeBody(result[2]);
-	
 	return result;
 }
 
