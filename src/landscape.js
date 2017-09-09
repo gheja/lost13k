@@ -131,7 +131,6 @@ function drawLandscape()
 		}
 	}
 	
-	drawGuiBase(true);
 	drawGuiButton("LEAVE", 3, 3, true, landscapeLeave, RESOURCE_ROCKET);
 	drawGuiResources();
 }

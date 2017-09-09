@@ -111,7 +111,6 @@ function drawStarMap()
 		ctx.clearRect(0, i, _windowWidth, a);
 	}
 	
-	drawGuiBase();
 	drawGuiButton("\u00BB", 2, 1, true, starMapNext);
 	drawGuiButton("JUMP", 3, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump, RESOURCE_SHORT_JUMP);
 	drawGuiButton("ZOOM", 6, 3, (_currentSystem && _selectedSystem == _currentSystem), starMapZoom);
