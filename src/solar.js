@@ -276,13 +276,13 @@ function generateBodies()
 	
 	for (i=0; i<5; i++)
 	{
-		a = result.push(generateBody(result[0], 5, i * 30 + 50, 0.0001, BODY_TYPE_PLANET)) - 1;
+		a = result.push(generateBody(result[0], 5, i * 30 + 45, 0.0001, BODY_TYPE_PLANET)) - 1;
 		
 		c = Math.floor(randFloat() * 3);
 		
 		for (j=0; j<c; j++)
 		{
-			result.push(generateBody(result[a], 2, j * 10 + 15, 0.0005, BODY_TYPE_MOON));
+			result.push(generateBody(result[a], 2, j * 8 + 8 + result[a].radius, 0.0005, BODY_TYPE_MOON));
 		}
 	}
 	
