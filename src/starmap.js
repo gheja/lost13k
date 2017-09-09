@@ -96,6 +96,22 @@ function drawStarMap()
 	ctx.lineWidth = _scale(3);
 	ctx.stroke();
 	
+	ctx.strokeStyle = "rgba(255,255,0,0.25)";
+	// little cheat with the highlight
+	_arc(_currentSystem.mapPosition, SHORT_JUMP_DISTANCE - 2, 0, 1, 0, 1);
+	
+	_highlightedResourceCode = -1;
+	
+	if (_selectedSystem && (_currentSystem != _selectedSystem))
+	{
+		_highlightedResourceCode = RESOURCE_SHORT_JUMP;
+		
+		if (getDistance(_currentSystem.mapPosition, _selectedSystem.mapPosition) > SHORT_JUMP_DISTANCE || (_resources[RESOURCE_SHORT_JUMP] == 0 && _resources[RESOURCE_LONG_JUMP] > 0))
+		{
+			_highlightedResourceCode = RESOURCE_LONG_JUMP;
+		}
+	}
+	
 	ctx.globalCompositeOperation = "source-over";
 	ctx.lineCap = "butt";
 	

@@ -2,6 +2,8 @@
 
 const DEBUG_BORDER = 1;
 
+const SHORT_JUMP_DISTANCE = 80;
+
 const PATH_STEPS = 10;
 const PATH_STEP_DISTANCE = 100;
 const PATH_ITERATIONS = 100;
