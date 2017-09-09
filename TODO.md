@@ -17,6 +17,7 @@
 - [ ] noise texture
   - nebulae: starting at 0 on edges, 1 on center?
 - [ ] nebulae composition
+- [ ] use the wormhole animation
 
 ## Nice to have
 - [ ] add some low fps mode
@@ -42,3 +43,6 @@
 - [ ] check out commit 1ca0bdb6f48a7c263db18ef3ad48dab804ce671d for...
   - solar: stripes
   - solar: dual stars
+
+## Might be removed to save space
+- [ ] wormhole animation
