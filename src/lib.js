@@ -365,8 +365,6 @@ function drawGuiBase(skipStripes)
 			drawGuiStripe(i, 184, 10, "#222", false);
 		}
 	}
-	
-	drawGuiButton("F", 11, 2, true, goFullScreen);
 }
 
 function drawGuiButton(title, x, size, enabled, callback, resourceCodeToHighlight)
