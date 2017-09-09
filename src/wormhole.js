@@ -188,11 +188,3 @@ function restartWormhole()
 	
 	viewZ = -20;
 }
-
-function init()
-{
-	let tmp;
-	
-	generateSteps();
-	restartWormhole();
-}
