@@ -129,8 +129,8 @@ function regenerateStars()
 		for (j=0; j<STAR_DISTANCE_ITERATIONS; j++)
 		{
 			a = {
-				x: randPlusMinus(180),
-				y: randPlusMinus(180),
+				x: randPlusMinus(196),
+				y: randPlusMinus(174) - 3,
 			}
 			
 			// don't generate stars too close
