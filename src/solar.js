@@ -266,19 +266,21 @@ function describeBody(b)
 
 function generateBodies()
 {
-	let i, j, a, c, result;
+	let i, j, a, result, planetCount, moonCount;
 	
 	result = [];
 	
 	result.push(generateBody(null, 13, 0, 0, BODY_TYPE_STAR));
 	
-	for (i=0; i<5; i++)
+	planetCount = Math.round(randFloat() * 3 + 1);
+	
+	for (i=0; i<planetCount; i++)
 	{
-		a = result.push(generateBody(result[0], 5, i * 30 + 45, 0.0001, BODY_TYPE_PLANET)) - 1;
+		a = result.push(generateBody(result[0], 5, i * 40 + 45, 0.0001, BODY_TYPE_PLANET)) - 1;
 		
-		c = Math.floor(randFloat() * 3);
+		moonCount = Math.round(randFloat() * 3);
 		
-		for (j=0; j<c; j++)
+		for (j=0; j<moonCount; j++)
 		{
 			result.push(generateBody(result[a], 2, j * 8 + 8 + result[a].radius, 0.0005, BODY_TYPE_MOON));
 		}
