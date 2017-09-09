@@ -380,7 +380,7 @@ function drawGuiButton(title, x, size, enabled, callback, resourceCodeToHighligh
 	
 	if (enabled)
 	{
-		if (_cursor.x > x * 20 - 5 && _cursor.x < x * 20 + size * 20 - 10 + 5 && _cursor.y > 184 && _cursor.y < 196)
+		if (_cursor.x > x * 20 - 5 && _cursor.x < x * 20 + size * 20 - 10 + 5 && _cursor.y > 175)
 		{
 			if (resourceCodeToHighlight !== undefined)
 			{
