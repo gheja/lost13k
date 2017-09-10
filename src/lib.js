@@ -285,12 +285,19 @@ function draw()
 			
 //			if (DEBUG_BORDER)
 			{
-				ctx.beginPath();
 				ctx.lineWidth = 1;
-				ctx.strokeStyle = "#f00";
+				
+				ctx.beginPath();
+				ctx.rect(_x(-350), _y(-180), _scale(700), _scale(355));
+				ctx.strokeStyle = "#ff0";
+				ctx.stroke();
+				
+				ctx.beginPath();
 				ctx.rect(_x(-200), _y(-180), _scale(400), _scale(355));
 				ctx.rect(_x(-200), _y(-200), _scale(400), _scale(400));
+				ctx.strokeStyle = "#f00";
 				ctx.stroke();
+				
 			}
 		}
 	}
