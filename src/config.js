@@ -1,5 +1,8 @@
 "use strict";
 
+const TEXT_BUBBLE_STYLE = 1;
+const TEXT_BUBBLE_TIME = 3;
+
 const DEBUG_BORDER = 1;
 
 const SHORT_JUMP_DISTANCE = 80;

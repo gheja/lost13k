@@ -26,6 +26,12 @@ let _dt = 0;
 let _totalTime = 0;
 let _sceneTime = 0;
 
+let _textBubble = {
+	timeLeft: 0,
+	text: [],
+	position: null
+};
+
 function drawMain()
 {
 	animationStep();
@@ -98,6 +104,8 @@ function init()
 	_layers[1].visible = true;
 	
 	reset();
+	
+	showTextBubble({ x: 0, y: 0 }, [ "Oh, that seems strange.", "What." ]);
 	
 	draw();
 }

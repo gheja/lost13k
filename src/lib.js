@@ -268,6 +268,8 @@ function draw()
 	_sceneTime += _dt;
 	_totalTime += _dt;
 	
+	_textBubble.timeLeft -= _dt;
+	
 	// _frameNumber++;
 	_highlightedResourceCode = -1;
 	
@@ -308,6 +310,8 @@ function draw()
 			}
 		}
 	}
+	
+	drawTextBubble();
 	
 	// reset clicking state
 	_cursor.clicked = false;
@@ -502,4 +506,87 @@ function drawCat(p, scale, state)
 	}
 	ctx.fill();
 	ctx.stroke();
+}
+
+function showTextBubble(p, text)
+{
+	_textBubble.timeLeft = TEXT_BUBBLE_TIME;
+	_textBubble.position = p;
+	_textBubble.text = text;
+}
+
+function drawTextBubble()
+{
+	let i, fontHeight, padding, boxLeft, boxTop, boxWidth, boxHeight, n, a;
+	
+	if (_textBubble.timeLeft <= 0)
+	{
+		return;
+	}
+	
+	_textBubble.text = [ "WWWWWWWWW" ];
+	
+	fontHeight = 12;
+	n = _scale(30);
+	a = _scale(5);
+	
+	if (TEXT_BUBBLE_STYLE == 0)
+	{
+		ctx.strokeStyle = "#fff";
+		ctx.fillStyle = "rgba(0,0,0,1)";
+		padding = 4;
+	}
+	else if (TEXT_BUBBLE_STYLE == 1)
+	{
+		ctx.strokeStyle = "#fff";
+		ctx.fillStyle = "#fff";
+		padding = 2;
+	}
+	else
+	{
+		ctx.strokeStyle = "#000";
+		ctx.fillStyle = "#000";
+		padding = 4;
+	}
+	
+	boxWidth = _scale(200);
+	boxHeight = _scale((fontHeight + 2) * _textBubble.text.length + _scale(padding * 2));
+	boxLeft = _x(_textBubble.position.x) - boxWidth;
+	boxTop = _y(_textBubble.position.y) - boxHeight;
+	
+	ctx.font = _scale(fontHeight) + "px Arial";
+	ctx.textAlign = "left";
+	
+	ctx.lineWidth = _scale(2);
+	ctx.beginPath();
+	ctx.moveTo(boxLeft, boxTop);
+	ctx.lineTo(boxLeft, boxTop + boxHeight);
+	ctx.lineTo(boxLeft + boxWidth - n - a, boxTop + boxHeight);
+	ctx.lineTo(boxLeft + boxWidth - n, boxTop + boxHeight + a);
+	ctx.lineTo(boxLeft + boxWidth - n + a, boxTop + boxHeight);
+	ctx.lineTo(boxLeft + boxWidth, boxTop + boxHeight);
+	ctx.lineTo(boxLeft + boxWidth, boxTop);
+	ctx.closePath();
+	
+	
+	ctx.fill();
+	ctx.stroke();
+	
+	if (TEXT_BUBBLE_STYLE == 0)
+	{
+		ctx.fillStyle = "#fff";
+	}
+	else if (TEXT_BUBBLE_STYLE == 1)
+	{
+		ctx.fillStyle = "#000";
+	}
+	else
+	{
+		ctx.fillStyle = "#fff";
+	}
+	
+	for (i=0; i<_textBubble.text.length; i++)
+	{
+		ctx.fillText(_textBubble.text[i], boxLeft + _scale(5), boxTop + (i + 1) * _scale(fontHeight + 2) + _scale(padding));
+	}
 }
