@@ -139,6 +139,11 @@ function drawLandscape()
 		}
 	}
 	
+	if (_catLocationBody == _currentBody)
+	{
+		drawCat(_parallaxPosition({ x: -100, y: 160 }, 1.6), 1);
+	}
+	
 	drawGuiButton("LEAVE", 3, 3, true, landscapeLeave, RESOURCE_ROCKET);
 	drawGuiResources();
 }
