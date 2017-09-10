@@ -270,6 +270,7 @@ function draw()
 	_dt = (time - _lastFrameTime) / 1000;
 	_lastFrameTime = time;
 	
+	_lastSceneTime = _sceneTime;
 	_sceneTime += _dt;
 	_totalTime += _dt;
 	

@@ -8,6 +8,16 @@ let _p2 = 1;
 let _p3 = 1;
 let _p3Reversed = false;
 
+function passingSceneTime(x)
+{
+	if (_lastSceneTime < x && _sceneTime >= x)
+	{
+		return true;
+	}
+	
+	return false;
+}
+
 function landscapeLerp(a, b, x, pow)
 {
 	return a + (b - a) * Math.pow(x,pow);

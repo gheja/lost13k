@@ -25,6 +25,7 @@ let _lastFrameTime = 0;
 let _dt = 0;
 let _totalTime = 0;
 let _sceneTime = 0;
+let _lastSceneTime = 0;
 
 let _textBubble = {
 	timeLeft: 0,
