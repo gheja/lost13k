@@ -153,14 +153,47 @@ function drawLandscape()
 	
 	if (_catLocationBody == _currentBody)
 	{
-		if (_p < 1)
+		if (_animation.position == 1)
 		{
-			drawCat(_parallaxPosition({ x: -100, y: 160 }, 1.6), 1, 0);
+			if (passingSceneTime(1))
+			{
+				showTextBubble([ _cat.name + "!" ]);
+			}
+			
+			if (passingSceneTime(1.25))
+			{
+				_cat.state = 1;
+			}
+			
+			if (_sceneTime > 2 && _sceneTime < 10)
+			{
+				n = Math.floor((_sceneTime - 2) * 5);
+				_cat.position.x = -100 + n * 5;
+				_cat.state = n % 2 ? 2 : 3;
+			}
+			
+			if (passingSceneTime(10))
+			{
+				_cat.position.x = 1000;
+			}
+			
+			if (passingSceneTime(10.5))
+			{
+				// _cat.position.x = 1000;
+			}
+			
+			if (passingSceneTime(11.5))
+			{
+				showTextBubble([ "Good to see you again, " + arrayPick([ "buddy", _cat.name ]) + "." ]);
+			}
+			
+			if (passingSceneTime(13))
+			{
+				_cat.onBoard = true;
+			}
 		}
-		else
-		{
-			drawCat(_parallaxPosition({ x: -100, y: 160 }, 1.6), 1, 1);
-		}
+		
+		drawCat(_parallaxPosition(_cat.position, 1.6));
 	}
 	
 	drawGuiButton("LEAVE", 3, 3, true, landscapeLeave, RESOURCE_ROCKET);

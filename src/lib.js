@@ -490,19 +490,21 @@ function drawShip(p, scale)
 	ctx.stroke();
 }
 
-function drawCat(p, scale, state)
+function drawCat(p)
 {
-	let i, a;
+	let i, a, scale;
+	
+	scale = 1;
 	
 	ctx.fillStyle = "#000"
-	ctx.strokeStyle = "#333";
+	ctx.strokeStyle = "#900";
 	ctx.lineWidth = _scale(2 * scale);
 	
 	// states: 0: sleeping, 1: awake, 2: running 1, 3: running 2
 	
 	ctx.beginPath();
 	
-	switch (state)
+	switch (_cat.state)
 	{
 		case 0:
 			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
