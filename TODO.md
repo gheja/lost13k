@@ -9,7 +9,8 @@
 - [ ] main menu
 - [x] auto resize
 - [x] mobile fix (devicepixelratio, etc.)
-- [ ] objectives/talk design
+- [ ] objectives design
+- [x] talk design (text bubbles)
 - [ ] star map ship design
 - [x] parallax scrolling
 - [/] transitions
@@ -31,6 +32,7 @@
 - [ ] landscape: from a moon the planet should be visible
 - [ ] sound effects
 - [ ] some simple background music
+- [ ] twitter sharing
 
 ## Fine-tuning
 - [x] planet/moon generation tuning
