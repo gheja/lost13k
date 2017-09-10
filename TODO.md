@@ -20,6 +20,9 @@
 - [x] use the wormhole animation
 
 ## Nice to have
+- [ ] landscape: particle effects for landing
+- [ ] cat animation (running toward ship)
+- [ ] more cats
 - [ ] add some low fps mode
 - [ ] make all/actions/animations etc. time based not frame based (dropped frames should be less noticable)
 - [x] past planet/moon highlight (after visit)
