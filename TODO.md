@@ -24,7 +24,7 @@
 - [ ] cat animation (running toward ship)
 - [ ] more cats
 - [ ] add some low fps mode
-- [ ] make all/actions/animations etc. time based not frame based (dropped frames should be less noticable)
+- [x] make all/actions/animations etc. time based not frame based (dropped frames should be less noticable)
 - [x] past planet/moon highlight (after visit)
 - [ ] difficulty levels (star count, path length, etc.)
 - [ ] landscape: moon color should match on sky
