@@ -524,8 +524,6 @@ function drawTextBubble()
 		return;
 	}
 	
-	_textBubble.text = [ "WWWWWWWWW" ];
-	
 	fontHeight = 12;
 	n = _scale(30);
 	a = _scale(5);
