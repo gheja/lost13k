@@ -332,6 +332,8 @@ function drawSolar()
 	updateBodies();
 	drawBodies();
 	
+	drawShip({ x: 160, y: 150 + (Math.sin(_frameNumber * 0.02) * 5) }, 1.5);
+	
 	drawGuiButton("\u00BB", 2, 1, true, solarNext);
 	drawGuiButton("LAND", 3, 3, (_selectedBody != null), solarLand);
 	drawGuiButton("ZOOM", 6, 3, true, solarZoom);
