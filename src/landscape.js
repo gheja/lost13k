@@ -132,6 +132,8 @@ function drawLandscape()
 	
 	// drawShip({ x: 300, y: 0 - (1 - _p) * 400 }, 10);
 	drawShip({ x: 200 + shake(1 - _p, 10), y: 100 - Math.pow(1 - _p, 0.7) * 400 + shake(1 - _p, 4) }, 5);
+	_playerPosition.x = 200;
+	_playerPosition.y = 100;
 	
 	if (_p3 < 1)
 	{
