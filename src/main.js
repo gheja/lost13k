@@ -31,12 +31,27 @@ let _textBubble = {
 	timeLeft: 0,
 	text: []
 };
+let _cats = [ ];
+let _cat = null;
 
 let _playerPosition = { x: 0, y: 0 };
 
 function drawMain()
 {
 	animationStep();
+}
+
+function generateCats()
+{
+	let a, i;
+	
+	a = CAT_NAMES.slice();
+	arrayShuffle(a);
+	
+	for (i=0; i<1; i++)
+	{
+		_cats.push({ name: a.shift(), onBoard: true });
+	}
 }
 
 function loseTheCat()
@@ -52,6 +67,8 @@ function loseTheCat()
 				if (randFloat() < 0.001)
 				{
 					_catLocationBody = _map.path[i].bodies[j];
+					_cat = _cats[0];
+					_cat.onBoard = false;
 					return;
 				}
 			}
@@ -78,6 +95,7 @@ function reset()
 	regeneratePath();
 	regenerateAllBodies();
 	// regenerateLandscape();
+	generateCats();
 	loseTheCat();
 	
 	console.log(describeBody(_catLocationBody));

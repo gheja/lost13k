@@ -311,6 +311,9 @@ function solarLand()
 	generateOrLoadLandscape();
 	animationStart(animationPlanetLanding, 5);
 	
+	_cat.state = 0;
+	_cat.position = { x: -100, y: 160 };
+	
 	_cursor.clicked = false;
 	// _layers[0].visible = false;
 	_layers[2].visible = true;
