@@ -12,7 +12,7 @@ function generateBody(parent, size, r, speed, type)
 		orbitPosition: randFloat(),
 		center: { x: 0, y: 0 },
 		position: { x: 0, y: 0 },
-		speed: speed * (randFloat() + 0.5) * 5,
+		speed: speed * (randFloat() + 0.5) * 5 * 60,
 		type: type,
 		childCount: 0,
 		landscapeSettings: null,
@@ -39,7 +39,7 @@ function updateBodies()
 	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
 		b = _currentSystem.bodies[i];
-		b.orbitPosition += b.speed;
+		b.orbitPosition += b.speed * _dt;
 		
 		if (b.type == BODY_TYPE_STAR)
 		{
