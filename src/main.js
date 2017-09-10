@@ -125,8 +125,6 @@ function init()
 	
 	reset();
 	
-	showTextBubble({ x: 0, y: 0 }, [ "Oh, that seems strange.", "What." ]);
-	
 	draw();
 }
 
