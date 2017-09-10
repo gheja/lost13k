@@ -1,5 +1,7 @@
 "use strict";
 
+const CAT_NAMES = [ "Bubble", "Bobby", "Marshmallow", "Winston" ];
+
 const TEXT_BUBBLE_STYLE = 1;
 const TEXT_BUBBLE_TIME = 3;
 
