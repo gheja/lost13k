@@ -466,3 +466,17 @@ function drawShip(p, scale)
 	ctx.fill();
 	ctx.stroke();
 }
+
+function drawCat(p, scale)
+{
+	let i, a;
+	
+	ctx.fillStyle = "#000"
+	ctx.strokeStyle = "#333";
+	ctx.lineWidth = _scale(2 * scale);
+	
+	ctx.beginPath();
+	ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+	ctx.fill();
+	ctx.stroke();
+}
