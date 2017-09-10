@@ -508,16 +508,15 @@ function drawCat(p, scale, state)
 	ctx.stroke();
 }
 
-function showTextBubble(p, text)
+function showTextBubble(text)
 {
 	_textBubble.timeLeft = TEXT_BUBBLE_TIME;
-	_textBubble.position = p;
 	_textBubble.text = text;
 }
 
 function drawTextBubble()
 {
-	let i, fontHeight, padding, boxLeft, boxTop, boxWidth, boxHeight, n, a;
+	let i, fontHeight, padding, boxLeft, boxTop, boxWidth, boxHeight, n, a, m;
 	
 	if (_textBubble.timeLeft <= 0)
 	{
@@ -549,8 +548,8 @@ function drawTextBubble()
 	
 	boxWidth = _scale(200);
 	boxHeight = _scale((fontHeight + 2) * _textBubble.text.length + _scale(padding * 2));
-	boxLeft = _x(_textBubble.position.x) - boxWidth;
-	boxTop = _y(_textBubble.position.y) - boxHeight;
+	boxLeft = _x(_playerPosition.x) - boxWidth + n;
+	boxTop = Math.round(_y(_playerPosition.y - 10) - boxHeight);
 	
 	ctx.font = _scale(fontHeight) + "px Arial";
 	ctx.textAlign = "left";
@@ -570,6 +569,8 @@ function drawTextBubble()
 	ctx.fill();
 	ctx.stroke();
 	
+	m = Math.round(_scale(fontHeight + 2));
+	
 	if (TEXT_BUBBLE_STYLE == 0)
 	{
 		ctx.fillStyle = "#fff";
@@ -585,6 +586,6 @@ function drawTextBubble()
 	
 	for (i=0; i<_textBubble.text.length; i++)
 	{
-		ctx.fillText(_textBubble.text[i], boxLeft + _scale(5), boxTop + (i + 1) * _scale(fontHeight + 2) + _scale(padding));
+		ctx.fillText(_textBubble.text[i], boxLeft + _scale(5), boxTop + (i + 1) * m + _scale(padding));
 	}
 }

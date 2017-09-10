@@ -332,7 +332,10 @@ function drawSolar()
 	updateBodies();
 	drawBodies();
 	
-	drawShip({ x: 160, y: 150 + (Math.sin(_totalTime) * 5) }, 1.5);
+	_playerPosition.x = 160;
+	_playerPosition.y = 150 + (Math.sin(_totalTime) * 5);
+	
+	drawShip(_playerPosition, 1.5);
 	
 	drawGuiButton("\u00BB", 2, 1, true, solarNext);
 	drawGuiButton("LAND", 3, 3, (_selectedBody != null), solarLand);

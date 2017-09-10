@@ -127,7 +127,10 @@ function drawStarMap()
 		ctx.clearRect(0, i, _windowWidth, a);
 	}
 	
-	drawShip({ x: _currentSystem.mapPosition.x, y: _currentSystem.mapPosition.y - 12 + (Math.sin(_totalTime) * 5) }, 0.5);
+	_playerPosition.x = _currentSystem.mapPosition.x;
+	_playerPosition.y = _currentSystem.mapPosition.y - 12 + (Math.sin(_totalTime) * 5);
+	
+	drawShip(_playerPosition, 0.5);
 	
 	drawGuiButton("\u00BB", 2, 1, true, starMapNext);
 	drawGuiButton("JUMP", 3, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump);

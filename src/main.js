@@ -28,9 +28,10 @@ let _sceneTime = 0;
 
 let _textBubble = {
 	timeLeft: 0,
-	text: [],
-	position: null
+	text: []
 };
+
+let _playerPosition = { x: 0, y: 0 };
 
 function drawMain()
 {
