@@ -1,10 +1,12 @@
 "use strict";
 
 const WORMHOLE_STEPS = 40;
-const WORMHOLE_STARS = 250;
+const WORMHOLE_STARS = 150;
 const WORMHOLE_VIEW_Z_STEP = 0.5;
+const WORMHOLE_FADE_DURATION = 1;
 
 let viewZ = 0;
+let viewZX = 0;
 let lastFrameTime = 0;
 
 let csteps = [];
@@ -44,7 +46,6 @@ function pushStep(shift)
 {
 	if (shift)
 	{
-		viewZ += WORMHOLE_VIEW_Z_STEP;
 		csteps.shift();
 	}
 	
@@ -54,6 +55,22 @@ function pushStep(shift)
 	vy = clamp(vy + randPlusMinus(2), -20, 20);
 	
 	csteps.push({ a: va, b: vb, x: vx, y: vy });
+}
+
+function wormholeViewStep()
+{
+	let a;
+	
+	a = WORMHOLE_VIEW_Z_STEP *(_dt * 60);
+	
+	viewZ += a;
+	viewZX += a;
+	
+	while (viewZX > 1)
+	{
+		pushStep(true);
+		viewZX -= 1;
+	}
 }
 
 function generateSteps()
@@ -76,50 +93,63 @@ function drawWormhole()
 {
 	let i, j, k, p, lastP, star, a, b, x, y, z, c, now, dt, lineStarted, state;
 	
-	// 0: fade in
-	// 1: running
-	// 2: fade out
-	
-	state = 0;
-	
 	wormholeFrameNumber++;
 	
 	ctx.globalCompositeOperation = "source-over";
 	ctx.fillStyle = "#000";
 	
-	if (wormholeFrameNumber < 60)
+	// if (wormholeFrameNumber < 60)
+	if (_animation.time < WORMHOLE_FADE_DURATION)
 	{
+		// fade in
+		state = 0;
 		ctx.clearRect(0, 0, _windowWidth, _windowHeight);
-		// state = 0;
-		z = 0;
+		x = _animation.time / WORMHOLE_FADE_DURATION;
 	}
-	else if (wormholeFrameNumber < 100)
+	else if (_animation.time < _animation.duration - WORMHOLE_FADE_DURATION)
 	{
+		// running
 		state = 1;
 	}
 	else
 	{
+		// fade out
 		state = 2;
+		x = (_animation.time - (_animation.duration - WORMHOLE_FADE_DURATION)) / WORMHOLE_FADE_DURATION;
 	}
 	
+	// running and fade out
 	if (state > 0)
 	{
+		// fill screen with black
 		ctx.fillRect(0, 0, _windowWidth, _windowHeight);
+		
+		// and set composition to clearing the black
 		ctx.globalCompositeOperation = "destination-out";
 		ctx.fillStyle = "#000";
-		z = 100;
 	}
 	
-	a = _windowWidth / 2;
-	b = _windowHeight / 2;
-	ctx.beginPath();
-	ctx.moveTo(a, b)
-	for (i=0; i<(wormholeFrameNumber - z) * 3; i++)
+	// when fade in or out
+	if (state != 1)
 	{
-		c = _scale(i * i * i / 1500);
-		ctx.lineTo(a + cos(-i/30) * c, b + sin(-i/30) * c);
+		a = _windowWidth / 2;
+		b = _windowHeight / 2;
+		ctx.beginPath();
+		
+		// go to the center of the screen
+		ctx.moveTo(a, b);
+		
+		// and draw an outward spiral
+		for (i=0; i<x * 150; i++)
+		{
+			c = _scale(i * i * i / 1500);
+			ctx.lineTo(a + cos(-i/30) * c, b + sin(-i/30) * c);
+		}
+		
+		// then fill it
+		ctx.fill();
 	}
-	ctx.fill();
+	
 	ctx.globalCompositeOperation = "lighter";
 	
 	ctx.lineWidth = _scale(1);
@@ -174,7 +204,7 @@ function drawWormhole()
 		}
 	}
 	
-	pushStep(true);
+	wormholeViewStep();
 }
 
 function restartWormhole()
@@ -187,4 +217,5 @@ function restartWormhole()
 	generateSteps();
 	
 	viewZ = -20;
+	viewZX = 0;
 }

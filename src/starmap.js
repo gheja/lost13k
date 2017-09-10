@@ -31,7 +31,7 @@ function starMapJump()
 	consumeResource();
 	jumpToSystem(_selectedSystem);
 	// starMapZoom();
-	animationStart(animationWormhole, 3.7);
+	animationStart(animationWormhole, 3);
 }
 
 function drawStarMap()
