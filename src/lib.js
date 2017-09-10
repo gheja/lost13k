@@ -474,7 +474,7 @@ function drawShip(p, scale)
 	ctx.stroke();
 }
 
-function drawCat(p, scale)
+function drawCat(p, scale, state)
 {
 	let i, a;
 	
@@ -482,8 +482,28 @@ function drawCat(p, scale)
 	ctx.strokeStyle = "#333";
 	ctx.lineWidth = _scale(2 * scale);
 	
+	// states: 0: sleeping, 1: awake, 2: running 1, 3: running 2
+	
 	ctx.beginPath();
-	ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+	
+	switch (state)
+	{
+		case 0:
+			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+		break;
+		case 1:
+			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+			ctx.strokeStyle = "#390";
+		break;
+		case 2:
+			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+			ctx.strokeStyle = "#093";
+		break;
+		case 3:
+			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+			ctx.strokeStyle = "#099";
+		break;
+	}
 	ctx.fill();
 	ctx.stroke();
 }
