@@ -257,11 +257,18 @@ function layerCreate(drawFunction)
 
 function draw()
 {
-	let i;
+	let i, time;
 	
 	_raf(draw);
 	
-	_frameNumber++;
+	time = (new Date()).getTime();
+	_dt = (time - _lastFrameTime) / 1000;
+	_lastFrameTime = time;
+	
+	_sceneTime += _dt;
+	_totalTime += _dt;
+	
+	// _frameNumber++;
 	_highlightedResourceCode = -1;
 	
 	drawMain();
@@ -316,7 +323,7 @@ function drawCircularSelection(p, radius)
 	ctx.lineCap = "butt";
 	ctx.lineWidth = _scale(2);
 	
-	c = _frameNumber / 60;
+	c = _totalTime;
 	
 	ctx.strokeStyle = "#fff";
 	

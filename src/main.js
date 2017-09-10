@@ -8,7 +8,7 @@ let ctx = null;
 
 let _body = null;
 let _layers = [];
-let _frameNumber = 0;
+// let _frameNumber = 0;
 
 let _currentSystem = null;;
 let _selectedSystem = null;
@@ -20,6 +20,11 @@ let _cursor = { x: 0, y: 0, clicked: false };
 
 let _resources = [ 3, 3, 3 ];
 let _highlightedResourceCode = -1;
+
+let _lastFrameTime = 0;
+let _dt = 0;
+let _totalTime = 0;
+let _sceneTime = 0;
 
 function drawMain()
 {
@@ -73,6 +78,8 @@ function reset()
 function init()
 {
 	let tmp;
+	
+	_lastFrameTime = (new Date()).getTime();
 	
 	_body = document.body;
 	_body.onmousedown = eventMouseDown;

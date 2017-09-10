@@ -19,7 +19,7 @@ function starMapNext()
 
 function starMapZoom()
 {
-	animationStart(animationSystemZoomIn, 0.03);
+	animationStart(animationSystemZoomIn, 0.5);
 	
 	_cursor.clicked = false;
 	_layers[0].visible = true;
@@ -31,7 +31,7 @@ function starMapJump()
 	consumeResource();
 	jumpToSystem(_selectedSystem);
 	// starMapZoom();
-	animationStart(animationWormhole, 0.0065);
+	animationStart(animationWormhole, 3.7);
 }
 
 function drawStarMap()
@@ -127,7 +127,7 @@ function drawStarMap()
 		ctx.clearRect(0, i, _windowWidth, a);
 	}
 	
-	drawShip({ x: _currentSystem.mapPosition.x, y: _currentSystem.mapPosition.y - 12 + (Math.sin(_frameNumber * 0.02) * 5) }, 0.5);
+	drawShip({ x: _currentSystem.mapPosition.x, y: _currentSystem.mapPosition.y - 12 + (Math.sin(_totalTime) * 5) }, 0.5);
 	
 	drawGuiButton("\u00BB", 2, 1, true, starMapNext);
 	drawGuiButton("JUMP", 3, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump);

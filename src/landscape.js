@@ -34,7 +34,7 @@ function buildLandscapePalette(settings)
 
 function landscapeLeave()
 {
-	animationStart(animationPlanetLeaving, 0.02);
+	animationStart(animationPlanetLeaving, 1);
 	consumeResource();
 	_cursor.clicked = false;
 	_layers[0].visible = true;

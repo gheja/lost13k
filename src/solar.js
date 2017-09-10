@@ -309,7 +309,7 @@ function solarLand()
 	_currentBody.visited = true;
 	
 	generateOrLoadLandscape();
-	animationStart(animationPlanetLanding, 0.003);
+	animationStart(animationPlanetLanding, 5);
 	
 	_cursor.clicked = false;
 	// _layers[0].visible = false;
@@ -318,7 +318,7 @@ function solarLand()
 
 function solarZoom()
 {
-	animationStart(animationSystemZoomOut, 0.03);
+	animationStart(animationSystemZoomOut, 0.5);
 	
 	_cursor.clicked = false;
 	// _layers[0].visible = false;
@@ -332,7 +332,7 @@ function drawSolar()
 	updateBodies();
 	drawBodies();
 	
-	drawShip({ x: 160, y: 150 + (Math.sin(_frameNumber * 0.02) * 5) }, 1.5);
+	drawShip({ x: 160, y: 150 + (Math.sin(_totalTime) * 5) }, 1.5);
 	
 	drawGuiButton("\u00BB", 2, 1, true, solarNext);
 	drawGuiButton("LAND", 3, 3, (_selectedBody != null), solarLand);

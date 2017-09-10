@@ -2,14 +2,16 @@
 
 let _animation = {
 	position: 1,
-	speed: 0.1,
+	time: 0,
+	duration: 1,
 	callback: null
 };
 
-function animationStart(callback, speed)
+function animationStart(callback, duration)
 {
 	_animation.position = 0;
-	_animation.speed = speed;
+	_animation.time = 0;
+	_animation.duration = duration;
 	_animation.callback = callback;
 	_animation.callback.call();
 }
@@ -21,7 +23,8 @@ function animationStep()
 		return;
 	}
 	
-	_animation.position = Math.min(1, _animation.position + _animation.speed);
+	_animation.time += Math.min(_dt, _animation.duration);
+	_animation.position = Math.min(1, _animation.time / _animation.duration);
 	_animation.callback.call();
 }
 
