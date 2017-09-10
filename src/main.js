@@ -14,6 +14,7 @@ let _currentSystem = null;;
 let _selectedSystem = null;
 let _currentBody = null;
 let _selectedBody = null;
+let _catLocationBody = null;
 let _map = null;
 let _cursor = { x: 0, y: 0, clicked: false };
 
@@ -23,6 +24,26 @@ let _highlightedResourceCode = -1;
 function drawMain()
 {
 	animationStep();
+}
+
+function loseTheCat()
+{
+	let i, j;
+	
+	while (1)
+	{
+		for (i=0; i<_map.path.length; i++)
+		{
+			for (j=1; j<_map.path[i].bodies.length; j++)
+			{
+				if (randFloat() < 0.001)
+				{
+					_catLocationBody = _map.path[i].bodies[j];
+					return;
+				}
+			}
+		}
+	}
 }
 
 function reset()
@@ -44,6 +65,9 @@ function reset()
 	regeneratePath();
 	regenerateAllBodies();
 	// regenerateLandscape();
+	loseTheCat();
+	
+	console.log(describeBody(_catLocationBody));
 }
 
 function init()
