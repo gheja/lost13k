@@ -108,6 +108,16 @@ function arrayPick(a)
 	return a[Math.floor(randFloat() * a.length)];
 }
 
+function arrayShuffle(a)
+{
+	// thx https://stackoverflow.com/a/6274381/460571
+	for (let i = a.length; i; i--)
+	{
+		let j = Math.floor(Math.random() * i);
+		[a[i - 1], a[j]] = [a[j], a[i - 1]];
+	}
+}
+
 function _arc(p, r, a, b, fill, stroke)
 {
 	ctx.beginPath();
