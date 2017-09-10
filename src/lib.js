@@ -452,3 +452,17 @@ function drawGuiResources()
 	drawGuiResource("Short jump fuel", RESOURCE_SHORT_JUMP, -5, 5);
 	drawGuiResource("Rocket fuel", RESOURCE_ROCKET, 0, 5);
 }
+
+function drawShip(p, scale)
+{
+	let i, a;
+	
+	ctx.fillStyle = "#777"
+	ctx.strokeStyle = "#444";
+	ctx.lineWidth = _scale(2 * scale);
+	
+	ctx.beginPath();
+	ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+	ctx.fill();
+	ctx.stroke();
+}
