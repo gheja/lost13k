@@ -33,6 +33,7 @@
 - [ ] sound effects
 - [ ] some simple background music
 - [ ] twitter sharing
+- [ ] make closure compiler happy
 
 ## Fine-tuning
 - [x] planet/moon generation tuning
