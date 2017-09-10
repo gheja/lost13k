@@ -607,3 +607,26 @@ function drawTextBubble()
 		ctx.fillText(_textBubble.text[i], boxLeft + _scale(5), boxTop + (i + 1) * m + _scale(padding));
 	}
 }
+
+function drawShape(shape, p, scale)
+{
+	let i;
+	
+	ctx.beginPath();
+	for (i=0; i<shape.length; i+=2)
+	{
+		if (i == 0)
+		{
+			ctx.moveTo(_x(shape[i] * scale + p.x), _y(shape[i+1] * scale + p.y));
+		}
+		else
+		{
+			ctx.lineTo(_x(shape[i] * scale + p.x), _y(shape[i+1] * scale + p.y));
+		}
+	}
+	ctx.fillStyle = "#aaa";
+	ctx.strokeStyle = "#fff";
+	ctx.lineWidth = _scale(3);
+	ctx.fill();
+	ctx.stroke();
+}
