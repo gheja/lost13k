@@ -237,6 +237,11 @@ function consumeResource()
 	_resources[_highlightedResourceCode]--;
 }
 
+function resetSceneTime()
+{
+	_sceneTime = 0;
+}
+
 
 //// canvas layers
 function layerCreate(drawFunction)
