@@ -448,13 +448,13 @@ function drawGuiResource(title, resourceCode, x, size)
 	// empty
 	if (_resources[resourceCode] == 0)
 	{
-		background = "rgba(0,0,0,0.5)";
-		foreground = "#000";
+		background = "rgba(0,0,0,0.8)";
+		foreground = "#777";
 		
 		if (_highlightedResourceCode == resourceCode)
 		{
-			background = "#800";
-			foreground = "#e00";
+			background = "#d00";
+			foreground = "#fff";
 		}
 	}
 	else // available

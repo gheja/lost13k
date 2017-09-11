@@ -104,7 +104,7 @@ function drawStarMap()
 	ctx.lineWidth = _scale(3);
 	ctx.stroke();
 	
-	ctx.strokeStyle = "rgba(255,255,0,0.25)";
+	ctx.strokeStyle = "rgba(0,200,0,0.25)";
 	// little cheat with the highlight
 	_arc(_currentSystem.mapPosition, SHORT_JUMP_DISTANCE - 2, 0, 1, 0, 1);
 	
