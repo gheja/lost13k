@@ -36,18 +36,16 @@ function _ry(y)
 	return _rscale(y) - _rscale(_windowHeight / 2);
 }
 
-
-function _parallax(x, distance, weight)
+function _parallax(x, distance)
 {
-//	return x + 1000 * Math.pow(1, -distance) * (1-_p);
-	return x + (weight ? weight : 400) * (1 / (distance)) * (1 - _p);
+	return x + 400 * (1 / (distance)) * (1 - _p);
 }
 
 function _parallaxPosition(p, distance, weight)
 {
 	return {
 		x: p.x,
-		y: _parallax(p.y, distance, weight)
+		y: _parallax(p.y, distance)
 	};
 }
 
