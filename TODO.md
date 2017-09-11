@@ -15,9 +15,9 @@
 - [x] parallax scrolling
 - [/] transitions
 - [x] past path highlight on star map
-- [ ] noise texture
-  - nebulae: starting at 0 on edges, 1 on center?
-- [ ] nebulae composition
+- [x] noise texture
+  - nebulae: starting at 0 on edges, 1 on center? nope.
+- [x] nebulae composition
 - [x] use the wormhole animation
 
 ## Nice to have
@@ -34,6 +34,7 @@
 - [ ] some simple background music
 - [ ] twitter sharing
 - [ ] make closure compiler happy
+- [ ] simple loader
 
 ## Fine-tuning
 - [x] planet/moon generation tuning
