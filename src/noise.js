@@ -1,3 +1,5 @@
+"use strict";
+
 function getNoiseLayer(pow, color)
 {
 	// heightmap generation using random midpoint displacement
@@ -8,8 +10,9 @@ function getNoiseLayer(pow, color)
 	// .   x   .   x   . - 2
 	// . x . x . x . x . - 1
 	
-	let x, y, step, max_elevation, size, map, p, d, a, b, canvas, ctx;
+	let x, y, step, max_elevation, size, map, p, d, a, b, canvas, ctx, min, max;
 	
+	// TODO: reduce this resolution
 	size = 2048;
 	
 	canvas = document.createElement("canvas");
