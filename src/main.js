@@ -32,34 +32,51 @@ let _textBubble = {
 };
 let _cats = [ ];
 let _cat = null;
+let _started = false;
 
 let _playerPosition = { x: 0, y: 0 };
+
+function checkWinCondition()
+{
+	let i;
+	
+	for (i=0; i<_cats.length; i++)
+	{
+		if (_cats[i].location != null)
+		{
+			return false;
+		}
+	}
+	
+	return true;
+}
+
+function popupWin()
+{
+	animationStart(animationTitleShow, 1);
+	_started = false;
+}
 
 function drawMain()
 {
 	animationStep();
 }
 
-function generateCats()
+function setupTheCats(countToLose)
 {
-	let a, b, i;
+	let i, j, l;
 	
-	a = CAT_NAMES.slice();
-	b = CAT_COLORS.slice();
-	arrayShuffle(a);
-	arrayShuffle(b);
+	_cats = [
+		// if location == null then the cat is on the ship
+		{ colors: [ "#222", "#444", "#ff0" ], location: null, name: "Bobby" },
+		{ colors: [ "#eee", "#ccc", "#06b" ], location: null, name: "Marshmallow" },
+		{ colors: [ "#777", "#999", "#0df" ], location: null, name: "Bubble" },
+		{ colors: [ "#c61", "#a51", "#1f3" ], location: null, name: "Winston" }
+	];
 	
-	for (i=0; i<1; i++)
-	{
-		_cats.push({ name: a.shift(), onBoard: true, colors: b.shift() });
-	}
-}
-
-function loseTheCat()
-{
-	let i, j;
+	arrayShuffle(_cats);
 	
-	while (1)
+	while (countToLose > 0)
 	{
 		for (i=0; i<_map.path.length; i++)
 		{
@@ -67,10 +84,11 @@ function loseTheCat()
 			{
 				if (randFloat() < 0.001)
 				{
-					_catLocationBody = _map.path[i].bodies[j];
-					_cat = _cats[0];
-					_cat.onBoard = false;
-					return;
+					// always lose the last cat in the array
+					_cats[4 - countToLose].location = _map.path[i].bodies[j];
+					countToLose--;
+					
+					console.log(_map.path[i].bodies[j]);
 				}
 			}
 		}
@@ -102,10 +120,9 @@ function reset()
 	regenerateStars();
 	regeneratePath();
 	regenerateAllBodies();
-	generateCats();
-	loseTheCat();
+	setupTheCats(1);
 	
-	console.log(describeBody(_catLocationBody));
+	_started = true;
 }
 
 function init()

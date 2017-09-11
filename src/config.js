@@ -1,8 +1,5 @@
 "use strict";
 
-const CAT_NAMES = [ "Bubble", "Bobby", "Marshmallow", "Winston" ];
-const CAT_COLORS = [ [ "#222", "#444", "#ff0" ], [ "#eee", "#ccc", "#06b" ], [ "#777", "#999", "#0df" ], [ "#c61", "#a51", "#1f3" ] ];
-
 const TEXT_BUBBLE_STYLE = 1;
 const TEXT_BUBBLE_TIME = 3;
 

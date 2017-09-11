@@ -149,7 +149,7 @@ function drawLandscape()
 		}
 	}
 	
-	if (_catLocationBody == _currentBody)
+	if (_cat)
 	{
 		if (_animation.position == 1)
 		{
@@ -187,7 +187,15 @@ function drawLandscape()
 			
 			if (passingSceneTime(13))
 			{
-				_cat.onBoard = true;
+				_cat.location = null;
+			}
+			
+			if (passingSceneTime(15))
+			{
+				if (checkWinCondition())
+				{
+					popupWin();
+				}
 			}
 		}
 		

@@ -313,14 +313,27 @@ function solarNext()
 
 function solarLand()
 {
+	let i;
+	
 	_currentBody = _selectedBody;
 	_currentBody.visited = true;
 	
 	generateOrLoadLandscape();
 	animationStart(animationPlanetLanding, 5);
 	
-	_cat.state = 0;
-	_cat.position = { x: -160, y: 140 };
+	_cat = null;
+	
+	for (i=0; i<_cats.length; i++)
+	{
+		if (_cats[i].location == _currentBody)
+		{
+			_cat = _cats[i];
+			_cat.state = 0;
+			_cat.position = { x: -160, y: 140 };
+			break;
+		}
+	}
+	
 	
 	_cursor.clicked = false;
 	// _layers[0].visible = false;
