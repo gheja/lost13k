@@ -69,18 +69,18 @@ function drawLandscape()
 	ctx.fillStyle = "rgba(255,255,255,0.5)";
 	for (i=0; i<landscapeSettings.stars.length; i++)
 	{
-		_arc(_parallaxPosition(landscapeSettings.stars[i], 10), 2, 0, 1, 1);
+		_arc(_parallaxPosition(landscapeSettings.stars[i], 10), 2, 0, 1, 1, 0);
 	}
 	
 	// sun mask - no stars between planet and sun please
 	ctx.fillStyle = "#000";
-	_arc(_parallaxPosition(landscapeSettings.sun, 5), landscapeSettings.sun.radius, 0, 1, 1);
+	_arc(_parallaxPosition(landscapeSettings.sun, 5), landscapeSettings.sun.radius, 0, 1, 1, 0);
 	
 	// moons
 	for (i=0; i<landscapeSettings.moons.length; i++)
 	{
 		ctx.fillStyle = landscapeSettings.moons[i].color;
-		_arc(_parallaxPosition(landscapeSettings.moons[i], 4), landscapeSettings.moons[i].radius, 0, 1, 1);
+		_arc(_parallaxPosition(landscapeSettings.moons[i], 4), landscapeSettings.moons[i].radius, 0, 1, 1, 0);
 	}
 	
 	// atmosphere
@@ -95,7 +95,7 @@ function drawLandscape()
 	// sun
 	ctx.globalCompositeOperation = 'screen';
 	ctx.fillStyle = landscapeSettings.sun.color;
-	_arc(_parallaxPosition(landscapeSettings.sun, 5), landscapeSettings.sun.radius, 0, 1, 1);
+	_arc(_parallaxPosition(landscapeSettings.sun, 5), landscapeSettings.sun.radius, 0, 1, 1, 0);
 	
 	function puthill(hill, top, p)
 	{

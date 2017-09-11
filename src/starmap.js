@@ -64,13 +64,13 @@ function drawStarMap()
 		a = _map.systems[i].bodies[0].def;
 		
 		ctx.fillStyle = hsla2rgba_(a[0], a[1], a[2], 0.2);
-		_arc(_map.systems[i].mapPosition, 2.5, 0, 1, 1);
+		_arc(_map.systems[i].mapPosition, 2.5, 0, 1, 1, 0);
 		
 		ctx.fillStyle = hsla2rgba_(a[0], a[1], a[2], 1);
-		_arc(_map.systems[i].mapPosition, 1.5, 0, 1, 1);
+		_arc(_map.systems[i].mapPosition, 1.5, 0, 1, 1, 0);
 		
 		ctx.fillStyle = "#fff";
-		_arc(_map.systems[i].mapPosition, 0.75, 0, 1, 1);
+		_arc(_map.systems[i].mapPosition, 0.75, 0, 1, 1, 0);
 		
 		if (_map.systems[i] == _currentSystem)
 		{

@@ -149,7 +149,7 @@ function drawBodies()
 		}
 		
 		ctx.fillStyle = hsla2rgba_(b.def[0], b.def[1], b.def[2], 1);
-		_arc(b.position, b.radius, 0, 1, 1);
+		_arc(b.position, b.radius, 0, 1, 1, 0);
 		
 		// no shadow on the star
 		if (b.type == BODY_TYPE_STAR)
@@ -172,12 +172,12 @@ function drawBodies()
 		{
 			// sunny side
 			ctx.fillStyle = hsla2rgba_(_currentSystem.bodies[0].def[0], _currentSystem.bodies[0].def[1], _currentSystem.bodies[0].def[2], 0.2);
-			_arc(b.position, b.radius, 0, 1, 1);
+			_arc(b.position, b.radius, 0, 1, 1, 0);
 		}
 		
 		// shadow
 		ctx.fillStyle = "rgba(0,0,0,0.4)";
-		_arc(b.position, b.radius, c - 0.5, c, 1);
+		_arc(b.position, b.radius, c - 0.5, c, 1, 0);
 	}
 	
 	clicked = false;
