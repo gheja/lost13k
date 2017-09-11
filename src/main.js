@@ -140,12 +140,13 @@ function init()
 	layerCreate(drawStarMap); // star map
 	layerCreate(drawLandscape); // landscape
 	layerCreate(drawWormhole); // wormhole
+	layerCreate(drawTitle); // title/game over/restart screen
 	
 	restartWormhole();
 	
 	eventResize();
 	
-	_layers[1].visible = true;
+	_layers[4].visible = true;
 	
 	reset();
 	

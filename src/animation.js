@@ -99,3 +99,23 @@ function animationWormhole()
 		_layers[3].visible = false;
 	}
 }
+
+function animationTitleHide()
+{
+	_layers[1].visible = true;
+	
+	if (_animation.position == 1)
+	{
+		_layers[4].visible = false;
+	}
+}
+
+function animationTitleShow()
+{
+	if (_animation.position == 1)
+	{
+		_p4 = 0;
+		_layers[4].visible = true;
+		_layers[2].visible = false;
+	}
+}
