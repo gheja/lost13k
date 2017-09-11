@@ -6,7 +6,7 @@
 - [x] buttons
 - [x] resources (long jump, short jump, leave rockets)
 - [x] resource display
-- [ ] main menu
+- [/] main menu
 - [x] auto resize
 - [x] mobile fix (devicepixelratio, etc.)
 - [ ] objectives design
@@ -42,6 +42,7 @@
 - [ ] twitter sharing
 - [ ] make closure compiler happy
 - [ ] simple loader
+- [ ] fit the GUI to the screen not play area
 
 ## Fine-tuning
 - [x] planet/moon generation tuning
