@@ -202,7 +202,10 @@ function drawLandscape()
 		drawCat();
 	}
 	
-	_highlightedResourceCode = RESOURCE_ROCKET;
+	if (_animation.position == 1)
+	{
+		_highlightedResourceCode = RESOURCE_ROCKET;
+	}
 	
 	drawGuiButton("LEAVE", 3, 3, true, landscapeLeave);
 	drawGuiResources();
