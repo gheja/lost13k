@@ -2,7 +2,7 @@
 - [x] star map
 - [x] planet/moon selection
 - [x] star selection
-- [ ] win/lose conditions
+- [x] win/lose conditions
 - [x] buttons
 - [x] resources (long jump, short jump, leave rockets)
 - [x] resource display
