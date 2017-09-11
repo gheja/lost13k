@@ -501,7 +501,7 @@ function drawShip(p, scale)
 	ctx.stroke();
 }
 
-function drawCat(p)
+function drawCat()
 {
 	let i, a, scale, shapes;
 	
