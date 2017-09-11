@@ -307,7 +307,7 @@ function draw()
 			
 			_layers[i].draw.call();
 			
-			if (DEBUG_BORDER)
+			if (DEBUG_BORDER == 1)
 			{
 				ctx.lineWidth = 1;
 				
