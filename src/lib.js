@@ -104,6 +104,9 @@ function arrayPick(a)
 	return a[Math.floor(randFloat() * a.length)];
 }
 
+/*
+// Closure Compiler does not like ES6 at the moment for some reason
+// "$jscomp is not defined"
 function arrayShuffle(a)
 {
 	// thx https://stackoverflow.com/a/6274381/460571
@@ -111,6 +114,20 @@ function arrayShuffle(a)
 	{
 		let j = Math.floor(Math.random() * i);
 		[a[i - 1], a[j]] = [a[j], a[i - 1]];
+	}
+}
+*/
+
+function arrayShuffle(a) {
+	// thx https://stackoverflow.com/a/6274381/460571
+	var j, x, i;
+	
+	for (i = a.length; i; i--)
+	{
+		j = Math.floor(Math.random() * i);
+		x = a[i - 1];
+		a[i - 1] = a[j];
+		a[j] = x;
 	}
 }
 
