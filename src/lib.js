@@ -403,7 +403,7 @@ function drawGuiBase(skipStripes)
 	}
 }
 
-function drawGuiButton(title, x, size, enabled, callback, resourceCodeToHighlight)
+function drawGuiButton(title, x, size, enabled, callback)
 {
 	let c;
 	
@@ -418,11 +418,6 @@ function drawGuiButton(title, x, size, enabled, callback, resourceCodeToHighligh
 	{
 		if (_cursor.x > x * 20 - 5 && _cursor.x < x * 20 + size * 20 - 10 + 5 && _cursor.y > 175)
 		{
-			if (resourceCodeToHighlight !== undefined)
-			{
-				_highlightedResourceCode = resourceCodeToHighlight;
-			}
-			
 			if (_cursor.clicked)
 			{
 				c = "#0ac";
