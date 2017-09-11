@@ -119,7 +119,6 @@ function drawBodies()
 			ctx.lineWidth = _scale(2);
 			ctx.strokeStyle = "#0a0";
 			_arc(b.position, b.radius + 1.5, 0, 1, 0, 1);
-			// drawCircularSelection(b.position, b.radius + 2, 10, 600, "#0a0");
 		}
 		
 		// planet
@@ -174,15 +173,6 @@ function drawBodies()
 	for (i=0; i<_currentSystem.bodies.length; i++)
 	{
 		b = _currentSystem.bodies[i];
-		
-/*
-		if (b == _currentBody)
-		{
-			ctx.fillStyle = "#040";
-			ctx.lineWidth = _scale(2);
-			_arc(b.position, b.radius + 4, 0, 1, 0, 1);
-		}
-*/
 		
 		if (b.type != BODY_TYPE_STAR)
 		{

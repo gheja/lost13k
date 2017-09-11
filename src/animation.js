@@ -65,7 +65,6 @@ function animationSystemZoomIn()
 	if (_p4 == 1)
 	{
 		_layers[1].visible = false;
-//		_p4 = 0;
 	}
 }
 

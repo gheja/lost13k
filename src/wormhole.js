@@ -99,7 +99,6 @@ function drawWormhole()
 	// ctx.globalCompositeOperation = "source-over";
 	// ctx.fillStyle = "#000";
 	
-	// if (wormholeFrameNumber < 60)
 	if (_animation.time < WORMHOLE_FADE_DURATION)
 	{
 		// fade in

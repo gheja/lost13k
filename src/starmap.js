@@ -30,7 +30,6 @@ function starMapJump()
 {
 	consumeResource();
 	jumpToSystem(_selectedSystem);
-	// starMapZoom();
 	animationStart(animationWormhole, 3);
 }
 
@@ -136,12 +135,6 @@ function drawStarMap()
 	drawGuiButton("JUMP", 3, 3, (_selectedSystem && _selectedSystem != _currentSystem), starMapJump);
 	drawGuiButton("ZOOM", 6, 3, (_currentSystem && _selectedSystem == _currentSystem), starMapZoom);
 	drawGuiResources();
-	
-/*
-	_cat.position = { x: 0, y: 0 };
-	_cat.state = 1;
-	drawCat();
-*/
 }
 
 function regenerateStars()

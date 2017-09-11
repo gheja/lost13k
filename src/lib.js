@@ -286,7 +286,6 @@ function draw()
 	
 	_textBubble.timeLeft -= _dt;
 	
-	// _frameNumber++;
 	_highlightedResourceCode = -1;
 	
 	drawMain();

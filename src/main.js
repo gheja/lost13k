@@ -8,7 +8,6 @@ let ctx = null;
 
 let _body = null;
 let _layers = [];
-// let _frameNumber = 0;
 
 let _currentSystem = null;;
 let _selectedSystem = null;
@@ -96,7 +95,6 @@ function reset()
 	regenerateStars();
 	regeneratePath();
 	regenerateAllBodies();
-	// regenerateLandscape();
 	generateCats();
 	loseTheCat();
 	
