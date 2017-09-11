@@ -32,7 +32,7 @@ let _textBubble = {
 };
 let _cats = [ ];
 let _cat = null;
-let _started = false;
+let _gameState = 0;
 
 let _playerPosition = { x: 0, y: 0 };
 
@@ -54,7 +54,7 @@ function checkWinCondition()
 function popupWin()
 {
 	animationStart(animationTitleShow, 1);
-	_started = false;
+	_gameState = GAME_STATE_WON;
 }
 
 function drawMain()
@@ -122,7 +122,7 @@ function reset()
 	regenerateAllBodies();
 	setupTheCats(1);
 	
-	_started = true;
+	_gameState = GAME_STATE_INTRO;
 }
 
 function init()

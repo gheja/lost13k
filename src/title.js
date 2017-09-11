@@ -1,5 +1,10 @@
 "use strict";
 
+function titleAgain()
+{
+	_gameState = GAME_STATE_NEW;
+}
+
 function titleSetEasy()
 {
 	reset();
@@ -43,14 +48,30 @@ function drawTitle()
 	"Where's Winston?"
 	*/
 	
-	if (!_started)
+	switch (_gameState)
 	{
-		drawGuiButton("EASY", -3, 3, true, titleSetEasy);
-		drawGuiButton("NORMAL", 0, 3, true, titleSetNormal);
-		drawGuiButton("HARD", 3, 3, true, titleSetHard);
-	}
-	else
-	{
-		drawGuiButton("START", 6, 3, true, titleStart);
+		case GAME_STATE_NEW:
+			drawGuiButton("EASY", -3, 3, true, titleSetEasy);
+			drawGuiButton("NORMAL", 0, 3, true, titleSetNormal);
+			drawGuiButton("HARD", 3, 3, true, titleSetHard);
+		break;
+		
+		case GAME_STATE_INTRO:
+			_gameState = GAME_STATE_READY;
+		break;
+		
+		case GAME_STATE_READY:
+			drawGuiButton("START", 6, 3, true, titleStart);
+		break;
+		
+		case GAME_STATE_WON:
+			ctx.fillText("Congrats!", _x(-100), _y(0));
+			drawGuiButton("AGAIN", 6, 3, true, titleAgain);
+		break;
+		
+		case GAME_STATE_LOST:
+			ctx.fillText("You ran out of fuel :(", _x(-100), _y(0));
+			drawGuiButton("AGAIN", 6, 3, true, titleAgain);
+		break;
 	}
 }

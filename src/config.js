@@ -25,6 +25,12 @@ const RESOURCE_LONG_JUMP = 0;
 const RESOURCE_SHORT_JUMP = 1;
 const RESOURCE_ROCKET = 2;
 
+const GAME_STATE_NEW = 0;
+const GAME_STATE_INTRO = 1;
+const GAME_STATE_READY = 2;
+const GAME_STATE_WON = 3;
+const GAME_STATE_LOST = 4;
+
 // [ [ h, s, l, type ], [ ... ], ... ]
 let BODY_TYPE_DEFINITIONS =
 [
