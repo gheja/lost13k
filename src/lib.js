@@ -94,11 +94,7 @@ function randPlusMinus(x)
 function goFullScreen()
 {
 	// based on https://developers.google.com/web/fundamentals/native-hardware/fullscreen/
-/*
-	let documentElement = window.document.documentElement;
-	let request = documentElement.requestFullscreen || documentElement.mozRequestFullScreen || documentElement.webkitRequestFullScreen || documentElement.msRequestFullscreen;
-	request.call(documentElement);
-*/
+	
 	let d = window.document.documentElement;
 	(d.requestFullscreen || d.mozRequestFullScreen || d.webkitRequestFullScreen || d.msRequestFullscreen).call(d);
 }
