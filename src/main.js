@@ -89,8 +89,15 @@ function reset()
 	
 	_map = {
 		systems: [ ],
-		path: [ ]
+		path: [ ],
+		noiseLayers: [ ]
 	};
+	
+	_map.noiseLayers.push(
+		getNoiseLayer(3, [ 120, 0, 120 ]),
+		getNoiseLayer(2, [ 0, 128, 255 ]),
+		getNoiseLayer(3, [ 255, 120, 0 ])
+	);
 	
 	regenerateStars();
 	regeneratePath();

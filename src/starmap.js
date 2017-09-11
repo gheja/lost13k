@@ -40,6 +40,14 @@ function drawStarMap()
 	ctx.fillStyle = "#112";
 	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
+	ctx.globalCompositeOperation = "screen";
+	for (i=0; i<_map.noiseLayers.length; i++)
+	{
+		ctx.drawImage(_map.noiseLayers[i], 0, 0);
+	}
+	
+	ctx.globalCompositeOperation = "source-over";
+	
 	clicked = false;
 	
 	if (_cursor.clicked && _cursor.y > -180 && _cursor.y < 180)

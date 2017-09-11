@@ -64,6 +64,24 @@ function drawBodies()
 	
 	ctx.fillStyle = "#211";
 	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
+	
+	ctx.globalCompositeOperation = "screen";
+	for (i=0; i<_map.noiseLayers.length; i++)
+	{
+		// TODO: make sure the zoom is centered
+		ctx.drawImage(
+			_map.noiseLayers[i],
+			clamp(_x(_currentSystem.mapPosition.x) - _rscale(100), 0, 2048 - _scale(200)),
+			clamp(_y(_currentSystem.mapPosition.y) - _rscale(100), 0, 2048 - _scale(200)),
+			_scale(200),
+			_scale(200),
+			0,
+			0,
+			2048,
+			2048);
+	}
+	
+	ctx.globalCompositeOperation = "source-over";
 	ctx.lineCap = "round";
 	
 	for (i=0; i<_currentSystem.bodies.length; i++)
