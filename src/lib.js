@@ -492,7 +492,7 @@ function drawShip(p, scale)
 
 function drawCat(p)
 {
-	let i, a, scale;
+	let i, a, scale, shapes;
 	
 	scale = 1;
 	
@@ -502,28 +502,34 @@ function drawCat(p)
 	
 	// states: 0: sleeping, 1: awake, 2: running 1, 3: running 2
 	
-	ctx.beginPath();
+	shapes = [];
+	
+	if (_cat.state == 0 || _cat.state == 1)
+	{
+		shapes.push([ SHAPE_CAT_BODY_SLEEPING, { x: 0, y: 0 }, 10, _cat.colors[0], _cat.colors[1] ]);
+	}
 	
 	switch (_cat.state)
 	{
 		case 0:
-			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
+			shapes.push([ SHAPE_CAT_HEAD_AWAKE, { x: 50, y: -16 }, 10, _cat.colors[0], _cat.colors[1] ]);
 		break;
 		case 1:
-			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
-			ctx.strokeStyle = "#390";
+			shapes.push(
+				[ SHAPE_CAT_HEAD_AWAKE, { x: 50, y: -40 }, 10, _cat.colors[0], _cat.colors[1] ],
+				[ SHAPE_CAT_EYE, { x: 75, y: -65 }, 10, null, _cat.colors[2] ],
+				[ SHAPE_CAT_EYE, { x: 115, y: -65 }, 10, null, _cat.colors[2] ]
+			);
 		break;
 		case 2:
-			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
-			ctx.strokeStyle = "#093";
+			shapes.push([ SHAPE_CAT_HEAD_AWAKE, { x: 50, y: -16 }, 10, _cat.colors[0], _cat.colors[1] ]);
 		break;
 		case 3:
-			ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
-			ctx.strokeStyle = "#099";
+			shapes.push([ SHAPE_CAT_HEAD_AWAKE, { x: 50, y: -16 }, 10, _cat.colors[0], _cat.colors[1] ]);
 		break;
 	}
-	ctx.fill();
-	ctx.stroke();
+	
+	drawMultipleShape(shapes, _parallaxPosition(_cat.position, 1.6), 0.2);
 }
 
 function showTextBubble(text)
@@ -608,7 +614,7 @@ function drawTextBubble()
 	}
 }
 
-function drawShape(shape, p, scale)
+function drawShape(shape, p, scale, fill, stroke)
 {
 	let i;
 	
@@ -624,9 +630,27 @@ function drawShape(shape, p, scale)
 			ctx.lineTo(_x(shape[i] * scale + p.x), _y(shape[i+1] * scale + p.y));
 		}
 	}
-	ctx.fillStyle = "#aaa";
-	ctx.strokeStyle = "#fff";
-	ctx.lineWidth = _scale(3);
-	ctx.fill();
-	ctx.stroke();
+	
+	if (fill)
+	{
+		ctx.fillStyle = fill;
+		ctx.fill();
+	}
+	
+	if (stroke)
+	{
+		ctx.strokeStyle = stroke;
+		ctx.lineWidth = _scale(2);
+		ctx.stroke();
+	}
+}
+
+function drawMultipleShape(shapes, p, scale)
+{
+	let i;
+	
+	for (i=0; i<shapes.length; i++)
+	{
+		drawShape(shapes[i][0], { x: shapes[i][1].x * scale + p.x, y: shapes[i][1].y * scale + p.y }, shapes[i][2] * scale, shapes[i][3], shapes[i][4]);
+	}
 }

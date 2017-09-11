@@ -43,14 +43,16 @@ function drawMain()
 
 function generateCats()
 {
-	let a, i;
+	let a, b, i;
 	
 	a = CAT_NAMES.slice();
+	b = CAT_COLORS.slice();
 	arrayShuffle(a);
+	arrayShuffle(b);
 	
 	for (i=0; i<1; i++)
 	{
-		_cats.push({ name: a.shift(), onBoard: true });
+		_cats.push({ name: a.shift(), onBoard: true, colors: b.shift() });
 	}
 }
 

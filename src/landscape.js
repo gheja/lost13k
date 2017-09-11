@@ -193,7 +193,7 @@ function drawLandscape()
 			}
 		}
 		
-		drawCat(_parallaxPosition(_cat.position, 1.6));
+		drawCat();
 	}
 	
 	drawGuiButton("LEAVE", 3, 3, true, landscapeLeave, RESOURCE_ROCKET);
