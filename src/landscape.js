@@ -160,7 +160,7 @@ function drawLandscape()
 				showTextBubble([ _cat.name + "!" ]);
 			}
 			
-			if (passingSceneTime(1.25))
+			if (passingSceneTime(1.5))
 			{
 				_cat.state = 1;
 			}
@@ -168,7 +168,7 @@ function drawLandscape()
 			if (_sceneTime > 2 && _sceneTime < 10)
 			{
 				n = Math.floor((_sceneTime - 2) * 5);
-				_cat.position.x = -100 + n * 5;
+				_cat.position.x = -160 + n * 10;
 				_cat.state = n % 2 ? 2 : 3;
 			}
 			

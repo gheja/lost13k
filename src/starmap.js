@@ -137,8 +137,11 @@ function drawStarMap()
 	drawGuiButton("ZOOM", 6, 3, (_currentSystem && _selectedSystem == _currentSystem), starMapZoom);
 	drawGuiResources();
 	
-	drawShape(SHAPE_CAT_BODY_SLEEPING, { x: 0, y: 0 }, 10);
-	drawShape(SHAPE_CAT_HEAD_AWAKE, { x: 40, y: -40 }, 10);
+/*
+	_cat.position = { x: 0, y: 0 };
+	_cat.state = 1;
+	drawCat();
+*/
 }
 
 function regenerateStars()

@@ -312,7 +312,7 @@ function solarLand()
 	animationStart(animationPlanetLanding, 5);
 	
 	_cat.state = 0;
-	_cat.position = { x: -100, y: 160 };
+	_cat.position = { x: -160, y: 140 };
 	
 	_cursor.clicked = false;
 	// _layers[0].visible = false;
