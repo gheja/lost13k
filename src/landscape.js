@@ -201,6 +201,21 @@ function drawLandscape()
 		
 		drawCat();
 	}
+	else
+	{
+		if (_resources[2] == 0 && _animation.position == 1)
+		{
+			if (passingSceneTime(1))
+			{
+				showTextBubble([ "Bummer..." ]);
+			}
+			
+			if (passingSceneTime(4))
+			{
+				popupLost();
+			}
+		}
+	}
 	
 	if (_animation.position == 1)
 	{

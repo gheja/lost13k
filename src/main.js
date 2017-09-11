@@ -57,6 +57,12 @@ function popupWin()
 	_gameState = GAME_STATE_WON;
 }
 
+function popupLost()
+{
+	animationStart(animationTitleShow, 1);
+	_gameState = GAME_STATE_LOST;
+}
+
 function drawMain()
 {
 	animationStep();
