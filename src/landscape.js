@@ -44,11 +44,13 @@ function buildLandscapePalette(settings)
 
 function landscapeLeave()
 {
-	animationStart(animationPlanetLeaving, 1);
-	consumeResource();
-	_cursor.clicked = false;
-	_layers[0].visible = true;
-	// _layers[2].visible = false;
+	if (tryToConsumeResource())
+	{
+		animationStart(animationPlanetLeaving, 1);
+		_cursor.clicked = false;
+		_layers[0].visible = true;
+		// _layers[2].visible = false;
+	}
 }
 
 function shake(power, distance)

@@ -255,9 +255,15 @@ function eventResize()
 	}
 }
 
-function consumeResource()
+function tryToConsumeResource()
 {
-	_resources[_highlightedResourceCode]--;
+	if (_resources[_highlightedResourceCode] != 0)
+	{
+		_resources[_highlightedResourceCode]--;
+		return true;
+	}
+	
+	return false;
 }
 
 function resetSceneTime()
