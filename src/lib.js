@@ -41,7 +41,7 @@ function _parallax(x, distance)
 	return x + 400 * (1 / (distance)) * (1 - _p);
 }
 
-function _parallaxPosition(p, distance, weight)
+function _parallaxPosition(p, distance)
 {
 	return {
 		x: p.x,
