@@ -3,7 +3,8 @@
 const TEXT_BUBBLE_STYLE = 1;
 const TEXT_BUBBLE_TIME = 3;
 
-const DEBUG_BORDER = 1;
+const DEBUG_BORDER = 0;
+const NOISE_RESOLUTION = 2048;
 
 const SHORT_JUMP_DISTANCE = 80;
 
