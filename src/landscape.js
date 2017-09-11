@@ -224,7 +224,7 @@ function drawLandscape()
 		_highlightedResourceCode = RESOURCE_ROCKET;
 	}
 	
-	drawGuiButton("LEAVE", 3, 3, true, landscapeLeave);
+	drawGuiButton("LEAVE", 3, 3, _resources[2] != 0, landscapeLeave);
 	drawGuiResources();
 }
 
