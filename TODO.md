@@ -23,7 +23,7 @@
 ## Nice to have
 - [ ] landscape: particle effects for landing
 - [ ] cat animation (running toward ship)
-- [ ] more cats
+- [x] more cats
 - [ ] add some low fps mode
 - [x] make all/actions/animations etc. time based not frame based (dropped frames should be less noticable)
 - [x] past planet/moon highlight (after visit)
@@ -31,6 +31,13 @@
 - [ ] landscape: moon color should match on sky
 - [ ] landscape: from a moon the planet should be visible
 - [ ] sound effects
+  - [ ] wormhole
+  - [ ] zoom in
+  - [ ] zoom out
+  - [ ] star/body click
+  - [ ] landing
+  - [ ] leaving
+  - [ ] meow
 - [ ] some simple background music
 - [ ] twitter sharing
 - [ ] make closure compiler happy
