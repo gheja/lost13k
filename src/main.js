@@ -51,16 +51,10 @@ function checkWinCondition()
 	return true;
 }
 
-function popupWin()
+function gameFinish(newGameState)
 {
 	animationStart(animationTitleShow, 1);
-	_gameState = GAME_STATE_WON;
-}
-
-function popupLost()
-{
-	animationStart(animationTitleShow, 1);
-	_gameState = GAME_STATE_LOST;
+	_gameState = newGameState;
 }
 
 function drawMain()

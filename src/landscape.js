@@ -196,7 +196,7 @@ function drawLandscape()
 			{
 				if (checkWinCondition())
 				{
-					popupWin();
+					gameFinish(GAME_STATE_WON);
 				}
 			}
 		}
@@ -214,7 +214,7 @@ function drawLandscape()
 			
 			if (passingSceneTime(4))
 			{
-				popupLost();
+				gameFinish(GAME_STATE_LOST);
 			}
 		}
 	}
