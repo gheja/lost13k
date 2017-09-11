@@ -91,8 +91,6 @@ function getNoiseLayer(pow, color)
 			
 			b = Math.floor(Math.pow(a, 15) * 255);
 			
-			// map[x][y] = (map[x][y] - min) * (1 / (max - min));
-			
 			d.data[(y * size + x) * 4] = clamp(color[0] + b, 0, 255);
 			d.data[(y * size + x) * 4 + 1] = clamp(color[1] + b, 0, 255);
 			d.data[(y * size + x) * 4 + 2] = clamp(color[2] + b, 0, 255);
@@ -104,39 +102,3 @@ function getNoiseLayer(pow, color)
 	
 	return canvas;
 }
-
-function aNoise()
-{
-}
-
-/*
-function aNoise()
-{
-	let x, y, d, b, c, e;
-	
-	ctx.fillStyle = "#000";
-	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
-	
-	d = ctx.getImageData(0, 0, _windowWidth, _windowHeight);
-	
-	b = getNoiseLayer();
-	c = getNoiseLayer();
-	e = getNoiseLayer();
-	
-	for (x=0; x<512; x++)
-	{
-		for (y=0; y<512; y++)
-		{
-			br = clamp(Math.floor(b[x][y] * 300 + c[x][y] *  30 + e[x][y] *  50, 0, 255));
-			bg = clamp(Math.floor(b[x][y] * 120 + c[x][y] * 200 + e[x][y] * 255, 0, 255));
-			bb = clamp(Math.floor(b[x][y] *  30 + c[x][y] * 255 + e[x][y] * 120, 0, 255));
-			
-			d.data[(y * _windowWidth + x) * 4] = br;
-			d.data[(y * _windowWidth + x) * 4 + 2] = bg;
-			d.data[(y * _windowWidth + x) * 4 + 3] = bb;
-		}
-	}
-	
-	ctx.putImageData(d, 0, 0);
-}
-*/
