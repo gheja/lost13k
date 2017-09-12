@@ -61,3 +61,4 @@
 
 ## Might be removed to save space
 - [ ] wormhole animation
+- [ ] remove "next" buttons on solar and starmap
