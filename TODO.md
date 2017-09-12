@@ -19,6 +19,8 @@
   - nebulae: starting at 0 on edges, 1 on center? nope.
 - [x] nebulae composition
 - [x] use the wormhole animation
+- [ ] entry listing image (160x160)
+- [ ] entry cover image (400x250)
 
 ## Nice to have
 - [ ] landscape: particle effects for landing
