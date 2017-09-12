@@ -493,7 +493,7 @@ function drawShip(p, scale)
 	
 	ctx.fillStyle = "#777"
 	ctx.strokeStyle = "#444";
-	ctx.lineWidth = _scale(2 * scale);
+	ctx.lineWidth = _scale(1 * scale);
 	
 	ctx.beginPath();
 	ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
@@ -533,14 +533,22 @@ function drawCat()
 			);
 		break;
 		case 2:
-			shapes.push([ SHAPE_CAT_HEAD_AWAKE, { x: 50, y: -16 }, 10, _cat.colors[0], _cat.colors[1] ]);
+			shapes.push(
+				[ SHAPE_CAT_BODY_RUNNING_1, { x: 0, y: 40 }, 10, _cat.colors[0], _cat.colors[1] ],
+				[ SHAPE_CAT_HEAD_RUNNING, { x: 230, y: 0 }, 10, _cat.colors[0], _cat.colors[1] ],
+				[ SHAPE_CAT_EYE, { x: 280, y: -60 }, 10, null, _cat.colors[2] ]
+			);
 		break;
 		case 3:
-			shapes.push([ SHAPE_CAT_HEAD_AWAKE, { x: 50, y: -16 }, 10, _cat.colors[0], _cat.colors[1] ]);
+			shapes.push(
+				[ SHAPE_CAT_BODY_RUNNING_2, { x: 0, y: 40 }, 10, _cat.colors[0], _cat.colors[1] ],
+				[ SHAPE_CAT_HEAD_RUNNING, { x: 230, y: 0 }, 10, _cat.colors[0], _cat.colors[1] ],
+				[ SHAPE_CAT_EYE, { x: 280, y: -60 }, 10, null, _cat.colors[2] ]
+			);
 		break;
 	}
 	
-	drawMultipleShape(shapes, _parallaxPosition(_cat.position, 1.6), 0.2);
+	drawMultipleShape(shapes, _parallaxPosition(_cat.position, 1.6), 0.15);
 }
 
 function showTextBubble(text)

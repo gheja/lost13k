@@ -165,35 +165,29 @@ function drawLandscape()
 				_cat.state = 1;
 			}
 			
-			if (_sceneTime > 2 && _sceneTime < 10)
+			if (_sceneTime > 2 && _sceneTime < 4.2)
 			{
-				n = Math.floor((_sceneTime - 2) * 5);
-				_cat.position.x = -160 + n * 10;
-				_cat.state = n % 2 ? 2 : 3;
+				n = Math.floor((_sceneTime - 2) * 8);
+				_cat.position.x = -160 + n * 16;
+				_cat.state = (n % 2) ? 2 : 3;
+				
+				console.log(_cat.position.x, _sceneTime);
 			}
 			
-			if (passingSceneTime(10))
+			if (passingSceneTime(4.2))
 			{
 				_cat.position.x = 1000;
 			}
 			
-			if (passingSceneTime(10.5))
-			{
-				// _cat.position.x = 1000;
-			}
-			
-			if (passingSceneTime(11.5))
+			if (passingSceneTime(5))
 			{
 				showTextBubble([ "Good to see you again, " + arrayPick([ "buddy", _cat.name ]) + "." ]);
 			}
 			
-			if (passingSceneTime(13))
+			if (passingSceneTime(8))
 			{
 				_cat.location = null;
-			}
-			
-			if (passingSceneTime(15))
-			{
+				
 				if (checkWinCondition())
 				{
 					gameFinish(GAME_STATE_WON);
