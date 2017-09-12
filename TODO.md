@@ -50,7 +50,7 @@
 ## Extra
 - [ ] solar system ship design
 - [ ] landing/landed ship design
-- [ ] cat design
+- [x] cat design
 - [ ] star/planet/moon name generation
 - [ ] spherical distortion
 - [ ] planet/moon spherical noise overlay
