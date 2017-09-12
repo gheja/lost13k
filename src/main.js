@@ -132,6 +132,21 @@ function reset()
 	_gameState = GAME_STATE_INTRO;
 }
 
+function resetEasy()
+{
+	reset();
+}
+
+function resetNormal()
+{
+	reset();
+}
+
+function resetHard()
+{
+	reset();
+}
+
 function musicGenerate()
 {
 	let songGen = new sonantx.MusicGenerator(_music);
@@ -171,11 +186,12 @@ function init()
 	
 	eventResize();
 	
+	// title screen
 	_layers[4].visible = true;
 	
 	musicGenerate();
 	
-	reset();
+	resetEasy();
 	
 	draw();
 }

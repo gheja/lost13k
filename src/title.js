@@ -5,24 +5,14 @@ function titleAgain()
 	_gameState = GAME_STATE_NEW;
 }
 
-function titleSetEasy()
-{
-	reset();
-}
-
-function titleSetNormal()
-{
-	reset();
-}
-
-function titleSetHard()
-{
-	reset();
-}
-
 function titleStart()
 {
 	animationStart(animationTitleHide, 1);
+}
+
+function titleSkip()
+{
+	_sceneTime = 60;
 }
 
 function drawTitle()
