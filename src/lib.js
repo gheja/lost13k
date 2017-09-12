@@ -270,11 +270,6 @@ function tryToConsumeResource()
 	return false;
 }
 
-function resetSceneTime()
-{
-	_sceneTime = 0;
-}
-
 
 //// canvas layers
 function layerCreate(drawFunction)
@@ -306,6 +301,11 @@ function draw()
 	_lastSceneTime = _sceneTime;
 	_sceneTime += _dt;
 	_totalTime += _dt;
+	
+	if (_animation.position != 1)
+	{
+		_sceneTime = 0;
+	}
 	
 	_textBubble.timeLeft -= _dt;
 	

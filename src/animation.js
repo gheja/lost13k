@@ -26,11 +26,6 @@ function animationStep()
 	_animation.time += Math.min(_dt, _animation.duration);
 	_animation.position = Math.min(1, _animation.time / _animation.duration);
 	_animation.callback.call();
-	
-	if (_animation.position == 1)
-	{
-		resetSceneTime();
-	}
 }
 
 function animationPlanetLanding()
