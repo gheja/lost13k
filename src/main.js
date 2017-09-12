@@ -76,7 +76,7 @@ function setupTheCats(countToLose)
 	
 	arrayShuffle(_cats);
 	
-	while (countToLose > 0)
+	while (1)
 	{
 		for (i=0; i<_map.path.length; i++)
 		{
@@ -88,7 +88,10 @@ function setupTheCats(countToLose)
 					_cats[4 - countToLose].location = _map.path[i].bodies[j];
 					countToLose--;
 					
-					console.log(_map.path[i].bodies[j]);
+					if (countToLose == 0)
+					{
+						return;
+					}
 				}
 			}
 		}
