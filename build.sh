@@ -11,6 +11,33 @@ cd ./build/stage1
 
 {
 	echo "\"use strict\";"
+	
+	
+	if [ "$shave" != "yes" ]; then
+		cat ../../src/sonantx.js \
+			../../src/music.js
+	else
+		# cat music.js | grep -Eo '\"[^"]+\"' | cut -d \" -f 2 | sort | uniq
+		
+		cat ../../src/sonantx.js \
+			../../src/music.js > music2.js
+		
+		vars="endPattern env_attack env_master env_release env_sustain fx_delay_amt fx_delay_time fx_filter fx_freq fx_pan_amt fx_pan_freq fx_resonance lfo_amt lfo_freq lfo_fx_freq lfo_osc1_freq lfo_waveform noise_fader osc1_det osc1_detune osc1_oct osc1_vol osc1_waveform osc1_xenv osc2_det osc2_detune osc2_oct osc2_vol osc2_waveform osc2_xenv rowLen songData songLen"
+		i=0
+		for a in $vars; do
+			b="b${i}"
+			
+			mv music2.js music2.js.tmp
+			
+			cat music2.js.tmp | sed -r "s/\"$a\"/\"$b\"/g" > music2.js
+			
+			i=$((i + 1))
+		done
+		
+		cat music2.js
+	fi
+	
+	
 	cat ../../src/config.js \
 		../../src/lib.js \
 		../../src/animation.js \
