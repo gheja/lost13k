@@ -41,9 +41,9 @@ function drawTitle()
 	switch (_gameState)
 	{
 		case GAME_STATE_NEW:
-			drawGuiButton("EASY", -3, 3, true, titleSetEasy);
-			drawGuiButton("NORMAL", 0, 3, true, titleSetNormal);
-			drawGuiButton("HARD", 3, 3, true, titleSetHard);
+			drawGuiButton("EASY", -3, 3, true, resetEasy);
+			drawGuiButton("NORMAL", 0, 3, true, resetNormal);
+			drawGuiButton("HARD", 3, 3, true, resetHard);
 		break;
 		
 		case GAME_STATE_INTRO:
