@@ -225,6 +225,12 @@ function getAngle(p1, p2)
 //// event handling
 function eventMouseDown(e)
 {
+	if (_firstUserInteraction)
+	{
+		musicStart();
+		_firstUserInteraction = false;
+	}
+	
 	eventMouseMove(e);
 	_cursor.clicked = true;
 }
