@@ -140,7 +140,8 @@ function drawTitle()
 		break;
 		
 		case GAME_STATE_READY:
-			drawGuiButton("START", 6, 3, true, titleStart);
+			drawGuiButton("SKIP", 3, 3, _sceneTime < 20, titleSkip);
+			drawGuiButton("START", 6, 3, _sceneTime > 20, titleStart);
 		break;
 		
 		case GAME_STATE_WON:
