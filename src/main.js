@@ -36,6 +36,10 @@ let _gameState = 0;
 
 let _playerPosition = { x: 0, y: 0 };
 
+let _audioCtx;
+let _audioSourceObj;
+let _firstUserInteraction = true;
+
 function checkWinCondition()
 {
 	let i;
@@ -128,6 +132,24 @@ function reset()
 	_gameState = GAME_STATE_INTRO;
 }
 
+function musicGenerate()
+{
+	let songGen = new sonantx.MusicGenerator(_music);
+	_audioCtx = new AudioContext();
+	
+	songGen.createAudioBuffer(function(buffer) {
+		_audioSourceObj = _audioCtx.createBufferSource();
+		_audioSourceObj.loop = true;
+		_audioSourceObj.buffer = buffer;
+		_audioSourceObj.connect(_audioCtx.destination);
+	});
+}
+
+function musicStart()
+{
+	_audioSourceObj.start();
+}
+
 function init()
 {
 	let tmp;
@@ -150,6 +172,8 @@ function init()
 	eventResize();
 	
 	_layers[4].visible = true;
+	
+	musicGenerate();
 	
 	reset();
 	
