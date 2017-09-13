@@ -45,7 +45,7 @@ function drawStarMap()
 	ctx.globalCompositeOperation = "screen";
 	for (i=0; i<_map.noiseLayers.length; i++)
 	{
-		ctx.drawImage(_map.noiseLayers[i], 0, 0);
+		ctx.drawImage(_map.noiseLayers[i], 0, 0, NOISE_RESOLUTION, NOISE_RESOLUTION, 0, 0, _windowMax, _windowMax);
 	}
 	
 	ctx.globalCompositeOperation = "source-over";
@@ -72,11 +72,13 @@ function drawStarMap()
 		ctx.fillStyle = "#fff";
 		_arc(_map.systems[i].mapPosition, 0.75, 0, 1, 1, 0);
 		
+/*
 		if (_map.systems[i] == _currentSystem)
 		{
 			ctx.strokeStyle = "#050";
 			_arc(_map.systems[i].mapPosition, 5, 0, 1, 0, 1);
 		}
+*/
 		
 		if (_map.systems[i] == _selectedSystem)
 		{
@@ -139,8 +141,10 @@ function drawStarMap()
 	_playerPosition.x = _currentSystem.mapPosition.x;
 	_playerPosition.y = _currentSystem.mapPosition.y - 12 + (Math.sin(_totalTime) * 5);
 	
-	drawShip(_playerPosition, 0.5);
+	// TODO: stroke scale
+	drawShip({ x: _playerPosition.x - 20, y: _playerPosition.y }, 0.05);
 	
+	drawGuiButton("RECAP", -9, 3, true, toggleRecap);
 	drawGuiButton("\u00BB", 2, 1, true, starMapNext);
 	drawGuiButton("JUMP", 3, 3, (_selectedSystem && _selectedSystem != _currentSystem && (_resources[0] != 0 || _resources[1] != 0)), starMapJump);
 	drawGuiButton("ZOOM", 6, 3, (_currentSystem && _selectedSystem == _currentSystem), starMapZoom);

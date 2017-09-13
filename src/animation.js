@@ -14,6 +14,7 @@ function animationStart(callback, duration)
 	_animation.duration = duration;
 	_animation.callback = callback;
 	_animation.callback.call();
+	_textBubble.timeLeft = 0;
 }
 
 function animationStep()
@@ -97,6 +98,8 @@ function animationWormhole()
 
 function animationTitleHide()
 {
+	_p5 = _animation.position;
+	
 	_layers[1].visible = true;
 	
 	if (_animation.position == 1)
@@ -107,10 +110,12 @@ function animationTitleHide()
 
 function animationTitleShow()
 {
+	_layers[4].visible = true;
+	
 	if (_animation.position == 1)
 	{
-		_p4 = 0;
-		_layers[4].visible = true;
 		_layers[2].visible = false;
 	}
+	
+	_p5 = 1 - _animation.position;
 }
