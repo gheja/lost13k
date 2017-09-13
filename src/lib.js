@@ -227,8 +227,15 @@ function eventMouseDown(e)
 {
 	if (_firstUserInteraction)
 	{
-		musicStart();
-		_firstUserInteraction = false;
+		// do not throw an error when music is still loading
+		try
+		{
+			musicStart();
+			_firstUserInteraction = false;
+		}
+		catch (e)
+		{
+		}
 	}
 	
 	eventMouseMove(e);
@@ -249,6 +256,7 @@ function eventResize()
 	_windowWidth = window.innerWidth * window.devicePixelRatio;
 	_windowHeight = window.innerHeight * window.devicePixelRatio;
 	_windowScale = Math.min(_windowWidth, _windowHeight) / 400;
+	_windowMax = Math.max(_windowWidth, _windowHeight);
 	
 	for (i=0; i<_layers.length; i++)
 	{
@@ -261,6 +269,11 @@ function eventResize()
 
 function tryToConsumeResource()
 {
+	if (_zenMode)
+	{
+		return true;
+	}
+	
 	if (_resources[_highlightedResourceCode] != 0)
 	{
 		_resources[_highlightedResourceCode]--;
@@ -483,28 +496,34 @@ function drawGuiResource(title, resourceCode, x, size)
 	ctx.fillStyle = foreground;
 	ctx.textAlign = "center";
 	ctx.font = _scale(9) + "px Arial";
-	ctx.fillText(title + ": " + _resources[resourceCode], _x(x * 20 + (size - 1) * 10 + 1), _y(-196 + 9.5));
+	ctx.fillText(title + ": " + (_zenMode ? "\u221E" : _resources[resourceCode]), _x(x * 20 + (size - 1) * 10 + 1), _y(-196 + 9.5));
 }
 
 function drawGuiResources()
 {
-	drawGuiResource("Long jump fuel", RESOURCE_LONG_JUMP, -10, 5);
-	drawGuiResource("Short jump fuel", RESOURCE_SHORT_JUMP, -5, 5);
-	drawGuiResource("Rocket fuel", RESOURCE_ROCKET, 0, 5);
+	drawGuiResource("Long jump fuel", RESOURCE_LONG_JUMP, -7, 5);
+	drawGuiResource("Short jump fuel", RESOURCE_SHORT_JUMP, -2, 5);
+	drawGuiResource("Rocket fuel", RESOURCE_ROCKET, 3, 5);
 }
 
 function drawShip(p, scale)
 {
 	let i, a;
 	
-	ctx.fillStyle = "#777"
-	ctx.strokeStyle = "#444";
-	ctx.lineWidth = _scale(1 * scale);
+	_drawShapeLineWidth = 8 * scale;
 	
-	ctx.beginPath();
-	ctx.rect(_x(p.x) + _scale(- 20) * scale, _y(p.y) + _scale(- 10) * scale, _scale(40) * scale, _scale(20) * scale);
-	ctx.fill();
-	ctx.stroke();
+	drawMultipleShape([
+		[ SHAPE_SHIP, { x: 0, y: 0 }, 10, "#755", "#533" ],
+		[ SHAPE_SHIP_WINDOW1, { x: 0, y: 0 }, 10, "#3ac", "#533" ],
+		[ SHAPE_SHIP_WINDOW2, { x: 0, y: 0 }, 10, "#3ac", "#533" ],
+		[ SHAPE_SHIP_DOOR, { x: 0, y: 0 }, 10, "#322", "#533" ],
+		[ SHAPE_SHIP_CARGO, { x: 0, y: 0 }, 10, "#722", "#611" ],
+		[ SHAPE_SHIP_CARGO, { x: 130, y: 0 }, 10, "#960", "#750" ],
+		[ SHAPE_SHIP_CARGO, { x: 260, y: 0 }, 10, "#02b", "#018" ],
+		[ SHAPE_SHIP_CARGO, { x: 390, y: 0 }, 10, "#070", "#050" ],
+	], p, scale);
+	
+	_drawShapeLineWidth = 2;
 }
 
 function drawCat()
@@ -559,7 +578,8 @@ function drawCat()
 
 function showTextBubble(text)
 {
-	_textBubble.timeLeft = TEXT_BUBBLE_TIME;
+	_textBubble.timeLeft = text.length * TEXT_BUBBLE_TIME;
+	_textBubble.huge = false;
 	_textBubble.text = text;
 }
 
@@ -573,31 +593,24 @@ function drawTextBubble()
 	}
 	
 	fontHeight = 12;
-	n = _scale(30);
-	a = _scale(5);
 	
-	if (TEXT_BUBBLE_STYLE == 0)
+	ctx.strokeStyle = "#fff";
+	ctx.fillStyle = "#fff";
+	padding = 2;
+	
+	if (!_textBubble.huge)
 	{
-		ctx.strokeStyle = "#fff";
-		ctx.fillStyle = "rgba(0,0,0,1)";
-		padding = 4;
-	}
-	else if (TEXT_BUBBLE_STYLE == 1)
-	{
-		ctx.strokeStyle = "#fff";
-		ctx.fillStyle = "#fff";
-		padding = 2;
+		boxWidth = _scale(200);
+		boxLeft = _x(_playerPosition.x) - boxWidth * 0.8;
 	}
 	else
 	{
-		ctx.strokeStyle = "#000";
-		ctx.fillStyle = "#000";
-		padding = 4;
+		boxWidth = _scale(400);
+		boxLeft = _x(-200);
 	}
 	
-	boxWidth = _scale(200);
+	
 	boxHeight = _scale((fontHeight + 2) * _textBubble.text.length + _scale(padding * 2));
-	boxLeft = _x(_playerPosition.x) - boxWidth + n;
 	boxTop = Math.round(_y(_playerPosition.y - 10) - boxHeight);
 	
 	ctx.font = _scale(fontHeight) + "px Arial";
@@ -607,31 +620,19 @@ function drawTextBubble()
 	ctx.beginPath();
 	ctx.moveTo(boxLeft, boxTop);
 	ctx.lineTo(boxLeft, boxTop + boxHeight);
-	ctx.lineTo(boxLeft + boxWidth - n - a, boxTop + boxHeight);
-	ctx.lineTo(boxLeft + boxWidth - n, boxTop + boxHeight + a);
-	ctx.lineTo(boxLeft + boxWidth - n + a, boxTop + boxHeight);
+	ctx.lineTo(_x(_playerPosition.x - 5), _y(_playerPosition.y - 10));
+	ctx.lineTo(_x(_playerPosition.x), _y(_playerPosition.y - 5));
+	ctx.lineTo(_x(_playerPosition.x + 5), _y(_playerPosition.y - 10));
 	ctx.lineTo(boxLeft + boxWidth, boxTop + boxHeight);
 	ctx.lineTo(boxLeft + boxWidth, boxTop);
 	ctx.closePath();
-	
 	
 	ctx.fill();
 	ctx.stroke();
 	
 	m = Math.round(_scale(fontHeight + 2));
 	
-	if (TEXT_BUBBLE_STYLE == 0)
-	{
-		ctx.fillStyle = "#fff";
-	}
-	else if (TEXT_BUBBLE_STYLE == 1)
-	{
-		ctx.fillStyle = "#000";
-	}
-	else
-	{
-		ctx.fillStyle = "#fff";
-	}
+	ctx.fillStyle = "#000";
 	
 	for (i=0; i<_textBubble.text.length; i++)
 	{
@@ -665,7 +666,9 @@ function drawShape(shape, p, scale, fill, stroke)
 	if (stroke)
 	{
 		ctx.strokeStyle = stroke;
-		ctx.lineWidth = _scale(2);
+		ctx.lineWidth = _scale(_drawShapeLineWidth);
+		ctx.lineCap = "round";
+		ctx.lineJoin = "round";
 		ctx.stroke();
 	}
 }

@@ -1,6 +1,7 @@
 let _windowWidth;
 let _windowHeight;
 let _windowScale;
+let _windowMax;
 let _lowFps = 0;
 
 let canvas = null;
@@ -28,6 +29,7 @@ let _lastSceneTime = 0;
 
 let _textBubble = {
 	timeLeft: 0,
+	huge: false,
 	text: []
 };
 let _cats = [ ];
@@ -39,6 +41,10 @@ let _playerPosition = { x: 0, y: 0 };
 let _audioCtx;
 let _audioSourceObj;
 let _firstUserInteraction = true;
+let _logRescues = false;
+let _totalCatsRescued = 0;
+let _zenMode = false;
+let _drawShapeLineWidth = 2.5;
 
 function checkWinCondition()
 {
@@ -66,21 +72,57 @@ function drawMain()
 	animationStep();
 }
 
+function toggleRecap()
+{
+	let i, u;
+	
+	u = [];
+	
+	if (_textBubble.timeLeft > 0)
+	{
+		_textBubble.timeLeft = 0;
+		return;
+	}
+	
+	if (!_zenMode)
+	{
+		for (i=0; i<_cats.length; i++)
+		{
+			if (_cats[i].location != null)
+			{
+				u = u.concat(breakText(_cats[i].name + " was " + describeBody(_cats[i].location) + ".", 60));
+			}
+		}
+	}
+	else
+	{
+		u = [ "Everyone is on board.", "Let's explore the galaxy!" ];
+	}
+	
+	showTextBubble(u);
+	_textBubble.huge = true;
+	_textBubble.timeLeft = 9999;
+}
+
 function setupTheCats(countToLose)
 {
 	let i, j, l;
 	
 	_cats = [
 		// if location == null then the cat is on the ship
-		{ colors: [ "#222", "#444", "#ff0" ], location: null, name: "Bobby" },
-		{ colors: [ "#eee", "#ccc", "#06b" ], location: null, name: "Marshmallow" },
-		{ colors: [ "#777", "#999", "#0df" ], location: null, name: "Bubble" },
-		{ colors: [ "#c61", "#a51", "#1f3" ], location: null, name: "Winston" }
+		{ colors: [ "#222", "#444", "#ff0" ], location: null, name: "Bobby", himHer: "him" },
+		{ colors: [ "#eee", "#ccc", "#06b" ], location: null, name: "Marshmallow", himHer: "her" },
+		{ colors: [ "#777", "#999", "#0df" ], location: null, name: "Bubble", himHer: "her" },
+		{ colors: [ "#c61", "#a51", "#1f3" ], location: null, name: "Winston", himHer: "him" }
 	];
 	
-	arrayShuffle(_cats);
+	// make sure the first cat lost is Winston
+	if (_totalCatsRescued != 0)
+	{
+		arrayShuffle(_cats);
+	}
 	
-	while (1)
+	while (countToLose > 0)
 	{
 		for (i=0; i<_map.path.length; i++)
 		{
@@ -102,7 +144,7 @@ function setupTheCats(countToLose)
 	}
 }
 
-function reset()
+function reset(countToLose, logRescues, resources)
 {
 	lastFrameTime = (new Date()).getTime();
 	
@@ -124,27 +166,48 @@ function reset()
 		getNoiseLayer(3, [ 255, 120, 0 ])
 	);
 	
+	_zenMode = countToLose == 0;
+	
 	regenerateStars();
 	regeneratePath();
 	regenerateAllBodies();
-	setupTheCats(1);
+	setupTheCats(countToLose);
+	
+	_resources[0] = resources[0];
+	_resources[1] = resources[1];
+	_resources[2] = resources[2];
+	
+	// _logRescues = logRescues;
+	_logRescues = true;
 	
 	_gameState = GAME_STATE_INTRO;
+	_sceneTime = 0;
+	_p4 = 0;
 }
 
 function resetEasy()
 {
-	reset();
+	reset(1, false, [ 5, 5, 5 ]);
 }
 
 function resetNormal()
 {
-	reset();
+	reset(1, true, [ 3, 3, 3 ]);
 }
 
 function resetHard()
 {
-	reset();
+	reset(2, true, [ 5, 5, 5 ]);
+}
+
+function resetHarder()
+{
+	reset(3, true, [ 5, 5, 5 ]);
+}
+
+function resetZen()
+{
+	reset(0, false, [ 999, 999, 999 ]);
 }
 
 function musicGenerate()
@@ -163,6 +226,11 @@ function musicGenerate()
 function musicStart()
 {
 	_audioSourceObj.start();
+}
+
+function shareOnTwitter()
+{
+	window.open("https://twitter.com/intent/tweet?text=All%20my%20cats%20are%20now%20back%20on%20board!%0APlay%20Where%20is%20Winston%20%23js13k%20game%20by%20%40gheja_%20here:%20js13kgames.com%2Fentries%2Fwhere-is-winston");
 }
 
 function init()
@@ -186,10 +254,10 @@ function init()
 	
 	eventResize();
 	
+	musicGenerate();
+	
 	// title screen
 	_layers[4].visible = true;
-	
-	musicGenerate();
 	
 	resetEasy();
 	

@@ -62,8 +62,10 @@ function drawBodies()
 {
 	let i, j, a, b, c, stripes, clicked;
 	
-	ctx.fillStyle = "#211";
+	ctx.fillStyle = "#216";
 	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
+	
+	a = NOISE_RESOLUTION / 4;
 	
 	ctx.globalCompositeOperation = "screen";
 	for (i=0; i<_map.noiseLayers.length; i++)
@@ -71,14 +73,14 @@ function drawBodies()
 		// TODO: make sure the zoom is centered
 		ctx.drawImage(
 			_map.noiseLayers[i],
-			clamp(_x(_currentSystem.mapPosition.x) - _rscale(100), 0, 2048 - _scale(200)),
-			clamp(_y(_currentSystem.mapPosition.y) - _rscale(100), 0, 2048 - _scale(200)),
-			_scale(200),
-			_scale(200),
+			clamp(Math.floor((_currentSystem.mapPosition.x / 400 + 0.5) * NOISE_RESOLUTION - a / 2), 0, NOISE_RESOLUTION - a),
+			clamp(Math.floor((_currentSystem.mapPosition.y / 400 + 0.5) * NOISE_RESOLUTION - a / 2), 0, NOISE_RESOLUTION - a),
+			a,
+			a,
 			0,
 			0,
-			2048,
-			2048);
+			_windowMax,
+			_windowMax);
 	}
 	
 	ctx.globalCompositeOperation = "source-over";
@@ -132,19 +134,19 @@ function drawBodies()
 	{
 		b = _currentSystem.bodies[i];
 		
-		if (b.visited)
-		{
-			ctx.lineWidth = _scale(2);
-			ctx.strokeStyle = "#0a0";
-			_arc(b.position, b.radius + 1.5, 0, 1, 0, 1);
-		}
-		
 		// planet
 		if (b.type == BODY_TYPE_PLANET)
 		{
 			// atmosphere
 			ctx.lineWidth = _scale(1);
 			ctx.strokeStyle = hsla2rgba_(0.4, 0.2, 0.8, 0.7);
+			_arc(b.position, b.radius + 1.5, 0, 1, 0, 1);
+		}
+		
+		if (b.visited)
+		{
+			ctx.lineWidth = _scale(2);
+			ctx.strokeStyle = "#0a0";
 			_arc(b.position, b.radius + 1.5, 0, 1, 0, 1);
 		}
 		
@@ -254,22 +256,22 @@ function describeBody(b)
 	let star;
 	let s;
 	
-	s = "Oh, now I remember! Must be on ";
+	s = "on ";
 	
 	if (b.type == BODY_TYPE_MOON)
 	{
-		s += "the [" + describeBodySize(b) + "] [" + b.def[3] + "] moon of ";
+		s += "the " + describeBodySize(b) + " " + b.def[3] + " moon of ";
 		
 		// hack but cheap
 		b = b.parent;
 	}
 	
 	star = b.parent;
-	s += "a [" + describeBodySize(b) + "] [" + b.def[3] + "] planet [with " + describeMoons(b) + "], ";
+	s += "a " + describeBodySize(b) + " " + b.def[3] + " planet with " + describeMoons(b) + ", ";
 	
-	s += "orbiting a [" + star.def[3] + "] sun."
+	s += "orbiting a " + star.def[3] + " sun"
 	
-	console.log(s);
+	return s;
 }
 
 function generateBodies()
@@ -359,8 +361,9 @@ function drawSolar()
 	_playerPosition.x = 160;
 	_playerPosition.y = 150 + (Math.sin(_totalTime) * 5);
 	
-	drawShip(_playerPosition, 1.5);
+	drawShip({ x: _playerPosition.x - 50, y: _playerPosition.y + 10 }, 0.1);
 	
+	drawGuiButton("RECAP", -9, 3, true, toggleRecap);
 	drawGuiButton("\u00BB", 2, 1, true, solarNext);
 	drawGuiButton("LAND", 3, 3, (_selectedBody != null), solarLand);
 	drawGuiButton("ZOOM", 6, 3, true, solarZoom);

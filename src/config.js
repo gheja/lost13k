@@ -4,7 +4,7 @@ const TEXT_BUBBLE_STYLE = 1;
 const TEXT_BUBBLE_TIME = 3;
 
 const DEBUG_BORDER = 0;
-const NOISE_RESOLUTION = 2048;
+const NOISE_RESOLUTION = 512;
 
 const SHORT_JUMP_DISTANCE = 80;
 
@@ -152,3 +152,108 @@ const SHAPE_CAT_EYE = [
 	0, 0,
 	0, 1.5
 ];
+
+const SHAPE_GUY_HEAD = [
+	2, -0,
+	1, -1,
+	1, -6,
+	6, -6,
+	6, -1,
+	5, 0,
+	2, 0,
+];
+
+const SHAPE_GUY_HAIR = [
+	1, -3,
+	0, -4,
+	0, -6,
+	2, -8,
+	5, -8,
+	7, -6,
+	7, -4,
+	6, -3,
+	6, -5,
+	5, -6,
+	2, -6,
+	1, -5,
+	1, -3
+];
+
+const SHAPE_GUY_EYE_NORMAL = [
+	2.5, -3.7,
+	2.5, -4.3
+];
+
+const SHAPE_GUY_EYE_SCARED = [
+	2.5, -3.3,
+	2.5, -4.7
+];
+
+const SHAPE_GUY_MOUTH_NORMAL = [
+	2.5, -1.2,
+	3, -0.9,
+	4, -0.9,
+	4.5, -1.2,
+];
+
+const SHAPE_GUY_MOUTH_SCARED = [
+	2.5, -1,
+	2.5, -2,
+	4.5, -2,
+	4.5, -1,
+	2.5, -1
+];
+
+const SHAPE_SHIP = [
+	0, 0,
+	3, -5,
+	0, -5,
+	3, -11,
+	3, -15,
+	16, -15,
+	20, -11,
+	65, -11,
+	65, -10,
+	72, -11,
+	72, 0,
+	65, -1,
+	65, 0,
+	63, 0,
+	63, -9,
+	10, -9,
+	10, 0,
+	0, 0,
+];
+
+const SHAPE_SHIP_WINDOW1 = [
+	1, -7,
+	2, -9,
+	6, -9,
+	7, -7,
+	1, -7
+];
+
+const SHAPE_SHIP_WINDOW2 = [
+	4, -12,
+	4, -14,
+	15.5, -14,
+	17.5, -12,
+	4, -12
+];
+
+const SHAPE_SHIP_DOOR = [
+	8, 0,
+	8, -2,
+	9, -2,
+	9, 0,
+	8, 0
+];
+
+const SHAPE_SHIP_CARGO = [
+	11, 7,
+	11, -8,
+	23, -8,
+	23, 7,
+	11, 7
+];
+

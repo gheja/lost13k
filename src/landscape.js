@@ -131,9 +131,9 @@ function drawLandscape()
 	
 	i = _windowHeight * (1 - _p3);
 	
-	drawShip({ x: 200 + shake(1 - _p, 10), y: 100 - Math.pow(1 - _p, 0.7) * 400 + shake(1 - _p, 4) }, 5);
-	_playerPosition.x = 200;
-	_playerPosition.y = 100;
+	drawShip({ x: 100 + shake(1 - _p, 10), y: 100 - Math.pow(1 - _p, 0.7) * 400 + shake(1 - _p, 4) }, 0.6);
+	_playerPosition.x = 125;
+	_playerPosition.y = 10;
 	
 	if (_p3 < 1)
 	{
@@ -160,33 +160,36 @@ function drawLandscape()
 				showTextBubble([ _cat.name + "!" ]);
 			}
 			
-			if (passingSceneTime(1.5))
+			if (passingSceneTime(2))
 			{
 				_cat.state = 1;
 			}
 			
-			if (_sceneTime > 2 && _sceneTime < 4.2)
+			if (_sceneTime > 2.5 && _sceneTime < 4.7)
 			{
-				n = Math.floor((_sceneTime - 2) * 8);
+				n = Math.floor((_sceneTime - 2.5) * 8);
 				_cat.position.x = -160 + n * 16;
 				_cat.state = (n % 2) ? 2 : 3;
-				
-				console.log(_cat.position.x, _sceneTime);
 			}
 			
-			if (passingSceneTime(4.2))
+			if (passingSceneTime(4.7))
 			{
 				_cat.position.x = 1000;
 			}
 			
-			if (passingSceneTime(5))
+			if (passingSceneTime(5.5))
 			{
 				showTextBubble([ "Good to see you again, " + arrayPick([ "buddy", _cat.name ]) + "." ]);
 			}
 			
-			if (passingSceneTime(8))
+			if (passingSceneTime(8.5))
 			{
 				_cat.location = null;
+				
+				if (_logRescues)
+				{
+					_totalCatsRescued++;
+				}
 				
 				if (checkWinCondition())
 				{
@@ -218,7 +221,7 @@ function drawLandscape()
 		_highlightedResourceCode = RESOURCE_ROCKET;
 	}
 	
-	drawGuiButton("LEAVE", 3, 3, _resources[2] != 0, landscapeLeave);
+	drawGuiButton("LEAVE", 3, 3, _resources[2] != 0 && (!_cat || _cat.location == null), landscapeLeave);
 	drawGuiResources();
 }
 
