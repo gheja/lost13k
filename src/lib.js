@@ -225,6 +225,8 @@ function getAngle(p1, p2)
 //// event handling
 function eventMouseDown(e)
 {
+	let exception;
+	
 	if (_firstUserInteraction)
 	{
 		// do not throw an error when music is still loading
@@ -233,7 +235,7 @@ function eventMouseDown(e)
 			musicStart();
 			_firstUserInteraction = false;
 		}
-		catch (e)
+		catch (exception)
 		{
 		}
 	}

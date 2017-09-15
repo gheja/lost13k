@@ -212,15 +212,23 @@ function resetZen()
 
 function musicGenerate()
 {
-	let songGen = new sonantx.MusicGenerator(_music);
-	_audioCtx = new AudioContext();
+	let exception;
 	
-	songGen.createAudioBuffer(function(buffer) {
-		_audioSourceObj = _audioCtx.createBufferSource();
-		_audioSourceObj.loop = true;
-		_audioSourceObj.buffer = buffer;
-		_audioSourceObj.connect(_audioCtx.destination);
-	});
+	try
+	{
+		let songGen = new sonantx.MusicGenerator(_music);
+		_audioCtx = new AudioContext();
+		
+		songGen.createAudioBuffer(function(buffer) {
+			_audioSourceObj = _audioCtx.createBufferSource();
+			_audioSourceObj.loop = true;
+			_audioSourceObj.buffer = buffer;
+			_audioSourceObj.connect(_audioCtx.destination);
+		});
+	}
+	catch (exception)
+	{
+	}
 }
 
 function musicStart()
