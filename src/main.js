@@ -248,9 +248,10 @@ function init()
 	_lastFrameTime = (new Date()).getTime();
 	
 	_body = document.body;
-	_body.onmousedown = eventMouseDown;
-	_body.onmousemove = eventMouseMove;
-	_body.onresize = eventResize;
+	_body.addEventListener("touchstart", eventMouseDown);
+	_body.addEventListener("mousedown", eventMouseDown);
+	_body.addEventListener("mousemove", eventMouseMove);
+	_body.addEventListener("resize", eventResize);
 	
 	layerCreate(drawSolar); // planets
 	layerCreate(drawStarMap); // star map
