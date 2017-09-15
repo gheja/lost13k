@@ -247,8 +247,16 @@ function eventMouseDown(e)
 function eventMouseMove(e)
 {
 	e.preventDefault();
-	_cursor.x = _rx(e.clientX * window.devicePixelRatio);
-	_cursor.y = _ry(e.clientY * window.devicePixelRatio);
+	if (e.touches)
+	{
+		_cursor.x = _rx(e.touches[0].clientX * window.devicePixelRatio);
+		_cursor.y = _ry(e.touches[0].clientY * window.devicePixelRatio);
+	}
+	else
+	{
+		_cursor.x = _rx(e.clientX * window.devicePixelRatio);
+		_cursor.y = _ry(e.clientY * window.devicePixelRatio);
+	}
 }
 
 function eventResize()
