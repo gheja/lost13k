@@ -67,7 +67,6 @@ function drawTitle()
 	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
 	if (_gameState == GAME_STATE_READY)
-	if (_gameState == GAME_STATE_READY)
 	{
 		a = [];
 		u = [];
