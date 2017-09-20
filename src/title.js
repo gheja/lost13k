@@ -65,10 +65,12 @@ function drawTitle()
 	
 	function localPopText(time, x, y, text)
 	{
-		if (_sceneTime > time)
-		{
-			ctx.fillText(text, _x(x), _y(y));
-		}
+		let a;
+		
+		a = clamp(_sceneTime - time, 0, 0.2) * 5;
+		
+		ctx.fillStyle = "rgba(255,255,255," + a + ")";
+		ctx.fillText(text, _x(x), _y(y - (a - 1) * 3));
 	}
 	
 	// ctx.fillStyle = "#000";
