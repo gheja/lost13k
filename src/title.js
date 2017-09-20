@@ -63,6 +63,14 @@ function drawTitle()
 		], p, 0.4);
 	}
 	
+	function localPopText(time, x, y, text)
+	{
+		if (_sceneTime > time)
+		{
+			ctx.fillText(text, _x(x), _y(y));
+		}
+	}
+	
 	// ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
@@ -111,56 +119,21 @@ function drawTitle()
 		ctx.font = _scale(15) + "px Arial";
 		ctx.textAlign = "center";
 		
-		if (_sceneTime > 1)
-		{
-			ctx.fillText("This is the Bobcat-13 freighter", _x(0), _y(-100));
-		}
-		
-		if (_sceneTime > 2)
-		{
-			ctx.fillText("and its captain, Jeff.", _x(0), _y(-80));
-		}
-		
-		if (_sceneTime > 4)
-		{
-			ctx.fillText("He is shipping goods", _x(0), _y(-5));
-		}
-		
-		if (_sceneTime > 5)
-		{
-			ctx.fillText("from planet to planet", _x(0), _y(15));
-		}
-		
-		if (_sceneTime > 6)
-		{
-			ctx.fillText("with his four companions.", _x(0), _y(35));
-		}
-		
-		if (_sceneTime > 7)
-		{
-			ctx.fillText(_cats[0].name + ((_cats[0].location != null && _sceneTime > 7.5) ? "?!" : ""), _x(-135), _y(100));
-		}
-		
-		if (_sceneTime > 8)
-		{
-			ctx.fillText(_cats[1].name + ((_cats[1].location != null && _sceneTime > 8.5) ? "?!" : ""), _x(-45), _y(120));
-		}
-		
-		if (_sceneTime > 9)
-		{
-			ctx.fillText(_cats[2].name + ((_cats[2].location != null && _sceneTime > 9.5) ? "?!" : ""), _x(45), _y(100));
-		}
-		
-		if (_sceneTime > 10)
-		{
-			ctx.fillText("and " + _cats[3].name + ((_cats[3].location != null && _sceneTime > 10.5) ? "?!" : ""), _x(135), _y(120));
-		}
+		localPopText(1, 0, -100, "This is the Bobcat-13 freighter");
+		localPopText(2, 0, -80, "and its captain, Jeff.");
+		localPopText(4, 0, -5, "He is shipping goods");
+		localPopText(5, 0, 15, "from planet to planet");
+		localPopText(6, 0, 35, "with his four companions.");
+		localPopText(7, -135, 100, _cats[0].name + ((_cats[0].location != null && _sceneTime > 7.5) ? "?!" : ""));
+		localPopText(8, -45, 120, _cats[1].name + ((_cats[1].location != null && _sceneTime > 8.5) ? "?!" : ""));
+		localPopText(9, 45, 100, _cats[2].name + ((_cats[2].location != null && _sceneTime > 9.5) ? "?!" : ""));
+		localPopText(10, 135, 120, "and " + _cats[3].name + ((_cats[3].location != null && _sceneTime > 10.5) ? "?!" : ""));
 		
 		if (!_zenMode)
 		{
-			if (_sceneTime > 11.5 && _sceneTime < 19)
+			if (_sceneTime < 19)
 			{
-				ctx.fillText(s, _x(0), _y(160));
+				localPopText(11.5, 0, 160, s);
 			}
 			
 			if (passingSceneTime(14))
@@ -169,9 +142,9 @@ function drawTitle()
 				_textBubble.timeLeft = 4;
 			}
 			
-			if (_sceneTime > 19.5 && _sceneTime < 22)
+			if (_sceneTime < 22)
 			{
-				ctx.fillText("Where?", _x(0), _y(160));
+				localPopText(19.5, 0, 160, "Where?");
 			}
 			
 			if (passingSceneTime(20))
@@ -179,16 +152,14 @@ function drawTitle()
 				toggleRecap();
 			}
 			
-			if (_sceneTime > 25)
-			{
-				ctx.fillText("Okay then, let's find " + t + "!", _x(0), _y(160));
-			}
+			localPopText(25, 0, 160, "Okay then, let's find " + t + "!");
 		}
 		else
 		{
+			localPopText(11.5, 0, 160, "Let's go and see the galaxy!", _x(0), _y(160));
+			
 			if (_sceneTime > 11.5)
 			{
-				ctx.fillText("Let's go and see the galaxy!", _x(0), _y(160));
 				_sceneTime = 60;
 			}
 		}
