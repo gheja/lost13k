@@ -52,7 +52,7 @@ function breakText(s, len)
 
 function drawTitle()
 {
-	let i, a, s, t, u;
+	let i, a, s, t, u, guyHappy, guyArray;
 	
 	function localDrawCat(cat, p)
 	{
@@ -75,6 +75,30 @@ function drawTitle()
 	
 	// ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
+	
+	guyHappy = false;
+	if (_gameState == GAME_STATE_READY)
+	{
+		if (_sceneTime > 11.5 || _sceneTime < 14.5 || _zenMode)
+		{
+			guyHappy = true;
+		}
+	}
+	else
+	{
+		if (_gameState == GAME_STATE_WON)
+		{
+			guyHappy = true;
+		}
+	}
+	
+	guyArray = [
+		[ SHAPE_GUY_HEAD, { x: 0, y: 0 }, 10, "#da8", "#b87" ],
+		[ SHAPE_GUY_HAIR, { x: 0, y: 0 }, 10, "#a51", "#841" ],
+		[ guyHappy ? SHAPE_GUY_EYE_NORMAL : SHAPE_GUY_EYE_SCARED, { x: 0, y: 0 }, 10, null, "#841" ],
+		[ guyHappy ? SHAPE_GUY_EYE_NORMAL : SHAPE_GUY_EYE_SCARED, { x: 20, y: 0 }, 10, null, "#841" ],
+		[ guyHappy ? SHAPE_GUY_MOUTH_NORMAL : SHAPE_GUY_MOUTH_SCARED, { x: 0, y: 0 }, 10, (guyHappy ? null : "#b87"), "#841" ]
+	];
 	
 	if (_gameState == GAME_STATE_READY)
 	{
@@ -179,15 +203,7 @@ function drawTitle()
 		
 		if (_sceneTime > 2.0)
 		{
-			i = _sceneTime > 11.5 || _sceneTime < 14.5 || _zenMode;
-			
-			drawMultipleShape([
-				[ SHAPE_GUY_HEAD, { x: 0, y: 0 }, 10, "#da8", "#b87" ],
-				[ SHAPE_GUY_HAIR, { x: 0, y: 0 }, 10, "#a51", "#841" ],
-				[ i ? SHAPE_GUY_EYE_NORMAL : SHAPE_GUY_EYE_SCARED, { x: 0, y: 0 }, 10, null, "#841" ],
-				[ i ? SHAPE_GUY_EYE_NORMAL : SHAPE_GUY_EYE_SCARED, { x: 20, y: 0 }, 10, null, "#841" ],
-				[ i ? SHAPE_GUY_MOUTH_NORMAL : SHAPE_GUY_MOUTH_SCARED, { x: 0, y: 0 }, 10, i ? null : "#b87", "#841" ]
-			], { x: -20, y: -25 }, 0.6);
+			drawMultipleShape(guyArray, { x: -20, y: -25 }, 0.6);
 		}
 		
 		if (_sceneTime > 6 && _cats[0].location == null)
@@ -233,15 +249,8 @@ function drawTitle()
 			localDrawCat(_cats[3], { x: 40, y: 30 });
 		}
 		
-		i = _gameState == GAME_STATE_WON;
 		
-		drawMultipleShape([
-			[ SHAPE_GUY_HEAD, { x: 0, y: 0 }, 10, "#da8", "#b87" ],
-			[ SHAPE_GUY_HAIR, { x: 0, y: 0 }, 10, "#a51", "#841" ],
-			[ i ? SHAPE_GUY_EYE_NORMAL : SHAPE_GUY_EYE_SCARED, { x: 0, y: 0 }, 10, null, "#841" ],
-			[ i ? SHAPE_GUY_EYE_NORMAL : SHAPE_GUY_EYE_SCARED, { x: 20, y: 0 }, 10, null, "#841" ],
-			[ i ? SHAPE_GUY_MOUTH_NORMAL : SHAPE_GUY_MOUTH_SCARED, { x: 0, y: 0 }, 10, i ? null : "#b87", "#841" ]
-		], { x: -20, y: -25 }, 0.6);
+		drawMultipleShape(guyArray, { x: -20, y: -25 }, 0.6);
 	}
 	
 	ctx.fillStyle = "#fff";
