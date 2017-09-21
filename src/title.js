@@ -205,7 +205,7 @@ function drawTitle()
 			localDrawCat(_cats[2], { x: 10, y: 90 });
 		}
 		
-		if (_sceneTime > 9 && _cats[3].location != null)
+		if (_sceneTime > 9 && _cats[3].location == null)
 		{
 			localDrawCat(_cats[3], { x: 100, y: 110 });
 		}
