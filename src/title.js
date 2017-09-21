@@ -121,35 +121,38 @@ function drawTitle()
 		ctx.font = _scale(15) + "px Arial";
 		ctx.textAlign = "center";
 		
+		
+		// texts
+		
 		localPopText(1, 0, -100, "This is the Bobcat-13 freighter");
 		localPopText(2, 0, -80, "and its captain, Jeff.");
-		localPopText(4, 0, -5, "He is shipping goods");
-		localPopText(5, 0, 15, "from planet to planet");
-		localPopText(6, 0, 35, "with his four companions.");
-		localPopText(7, -135, 100, _cats[0].name + ((_cats[0].location != null && _sceneTime > 7.5) ? "?!" : ""));
-		localPopText(8, -45, 120, _cats[1].name + ((_cats[1].location != null && _sceneTime > 8.5) ? "?!" : ""));
-		localPopText(9, 45, 100, _cats[2].name + ((_cats[2].location != null && _sceneTime > 9.5) ? "?!" : ""));
-		localPopText(10, 135, 120, "and " + _cats[3].name + ((_cats[3].location != null && _sceneTime > 10.5) ? "?!" : ""));
+		localPopText(3, 0, -5, "He is shipping goods");
+		localPopText(4, 0, 15, "from planet to planet");
+		localPopText(5, 0, 35, "with his four companions.");
+		localPopText(6, -135, 100, _cats[0].name + ((_cats[0].location != null && _sceneTime > 6.7) ? "?!" : ""));
+		localPopText(7, -45, 120, _cats[1].name + ((_cats[1].location != null && _sceneTime > 7.7) ? "?!" : ""));
+		localPopText(8, 45, 100, _cats[2].name + ((_cats[2].location != null && _sceneTime > 8.7) ? "?!" : ""));
+		localPopText(9, 135, 120, "and " + _cats[3].name + ((_cats[3].location != null && _sceneTime > 9.7) ? "?!" : ""));
 		
 		if (!_zenMode)
 		{
-			if (_sceneTime < 19)
+			if (_sceneTime < 17)
 			{
-				localPopText(11.5, 0, 160, s);
+				localPopText(11, 0, 160, s);
 			}
 			
-			if (passingSceneTime(14))
+			if (passingSceneTime(13))
 			{
 				showTextBubble([ "I think I remember where I saw " + t + "." ]);
 				_textBubble.timeLeft = 4;
 			}
 			
-			if (_sceneTime < 22)
+			if (_sceneTime < 24)
 			{
-				localPopText(19.5, 0, 160, "Where?");
+				localPopText(17.5, 0, 160, "Where?");
 			}
 			
-			if (passingSceneTime(20))
+			if (passingSceneTime(19))
 			{
 				toggleRecap();
 			}
@@ -158,38 +161,20 @@ function drawTitle()
 		}
 		else
 		{
-			localPopText(11.5, 0, 160, "Let's go and see the galaxy!", _x(0), _y(160));
+			localPopText(11, 0, 160, "Let's go and see the galaxy!");
 			
-			if (_sceneTime > 11.5)
+			if (_sceneTime > 12)
 			{
 				_sceneTime = 60;
 			}
 		}
 		
-		if (_sceneTime > 0.5)
-		{
-			// drawShip({ x: -110, y: -130 }, 0.3);
-			drawShip({ x: -120, y: -140 }, 0.35);
-		}
 		
-		if (_sceneTime > 7.5 && _cats[0].location == null)
-		{
-			localDrawCat(_cats[0], { x: -170, y: 90 });
-		}
+		// objects
 		
-		if (_sceneTime > 8.5 && _cats[1].location == null)
+		if (_sceneTime > 1.0)
 		{
-			localDrawCat(_cats[1], { x: -80, y: 110 });
-		}
-		
-		if (_sceneTime > 9.5 && _cats[2].location == null)
-		{
-			localDrawCat(_cats[2], { x: 10, y: 90 });
-		}
-		
-		if (_sceneTime > 10.5 && _cats[3].location == null)
-		{
-			localDrawCat(_cats[3], { x: 100, y: 110 });
+			drawShip({ x: -115, y: -140 }, 0.35);
 		}
 		
 		if (_sceneTime > 2.0)
@@ -203,6 +188,26 @@ function drawTitle()
 				[ i ? SHAPE_GUY_EYE_NORMAL : SHAPE_GUY_EYE_SCARED, { x: 20, y: 0 }, 10, null, "#841" ],
 				[ i ? SHAPE_GUY_MOUTH_NORMAL : SHAPE_GUY_MOUTH_SCARED, { x: 0, y: 0 }, 10, i ? null : "#b87", "#841" ]
 			], { x: -20, y: -25 }, 0.6);
+		}
+		
+		if (_sceneTime > 6 && _cats[0].location == null)
+		{
+			localDrawCat(_cats[0], { x: -170, y: 90 });
+		}
+		
+		if (_sceneTime > 7 && _cats[1].location == null)
+		{
+			localDrawCat(_cats[1], { x: -80, y: 110 });
+		}
+		
+		if (_sceneTime > 8 && _cats[2].location == null)
+		{
+			localDrawCat(_cats[2], { x: 10, y: 90 });
+		}
+		
+		if (_sceneTime > 9 && _cats[3].location != null)
+		{
+			localDrawCat(_cats[3], { x: 100, y: 110 });
 		}
 	}
 	
