@@ -160,7 +160,7 @@ function drawTitle()
 		
 		if (!_zenMode)
 		{
-			if (_sceneTime < 17)
+			if (_sceneTime < 17.5)
 			{
 				localPopText(11, 0, 160, s);
 			}
@@ -171,7 +171,7 @@ function drawTitle()
 				_textBubble.timeLeft = 4;
 			}
 			
-			if (_sceneTime < 24)
+			if (_sceneTime < 25)
 			{
 				localPopText(17.5, 0, 160, "Where?");
 			}
