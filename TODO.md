@@ -19,8 +19,8 @@
   - nebulae: starting at 0 on edges, 1 on center? nope.
 - [x] nebulae composition
 - [x] use the wormhole animation
-- [ ] entry listing image (160x160)
-- [ ] entry cover image (400x250)
+- [x] entry listing image (160x160)
+- [x] entry cover image (400x250)
 
 ## Nice to have
 - [ ] BUG: multiple cats on same body
@@ -43,7 +43,7 @@
   - [ ] leaving
   - [ ] meow
 - [x] some simple background music
-- [ ] twitter sharing
+- [x] twitter sharing
 - [ ] make closure compiler happy
 - [ ] simple loader
 - [ ] fit the GUI to the screen not play area
