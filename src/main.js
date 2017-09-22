@@ -251,7 +251,8 @@ function init()
 	_body.addEventListener("touchstart", eventMouseDown);
 	_body.addEventListener("mousedown", eventMouseDown);
 	_body.addEventListener("mousemove", eventMouseMove);
-	_body.addEventListener("resize", eventResize);
+	window.addEventListener("orientationchange", eventResize);
+	window.addEventListener("resize", eventResize);
 	
 	layerCreate(drawSolar); // planets
 	layerCreate(drawStarMap); // star map
