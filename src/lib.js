@@ -33,6 +33,9 @@ function _get(key, defaultValue)
 
 function _set(key, value)
 {
+	// make sure value is string
+	value += "";
+	
 	_localStorageCache[key] = value;
 	
 	window.localStorage.setItem(LOCAL_STORAGE_PREFIX + ":" + key, value);
