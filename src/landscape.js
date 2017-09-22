@@ -189,6 +189,7 @@ function drawLandscape()
 				if (_logRescues)
 				{
 					_totalCatsRescued++;
+					_set("totalCatsRescued", _totalCatsRescued);
 				}
 				
 				if (checkWinCondition())

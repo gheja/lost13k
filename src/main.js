@@ -268,7 +268,16 @@ function init()
 	// title screen
 	_layers[4].visible = true;
 	
-	resetEasy();
+	_totalCatsRescued = _get("totalCatsRescued", 0);
+	
+	if (_totalCatsRescued == 0)
+	{
+		resetEasy();
+	}
+	else
+	{
+		_gameState = GAME_STATE_NEW;
+	}
 	
 	draw();
 }
