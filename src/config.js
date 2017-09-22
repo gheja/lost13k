@@ -31,6 +31,8 @@ const GAME_STATE_READY = 2;
 const GAME_STATE_WON = 3;
 const GAME_STATE_LOST = 4;
 
+const LOCAL_STORAGE_PREFIX = "whereiswinston";
+
 // [ [ h, s, l, type ], [ ... ], ... ]
 let BODY_TYPE_DEFINITIONS =
 [

@@ -6,6 +6,33 @@ const PI2 = 2 * PI;
 
 var _raf = window.requestAnimationFrame;
 
+/*
+	"localStorage does not write or delete entries instantly. If you create
+	or delete a localStorage key, always have local variables updated at the
+	same time, because when you need them later, localStorage may not have
+	updated itself yet, and there are chances it won't contain what you think
+	it contains." - http://xem.github.io/articles/#js13k17
+	thx Maxime Euzière!
+*/
+let _localStorageCache = {};
+
+function _get(key)
+{
+	if (_localStorageCache[key] === undefined)
+	{
+		_localStorageCache[key] = window.localStorage.getItem(LOCAL_STORAGE_PREFIX + ":" + key);
+	}
+	
+	return _localStorageCache[key];
+}
+
+function _set(key, value)
+{
+	_localStorageCache[key] = value;
+	
+	window.localStorage.setItem(LOCAL_STORAGE_PREFIX + ":" + key, value);
+}
+
 function _scale(x)
 {
 	return x * _windowScale;
