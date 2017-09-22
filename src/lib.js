@@ -16,11 +16,16 @@ var _raf = window.requestAnimationFrame;
 */
 let _localStorageCache = {};
 
-function _get(key)
+function _get(key, defaultValue)
 {
 	if (_localStorageCache[key] === undefined)
 	{
 		_localStorageCache[key] = window.localStorage.getItem(LOCAL_STORAGE_PREFIX + ":" + key);
+	}
+	
+	if (_localStorageCache[key] == null)
+	{
+		return defaultValue;
 	}
 	
 	return _localStorageCache[key];
