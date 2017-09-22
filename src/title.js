@@ -73,9 +73,57 @@ function drawTitle()
 		ctx.fillText(text, _x(x), _y(y - (a - 1) * 3));
 	}
 	
+	function localSkew(x, y)
+	{
+		let m, n;
+		
+		m = Math.sin(x * y * 4202 + _totalTime) * 2;
+		n = Math.cos(x * y * 6955 + _totalTime) * 3;
+		
+		return { x: x + m, y: y + n };
+	}
+	
+	function localColor(x, y)
+	{
+		return Math.abs(Math.sin((x * 3281 + y * 9760) % 8483));
+	}
+	
+	function localDrawBackground()
+	{
+		let x, y, n, m, p1, p2, p3, p4;
+		
+		n = 30;
+		
+		for (x=-600; x<600; x+=n)
+		{
+			for (y=-600; y<600; y+=n)
+			{
+				p1 = localSkew(x, y);
+				p2 = localSkew(x + n, y);
+				p3 = localSkew(x + n, y + n);
+				p4 = localSkew(x, y + n);
+				
+				m = Math.floor(localColor(x, y) * 10 + 20);
+				
+				ctx.fillStyle = "rgb(" + m + "," + m + "," + m + ")";
+				ctx.strokeStyle = ctx.fillStyle;
+				
+				ctx.beginPath();
+				ctx.moveTo(_x(p1.x), _y(p1.y));
+				ctx.lineTo(_x(p2.x), _y(p2.y));
+				ctx.lineTo(_x(p3.x), _y(p3.y));
+				ctx.lineTo(_x(p4.x), _y(p4.y));
+				ctx.closePath();
+				ctx.fill();
+				ctx.stroke();
+			}
+		}
+	}
+	
 	// ctx.fillStyle = "#000";
 	ctx.fillRect(0, 0, _windowWidth, _windowHeight);
 	
+	localDrawBackground();
 	guyHappy = false;
 	if (_gameState == GAME_STATE_READY)
 	{
