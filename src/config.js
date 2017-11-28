@@ -37,13 +37,13 @@ const LOCAL_STORAGE_PREFIX = "whereiswinston";
 let BODY_TYPE_DEFINITIONS =
 [
 	// star == 0
-	[ [ 0.13, 1.0, 0.7, "warm" ], [ 0.5, 0.4, 0.9, "cold" ], [ 0, 0.8, 0.4, "dying red" ] ],
+	[ [ 0.13, 1.0, 0.7, "warm yellow" ], [ 0.5, 0.4, 0.9, "hot blue" ], [ 0, 0.8, 0.4, "dying red" ] ],
 	
 	// planet == 1
-	[ [ 0.55, 0.5, 0.8, "icy" ], [ 0.25, 0.5, 0.5, "forest" ], [ 0.12, 0.7, 0.5, "deserted" ], [ 0, 0.5, 0.5, "rusty red" ] ],
+	[ [ 0.55, 0.5, 0.85, "icy" ], [ 0.25, 0.5, 0.5, "forest" ], [ 0.12, 0.7, 0.5, "deserted" ], [ 0, 0.5, 0.5, "rusty red" ] ],
 	
 	// moon == 2
-	[ [ 0.55, 0.2, 0.9, "icy" ], [ 0, 0.0, 0.3, "rocky" ] ]
+	[ [ 0.55, 0.2, 0.95, "icy" ], [ 0, 0.0, 0.25, "rocky" ] ]
 ];
 
 const SHAPE_CAT_BODY_SLEEPING = [
